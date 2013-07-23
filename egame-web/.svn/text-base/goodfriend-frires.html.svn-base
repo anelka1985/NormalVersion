@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+
+<title>爱游戏--个人中心--我的好友</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script type="text/javascript" src="js/callAndroid.js"></script> 
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/common_html.js"></script> 
+<!--页面本身的JS-->
+<script type="text/javascript" src="js/goodfriend-frires.js"></script> 
+
+</head>
+
+
+<body>
+	   <div class="title_pk fri_pk">
+    	<ul>
+        	<li class="title_pk_nor"><a href="" id="myfriend_index">我的好友</a></li>
+            <li class="title_pk_nor"><a href="" id="possiblefriend_index">可能认识</a></li>
+            <li class="title_pk_select"><a href="" id="searchfriend_index"><span class="head_mask_pknarrow"></span>找朋友</a></li>
+            <li class="title_pk_nor"><a href="" id="invitefriend">邀请朋友</a></li>
+        </ul>
+    </div>
+    <!--详情-->
+    <div class="weibo beento">
+    	<div id="friendList">
+    	<!--<div class="line_1"></div>
+        <div class="list pos sym_bg">
+        	<div class="sendmesage">
+                <div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_addfri_left"></span><span class="btu_mood_right"></span><span class="m_l_20">加好友</span></a></div>
+            </div>
+        	 <div class="P_tb_10 blohi">
+                <div class="collLeft pos"><a href=""><span class="head_mask_76c"></span><img src="images/headpic1.png" alt=""/></a></div>
+                <div class="listRight">
+                    <P class="font_20 P_tb_5">小西瓜 <span><img src="images/icon_online.png" width="26" height="20" /></span></P>
+                    <P class="font_18 color_4 m_tb_2 p_r_10">通过搜索匹配</P>
+                 </div>
+        	</div>
+        </div>
+        
+        <div class="line_1"></div>
+        <div class="list pos sym_bg">
+        	<div class="sendmesage">
+                <div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_addfri_left"></span><span class="btu_mood_right"></span><span class="m_l_20">加好友</span></a></div>
+            </div>
+        	 <div class="P_tb_10 blohi">
+                <div class="collLeft pos"><a href=""><span class="head_mask_76c"></span><img src="images/headpic2.png" alt=""/></a></div>
+                <div class="listRight">
+                    <P class="font_20 P_tb_5">小西瓜 <span><img src="images/icon_online.png" width="26" height="20" /></span></P>
+                    <P class="font_18 color_4 m_tb_2 p_r_10">通过搜索匹配</P>
+                 </div>
+        	</div>
+        </div>
+        
+        <div class="line_1"></div>
+        <div class="list pos sym_bg">
+        	<div class="sendmesage">
+                <div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_addfri_left"></span><span class="btu_mood_right"></span><span class="m_l_20">加好友</span></a></div>
+            </div>
+        	 <div class="P_tb_10 blohi">
+                <div class="collLeft pos"><a href=""><span class="head_mask_76c"></span><img src="images/headpic3.png" alt=""/></a></div>
+                <div class="listRight">
+                    <P class="font_20 P_tb_5">小西瓜 <span><img src="images/icon_online.png" width="26" height="20" /></span></P>
+                    <P class="font_18 color_4 m_tb_2 p_r_10">通过搜索匹配</P>
+                 </div>
+        	</div>
+        </div>
+        
+        <div class="line_1"></div>
+        <div class="list pos sym_bg">
+        	<div class="sendmesage">
+                <div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_addfri_left"></span><span class="btu_mood_right"></span><span class="m_l_20">加好友</span></a></div>
+            </div>
+        	 <div class="P_tb_10 blohi">
+                <div class="collLeft pos"><a href=""><span class="head_mask_76c"></span><img src="images/headpic4.png" alt=""/></a></div>
+                <div class="listRight">
+                    <P class="font_20 P_tb_5">小西瓜 <span><img src="images/icon_online.png" width="26" height="20" /></span></P>
+                    <P class="font_18 color_4 m_tb_2 p_r_10">通过搜索匹配</P>
+                 </div>
+        	</div>
+        </div>
+        
+        <div class="line_1"></div>
+        <div class="list pos sym_bg">
+        	<div class="sendmesage">
+                <div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_addfri_left"></span><span class="btu_mood_right"></span><span class="m_l_20">加好友</span></a></div>
+            </div>
+        	 <div class="P_tb_10 blohi">
+                <div class="collLeft pos"><a href=""><span class="head_mask_76c"></span><img src="images/headpic5.png" alt=""/></a></div>
+                <div class="listRight">
+                    <P class="font_20 P_tb_5">小西瓜 <span></span></P>
+                    <P class="font_18 color_4 m_tb_2 p_r_10">通过搜索匹配</P>
+                 </div>
+        	</div>
+        </div>-->
+        </div>
+        <!--<div class="m_auto">  
+            <div class="but_man btu_green_sd pos">
+                <a href=""><span class="btu_man_com2 btu_green_sd_com btu_green_sd_left"></span><span class="btu_green_sd_right"></span><span class="color_8">1</span><span class="color_7">/200</span></a>
+            </div>
+            
+            <div class="but_man btu_green_s pos">
+                <a href=""><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+            </div>
+            
+            <div class="but_man btu_gra_s pos btu_page_com">
+                <a href=""><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>上一页</a>
+            </div>
+            
+            <div class="but_man btu_gra_s pos btu_page_com">
+                <a href=""><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>首 页</a>
+            </div>
+        </div>-->
+        
+    </div>
+
+
+
+</body>
+</html>
+

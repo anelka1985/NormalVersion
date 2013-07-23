@@ -1,0 +1,488 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.ArrayAdapter2;
+import com.egame.app.adapters.TestGameListAdapter;
+import com.egame.app.receivers.ListNotifyReceiver;
+import com.egame.app.receivers.SearchKeyReceiver;
+import com.egame.app.tasks.GetListIconAsyncTask;
+import com.egame.app.tasks.SearchTask;
+import com.egame.app.widgets.HotKey;
+import com.egame.app.widgets.SearchHotView;
+import com.egame.app.widgets.SensorGet;
+import com.egame.app.widgets.SensorGet.OnSensor;
+import com.egame.beans.GameListBean;
+import com.egame.config.Urls;
+import com.egame.utils.common.HttpConnect;
+import com.egame.utils.common.L;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.common.SourceUtils;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.DialogUtil;
+import com.egame.utils.ui.ProgressDialogInterface;
+import com.egame.utils.ui.Utils;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 类说明：
+ * 
+ * @创建时间 2011-12-14 上午09:39:52
+ * @创建人： 陆林
+ * @邮箱：15366189868@189.cn
+ */
+public class SearchActivity extends Activity implements OnClickListener, OnTouchListener, BaseActivity, ProgressDialogInterface {
+
+	private EgameApplication application;
+	// 标题栏View
+	private View mTitle;
+	private View mNoTextTitle;
+	private View mBack;
+	private TextView mTvTitle;
+
+	// 语音识别
+	private RelativeLayout search_type;
+
+	private final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+	// 搜索关键字
+	private AutoCompleteTextView autoCompleteText;
+	private View mSearchClear;
+	private View mSearchBtn;
+
+	// 搜索结果View
+	private View mResultLayout;
+	private TextView mResultText;
+	private TextView mResultEmptyText;
+	private ListView mResultList;
+	private List<GameListBean> mResults = new ArrayList<GameListBean>();
+	// private SearchGameListAdapter mResultListAdapter;
+	private TestGameListAdapter mResultListAdapter;
+
+	// 热门自定义View
+	private SearchHotView mHotView;
+
+	private SearchKeyReceiver mSearchKeyReceiver;
+
+	private SensorGet mSensorGet;
+
+	private boolean mIsResult = false;
+	// private String[] mSearchKeys;
+	// private String[] mSearchHints;
+
+	// 对话框
+	private ProgressDialog mProgressDialog;
+	private String downloadFromer = SourceUtils.DEFAULT;
+	private GetListIconAsyncTask<GameListBean> getListIconTask;
+	ListNotifyReceiver br;
+
+	// 联想词集合
+	private List<String> listAutoText = new ArrayList<String>();
+	private ArrayAdapter2<String> adapter = null;
+
+	// 入口
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_search);
+		this.application = (EgameApplication) this.getApplication();
+		initData();
+		initView();
+		initViewData();
+		initEvent();
+		br = new ListNotifyReceiver(mResultListAdapter);
+		IntentFilter intentFilter = new IntentFilter("com.egame.app.uis.GameDownloadMissionActivity");
+		this.registerReceiver(br, intentFilter);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("SearchActivity");
+	}
+
+	public void initData() {
+
+		// mSearchKeys =
+		// getResources().getStringArray(R.array.egame_search_type);
+		// mSearchHints =
+		// getResources().getStringArray(R.array.egame_search_hint);
+	}
+
+	public void initView() {
+		mTitle = findViewById(R.id.top_title);
+		mNoTextTitle = findViewById(R.id.top_no_text_title);
+		mBack = findViewById(R.id.top_back);
+		mTvTitle = (TextView) findViewById(R.id.title_text);
+		// 语音识别
+		search_type = (RelativeLayout) this.findViewById(R.id.search_type);
+		search_type.setOnClickListener(this);
+
+		// 搜索框
+		autoCompleteText = (AutoCompleteTextView) findViewById(R.id.search_text);
+		adapter = new ArrayAdapter2<String>(this, android.R.layout.simple_dropdown_item_1line, listAutoText);
+		autoCompleteText.setAdapter(adapter);
+
+		// 加载所有游戏名称
+		if (application.getAutoText().size() == 0) {
+			new queryForListByGameName().execute("");
+		} else {
+			listAutoText.addAll(application.getAutoText());
+			adapter.notifyDataSetChanged();
+		}
+		// 搜索框的数据发生改变
+		
+		
+//		autoCompleteText.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+//			}
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				if (autoCompleteText.getText().length() > 0) {
+//					mSearchClear.setBackgroundResource(R.drawable.egame_search_clear_on);
+//					autoCompleteText.setSelection(autoCompleteText.length());
+//				} else {
+//					mSearchClear.setBackgroundResource(R.drawable.egame_search_clear_off);
+//					mIsResult = false;
+//					autoCompleteText.setSelection(autoCompleteText.length());
+//					initViewData();
+//				}
+//			}
+//
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//
+//			}
+//		});
+
+		mSearchClear = findViewById(R.id.search_clear);
+		mSearchClear.setOnClickListener(this);
+		mSearchBtn = findViewById(R.id.search_btn);
+
+		mResultLayout = findViewById(R.id.result_layout);
+		mResultText = (TextView) findViewById(R.id.result_text);
+		mResultEmptyText = (TextView) findViewById(R.id.result_empty_text);
+		mResultList = (ListView) findViewById(R.id.result_list);
+		mResultListAdapter = new TestGameListAdapter(mResults, this, downloadFromer, true);
+		mResultList.setAdapter(mResultListAdapter);
+		mResultList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				GameListBean bean = mResults.get(arg2);
+				Bundle bundle = GamesDetailActivity.makeIntentData(bean.getGameId(), downloadFromer);
+				Intent intent = new Intent(getApplicationContext(), GamesDetailActivity.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+
+		mHotView = (SearchHotView) findViewById(R.id.hot_view);
+		mHotView.begin();
+
+		mSensorGet = new SensorGet(getApplicationContext(), new OnSensor() {
+			@Override
+			public void onSensor() {
+				mHotView.setHotKey();
+			}
+		});
+		mSensorGet.register();
+
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Utils.RECEIVER_SEARCH_KEY);
+		mSearchKeyReceiver = new SearchKeyReceiver(this);
+		registerReceiver(mSearchKeyReceiver, filter);
+	}
+
+	public void initViewData() {
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		L.d("语音", "" + activities.size());
+		if (activities.size() == 0) {
+			search_type.setVisibility(View.GONE);
+			autoCompleteText.setBackgroundResource(R.drawable.egame_novoice_input_search);
+		}
+		if (mIsResult) {
+			mTitle.setVisibility(View.GONE);
+			mNoTextTitle.setVisibility(View.VISIBLE);
+			mBack.setVisibility(View.VISIBLE);
+			mTvTitle.setVisibility(View.VISIBLE);
+
+			mHotView.setVisibility(View.GONE);
+			mResultLayout.setVisibility(View.VISIBLE);
+			if (mResults.size() == 0) {
+				mResultText.setVisibility(View.GONE);
+				mResultList.setVisibility(View.GONE);
+				mResultEmptyText.setVisibility(View.VISIBLE);
+			} else {
+				mResultEmptyText.setVisibility(View.GONE);
+				mResultText.setText(String.format(getResources().getString(R.string.egame_searchResult), mResults.size()));
+				mResultText.setVisibility(View.VISIBLE);
+				mResultList.setVisibility(View.VISIBLE);
+			}
+		} else {
+			mNoTextTitle.setVisibility(View.GONE);
+			mBack.setVisibility(View.GONE);
+			mTvTitle.setVisibility(View.GONE);
+			mTitle.setVisibility(View.VISIBLE);
+
+			mResultLayout.setVisibility(View.GONE);
+			mHotView.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public void initEvent() {
+		mHotView.setOnTouchListener(this);
+		mBack.setOnClickListener(this);
+		mSearchBtn.setOnClickListener(this);
+	}
+
+	public boolean initYuYing() {
+		// 下面是判断当前手机是否支持语音识别功能
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> list = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		if (list.size() != 0) {
+			search_type.setVisibility(View.VISIBLE);
+			return true;
+		} else {
+			search_type.setVisibility(View.GONE);
+			return false;
+		}
+	}
+
+	public void showProgress(int resId) {
+		mSearchBtn.setEnabled(false);
+		mProgressDialog = ProgressDialog.show(getParent(), null, getResources().getString(resId), true);
+	}
+
+	public void hideProgress() {
+		mSearchBtn.setEnabled(true);
+		try {
+			mProgressDialog.dismiss();
+		} catch (Exception e) {
+		}
+		mProgressDialog = null;
+	}
+
+	public void searchCompleted(List<GameListBean> result) {
+		mIsResult = true;
+		mResults.addAll(result);
+		mResultListAdapter.notifyDataSetChanged();
+		mResultList.setSelection(0);
+		downloadIcon();
+		initViewData();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mHotView.end();
+		mSensorGet.unRegister();
+		mResultListAdapter.getDbService().close();
+		unregisterReceiver(mSearchKeyReceiver);
+		unregisterReceiver(br);
+	}
+
+	public void setSearchKeyByBroadcast(String searchKey, int type) {
+		autoCompleteText.setText(searchKey);
+		Selection.setSelection(autoCompleteText.getText(), autoCompleteText.getText().toString().length());
+		setSearchKey(searchKey, SourceUtils.SEARCH_HOT);
+	}
+
+	private void setSearchKey(String searchKey, String downloadFromer) {
+		this.downloadFromer = downloadFromer;
+		if (!TextUtils.isEmpty(searchKey)) {
+			NetStat.onEvent(PreferenceUtil.KEY_QAS_SEARCH, "搜索关键词", searchKey);
+			mResults.clear();
+			mResultListAdapter.notifyDataSetChanged();
+			new SearchTask(this, autoCompleteText.getText().toString()).execute();
+		} else {
+			Toast.makeText(getApplicationContext(), R.string.egame_searchNoKeyTip, Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (mBack == v) {
+			mIsResult = false;
+			initViewData();
+		} else if (mSearchBtn == v) {
+			DialogUtil.closeSoft(this);
+			setSearchKey(autoCompleteText.getText().toString(), SourceUtils.SEARCH);
+		} else if (mSearchClear == v) {
+			autoCompleteText.setText("");
+		} else if (search_type == v) {
+			try {
+				// 通过Intent传递语音识别的模式，开启语音
+				Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+				// 语言模式和自由模式的语音识别
+				intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+				// 提示语音开始
+				intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "开始语音");
+				// 开始语音识别
+				startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), "找不到语音设备", 1).show();
+			}
+		}
+	}
+
+	private boolean mHotViewIsFling = false;
+	private float mHotViewBeginEventX;
+
+	public boolean onTouch(View v, MotionEvent event) {
+		int action = event.getAction();
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+			mHotViewIsFling = false;
+			mHotViewBeginEventX = event.getX();
+			break;
+		case MotionEvent.ACTION_MOVE:
+			mHotViewIsFling = true;
+			break;
+		case MotionEvent.ACTION_UP:
+			float x = event.getX();
+			float y = event.getY();
+			if (mHotViewIsFling) {
+				if (Math.abs(mHotViewBeginEventX - x) > 100) {
+					mHotView.setHotKey();
+					return true;
+				}
+				if (Math.abs(mHotViewBeginEventX - x) > 10) {
+					return true;
+				}
+			}
+
+			for (int i = 0; i < mHotView.getHotKeys().length; i++) {
+				HotKey hotKey = mHotView.getHotKeys()[i];
+				if (hotKey.inText(x, y)) {
+					autoCompleteText.setText(hotKey.getText());
+					autoCompleteText.setSelection(hotKey.getText().length());
+					setSearchKey(hotKey.getText(), SourceUtils.SEARCH_HOT);
+					//点击搜索热词进行搜索，自动隐藏键盘。
+					DialogUtil.closeSoft(SearchActivity.this);
+					return true;
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+			if (mIsResult) {
+				mIsResult = false;
+				initViewData();
+			} else {
+				DialogUtil.showExitDialog(this);
+			}
+			return true;
+		}
+		return super.dispatchKeyEvent(event);
+	}
+
+	public void downloadIcon() {
+		if (getListIconTask != null) {
+			getListIconTask.stop();
+		}
+		getListIconTask = new GetListIconAsyncTask<GameListBean>(mResults, mResultListAdapter);
+		getListIconTask.execute("");
+	}
+
+	// 语音识别
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// 回调获取从谷歌得到的数据
+		if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+			// 取得语音的字符
+			ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			autoCompleteText.setText(results.get(0));
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	// 异步任务(模糊查询联想关键词)
+	class queryForListByGameName extends AsyncTask<String, Integer, List<String>> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			listAutoText.clear();
+		}
+
+		@Override
+		protected List<String> doInBackground(String... params) {
+			try {
+				String s = HttpConnect.getHttpString(Urls.getQueyrListByGameName(SearchActivity.this, application.getUA()));
+				JSONObject obj = new JSONObject(s);
+				if ("0".equals(obj.getJSONObject("result").getString("resultcode"))) {
+					JSONArray array = obj.getJSONArray("values");
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject jsonObj = array.getJSONObject(i);
+//						Log.i("info", jsonObj.getString("wordValue"));
+						listAutoText.add(jsonObj.getString("wordValue"));
+					}
+					if(application.getAutoText().size() == 0){
+						application.getAutoText().addAll(listAutoText);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(List<String> result) {
+			adapter.notifyDataSetChanged();
+		}
+
+		@Override
+		protected void onCancelled() {
+			super.onCancelled();
+		}
+	}
+
+}

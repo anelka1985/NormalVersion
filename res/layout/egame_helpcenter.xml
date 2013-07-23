@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+
+    <!-- 以上是帮助中心的头部 -->
+
+    <RelativeLayout
+        android:id="@+id/m_lative_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top" >
+
+        <TextView
+            android:id="@+id/m_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" >
+        </TextView>
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="6dp"
+            android:text="帮助中心" >
+        </TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_lative_top"
+        android:background="@drawable/egame_top_line" >
+    </TextView>
+    <!-- 帮助中心的搜索输入布局 -->
+
+    <RelativeLayout
+        android:id="@+id/m_relative_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <TextView
+            android:id="@+id/m_search_help"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/egame_help_search" />
+
+        <EditText
+            android:id="@+id/m_input_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/m_search_help"
+            android:background="@drawable/egame_help_input"
+            android:hint="请输入您需要查找的帮助信息"
+            android:paddingLeft="8dp"
+            android:textSize="14dp" />
+    </RelativeLayout>
+    <!-- 帮助主题索引布局 -->
+
+    <LinearLayout
+        android:id="@+id/m_help_index"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_relative_input"
+        android:layout_margin="10dp" >
+
+        <TextView
+            android:id="@+id/m_help_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8.5"
+            android:text="帮助主题索引:"
+            android:textColor="#0D6EBA"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/m_mobile_client"
+            style="@style/egame_helpIndex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8.8"
+            android:text="手机客户端 |" />
+
+        <TextView
+            android:id="@+id/m_mobile_wap"
+            style="@style/egame_helpIndex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9.4"
+            android:text="手机WAP|" />
+
+        <TextView
+            android:id="@+id/m_game"
+            style="@style/egame_helpIndex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.2"
+            android:text="游戏 |" />
+
+        <TextView
+            android:id="@+id/m_charges"
+            style="@style/egame_helpIndex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.2"
+            android:text="资费 |" />
+
+        <TextView
+            android:id="@+id/m_other"
+            style="@style/egame_helpIndex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10.6"
+            android:text="其他" />
+    </LinearLayout>
+
+    <!-- tab布局 -->
+
+    <LinearLayout
+        android:id="@+id/m_tab_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/m_help_index" >
+
+        <TextView
+            android:id="@+id/m_doubt_tab"
+            style="@style/egame_helpTab"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/egame_btn_game_tab_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="疑问帮助" />
+
+        <TextView
+            android:id="@+id/m_game_tab"
+            style="@style/egame_helpTab"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/egame_btn_game_tab_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="游戏帮助" />
+    </LinearLayout>
+    <!-- 疑问帮助ListView -->
+
+    <ListView
+        android:id="@+id/m_doubt_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/m_tab_layout"
+        android:cacheColorHint="#00000000"
+        android:listSelector="#00000000" >
+    </ListView>
+    <!-- 游戏帮助ListView 初始化不显示 -->
+
+    <ListView
+        android:id="@+id/m_game_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/m_tab_layout"
+        android:cacheColorHint="#00000000"
+        android:listSelector="#00000000"
+        android:visibility="gone" >
+    </ListView>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:id="@+id/main" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/title" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:gravity="center" android:background="@drawable/egame_top"
+			style="@style/egame_topTitle" />
+
+		<Button android:id="@+id/back" android:layout_alignParentLeft="true" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:background="@drawable/egame_back" />
+	</RelativeLayout>
+
+	<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:background="@drawable/egame_background2">
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+			<ListView android:id="@+id/gameSortDetail"
+				android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="#00000000"
+				android:fadeScrollbars="true" android:divider="@null" android:layout_marginTop="10dp"
+				android:visibility="gone" />
+		</LinearLayout>
+		<LinearLayout android:id="@+id/loading" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:gravity="center" android:orientation="vertical">
+			<ProgressBar android:id="@+id/loadingProgress" style="?android:attr/progressBarStyleSmallInverse"
+				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<Button android:id="@+id/loadingButton" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:visibility="gone" android:text="@string/egame_error_reload" />
+			<TextView android:id="@+id/loadingText" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:gravity="center" android:textSize="16sp" />
+		</LinearLayout>
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:background="@drawable/egame_top_line" />
+	</FrameLayout>
+
+</LinearLayout>

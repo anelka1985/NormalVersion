@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>爱游戏--更多玩家</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/w_480.css" rel="stylesheet" type="text/css" />
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script type="text/javascript" src="js/callAndroid.js"></script> 
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/common_html.js"></script>
+<script type="text/javascript" src="js/currentgame-moreplayers.js"></script> 
+</head>
+
+
+<body>
+	
+	<!--title-->
+    <div class="title_pk head_lis">
+    	<!--我的好友-->
+    	<ul>
+        	<li class="title_pk_nor" id="friendsplayer"><span class="head_mask_pknarrow"></span><a href="#">我的好友</a></li>
+            <li class="title_pk_select" id="allplayer"><span></span><a href="#">所有人</a></li>
+        </ul>
+        
+    </div>
+
+
+	<!--详情-->
+	<div class="weibo beento P_t_10" id="myfriends_list">
+        <ul class="P_l_10">
+        	
+        </ul>
+    </div>
+     
+<!--分页-->
+         <div class="m_auto p_b_20 blohi" id="page">  
+            <div class="btu_page btu_green_s pos">
+                <a href="" id="pageEnd"><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>末 页</a>
+            </div>
+            
+            <div class="btu_page btu_green_s pos">
+                <a href="" id="pageDown"><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+            </div>
+            
+            <div class="btu_page btu_gra_s pos btu_page_com">
+                <a href="" id="pageUp"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>上一页</a>
+            </div>
+            
+            <div class="btu_page btu_gra_s pos btu_page_com">
+                <a href="" id="pageHome"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>首 页</a>
+            </div>
+        </div>
+        
+
+</body>
+</html>
+

@@ -1,0 +1,327 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.TestGameListAdapter;
+import com.egame.app.receivers.ListNotifyReceiver;
+import com.egame.app.tasks.GetListIconAsyncTask;
+import com.egame.app.tasks.GetStringRunnable;
+import com.egame.beans.GameListBean;
+import com.egame.beans.ListBeanCache;
+import com.egame.config.Const;
+import com.egame.config.Urls;
+import com.egame.utils.common.L;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.common.SourceUtils;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.Footer;
+import com.egame.utils.ui.Loading;
+import com.egame.utils.ui.ToastUtil;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * @desc 网游
+ * @Author yangky
+ */
+public class GameOnlineActivity extends Activity implements BaseActivity, OnClickListener {
+
+	/**
+	 * 网游列表
+	 */
+	ListView lvOnlineList;
+
+	/**
+	 * 游戏列表实体列表
+	 */
+	List<GameListBean> onlineList = new ArrayList<GameListBean>();
+	/**
+	 * 推荐列表适配器
+	 */
+	TestGameListAdapter gameListAdapter;
+
+	Footer footer;
+
+	private Loading loading;
+	/**
+	 * 获取数据成功
+	 */
+	public static final int MSG_GET_RECOMMEND_LIST_SUCCESS = 1;
+
+	/**
+	 * 获取数据失败
+	 */
+	public static final int MSG_GET_RECOMMEND_LIST_FAIL = 2;
+
+	/**
+	 * json对象中列表的key
+	 */
+	public static final String KEY_RECOMMEND_LIST = "gameListBySearch";
+
+	/** 总条目 */
+	private int totalRecord = 0;
+	/**
+	 * 新品和推荐共用一个activity,true表示是推荐列表
+	 */
+	/** 起始页 */
+	private int page = 1;
+
+	/** 是否是最后一页　 */
+	private boolean isLastPage = false;
+
+	private GetListIconAsyncTask<GameListBean> getListIconTask;
+
+	private EgameApplication application;
+
+	ListNotifyReceiver br;
+	SharedPreferences preference = null;
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			if (isFinishing()) { // activity已退出不做任何处理
+				return;
+			}
+			if (msg.what == Const.MSG_GET_SUCCESS) { // 读取成功
+				try {
+					JSONObject obj = new JSONObject(String.valueOf(msg.obj));
+					JSONArray array = null;
+					array = obj.getJSONArray(KEY_RECOMMEND_LIST);
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject json = array.getJSONObject(i);
+						GameListBean bean = new GameListBean(json);
+						onlineList.add(bean);
+					}
+					gameListAdapter.notifyDataSetChanged();
+					if (page == 1) {
+						totalRecord = obj.getInt(Const.KEY_TOTALRECORD);
+						lvOnlineList.setVisibility(View.VISIBLE);
+						loading.setVisibility(View.GONE);
+					}
+					if (totalRecord == 0) {
+						isLastPage = true;
+						footer.showNoData();
+						return;
+					}
+					if (onlineList.size() >= totalRecord) { // 读取完毕
+						isLastPage = true;
+						lvOnlineList.removeFooterView(footer.getFooter());
+					}
+					downloadIcon();
+				} catch (Exception e) {
+					e.printStackTrace();
+					if (page == 1) {
+						loading.showReload();
+					} else {
+						footer.showReload();
+					}
+				}
+			} else if (msg.what == Const.MSG_GET_FAIL) { // 网络异常
+				ToastUtil.show(GameOnlineActivity.this, R.string.egame_request_wrong);
+				if (page == 1) {
+					loading.showReload();
+				} else {
+					footer.showReload();
+				}
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_game_onlinegame);
+
+		application = (EgameApplication) getApplication();
+		preference = getSharedPreferences(PreferenceUtil.SHARED_GAME, 0);
+		initData();
+		initView();
+		initEvent();
+		initViewData();
+
+		lvOnlineList.addFooterView(footer.getFooter(), null, false);
+		gameListAdapter = new TestGameListAdapter(onlineList, this, -1, SourceUtils.HOT_LIST, true);
+		lvOnlineList.setAdapter(gameListAdapter);
+
+		// 读缓存
+		ListBeanCache<GameListBean> cache = application.getOnlineGameCache();
+
+		if (cache.getTotalRecord() < 0) {
+			excute();
+		} else if (cache.isFinish()) {
+			isLastPage = true;
+			lvOnlineList.setVisibility(View.VISIBLE);
+			loading.setVisibility(View.GONE);
+			if (cache.getTotalRecord() == 0) {
+				footer.showNoData();
+			} else {
+				totalRecord = cache.getTotalRecord();
+				onlineList.addAll(cache.getList());
+				page = onlineList.size() / Const.PAGE_SIZE;
+				lvOnlineList.removeFooterView(footer.getFooter());
+				gameListAdapter.notifyDataSetChanged();
+				downloadIcon();
+			}
+		} else {
+			totalRecord = cache.getTotalRecord();
+			onlineList.addAll(cache.getList());
+			page = onlineList.size() / Const.PAGE_SIZE;
+			gameListAdapter.notifyDataSetChanged();
+			lvOnlineList.setVisibility(View.VISIBLE);
+			loading.setVisibility(View.GONE);
+			downloadIcon();
+		}
+
+		br = new ListNotifyReceiver(gameListAdapter);
+		IntentFilter intentFilter = new IntentFilter("com.egame.app.uis.GameDownloadMissionActivity");
+		this.registerReceiver(br, intentFilter);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("GameOnlineActivity");
+	}
+
+	public void excute() {
+		// new GameOnlineTask(GameOnlineActivity.this, onlineList,
+		// application.getUA(), handler).execute();
+		footer.showLoading();
+		new Thread(new GetStringRunnable(handler, Urls.getGameSortDetailUrl(GameOnlineActivity.this, (page - 1)
+				* Const.PAGE_SIZE, 3, "desc", 12, 0, application.getUA()))).start();
+	}
+
+	@Override
+	public void initData() {
+	}
+
+	@Override
+	public void initView() {
+		loading = new Loading(this);
+		footer = new Footer(this);
+		lvOnlineList = (ListView) findViewById(R.id.gameList);
+	}
+
+	@Override
+	public void initViewData() {
+		// loading.showLoading();
+	}
+
+	@Override
+	public void initEvent() {
+		loading.setOnReloadClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				page = 1;
+				loading.showLoading();
+				excute();
+			}
+		});
+		footer.setReloadButtonListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				excute();
+			}
+		});
+		lvOnlineList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				GameListBean bean = onlineList.get(position);
+				Bundle bundle;
+				bundle = GamesDetailActivity.makeIntentData(bean.getGameId(), SourceUtils.NEW_AD);
+				Intent intent = new Intent(GameOnlineActivity.this, GamesDetailActivity.class);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+
+		lvOnlineList.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
+
+			}
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int arg1) {
+				if (isLastPage) {
+					// 如果没有下一页了,就不再进行滚动加载
+					L.d("view", "is last page");
+				} else {
+					if (view.getLastVisiblePosition() == view.getCount() - 1) {
+						if (view.getCount() < page * Const.PAGE_SIZE) {
+							// 如果页数已经+1了,数据没有读取出来之前,不再+1
+							L.d("view", view.getCount() + "|" + page * Const.PAGE_SIZE + "|" + page);
+						} else {
+							L.d("view", "page + 1");
+							page = page + 1;
+							excute();
+						}
+					}
+				}
+
+			}
+		});
+
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
+	void downloadIcon() {
+		if (getListIconTask != null) {
+			getListIconTask.stop();
+		}
+		getListIconTask = new GetListIconAsyncTask<GameListBean>(onlineList, gameListAdapter);
+		getListIconTask.execute("");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		ListBeanCache<GameListBean> cache = application.getOnlineGameCache();
+		cache.getList().clear();
+		cache.getList().addAll(onlineList);
+		cache.releaseIcon();
+		cache.setTotalRecord(totalRecord);
+		cache.setFinish(isLastPage);
+		gameListAdapter.getDbService().close();
+		unregisterReceiver(br);
+	}
+
+}

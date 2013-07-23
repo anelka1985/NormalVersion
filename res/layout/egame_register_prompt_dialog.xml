@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+
+    <TextView
+        android:id="@+id/m_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:lines="2"
+        android:text="@string/egame_prompt_show"
+        android:textColor="#000000" >
+    </TextView>
+    <!-- 同意协议布局 -->
+
+    <RelativeLayout
+        android:id="@+id/m_layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_text1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" 
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/m_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/egame_lselect_contactson" />
+
+        <TextView
+            android:id="@+id/m_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/m_icon"
+            android:text="@string/egame_accept_agreement" >
+        </TextView>
+    </RelativeLayout>
+    <!-- 按钮布局 -->
+
+    <RelativeLayout
+        android:id="@+id/m_layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_layout1"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/m_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_btn_yellow_selector"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/egame_sure" />
+
+        <Button
+            android:id="@+id/m_login_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/m_accept"
+            android:background="@drawable/egame_btn_yellow_selector"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/egame_cancel" >
+        </Button>
+    </RelativeLayout>
+
+</RelativeLayout>

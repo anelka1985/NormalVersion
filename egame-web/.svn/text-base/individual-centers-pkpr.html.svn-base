@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--个人中心--我的PK--请稍候</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+</head>
+
+
+<body>
+	<!--title-->
+    <div class="title_pk">
+    	<ul>
+        	<li class="title_pk_nor"><a href="">挑战</a></li>
+            <li class="title_pk_select"><a href=""><span class="head_mask_pknarrow"></span>应战</a></li>
+        </ul>
+    </div>
+    
+    <div class="text_pk">当前有用户正在挑战，请等待挑战结束后再操作！</div>
+    
+
+
+
+</body>
+</html>
+

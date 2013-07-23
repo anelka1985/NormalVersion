@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--好友--发送消息</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>ss" />
+</head>
+
+
+<body>
+<div class="weibo">    
+    
+     <div class="pro_bdnu">
+    	<span class="probdnu_absolute probdnu_top_left"></span><span class="probdnu_absolute probdnu_top_right"></span><span class="probdnu_absolute probdnu_bottom_left"></span><span class="probdnu_absolute probdnu_bottom_right"></span>    
+          
+    	<p class="fri_texta color_2" >请输入您要发送的消息</p>
+        
+    </div>   
+        
+      <p class="fri_senmes_t color_4">120个汉字</p> 
+     <!--发送消息-->
+    <div class="br_color3 p_10 blohi">
+    
+    	<!--表情-->
+        <div class="btu_bq float_l">
+            <div class="btu_fri_bg pos m_r_10"><a href="">
+                <span class="btu_g_l"></span>
+                <span class="btu_g_r"></span>
+                <span class="icon_bq">表情</span>
+            </a></div>
+        </div>
+        <!--发送消息-->
+        <div class="btu_gr_70 float_l">
+            <div class="btu_gr pos btu_gr_100"><a href="">
+                <span class="btu_gr_l"></span>
+                <span class="btu_gr_r"></span>
+                <span class="icon_senmes">发送消息</span>
+            </a></div>
+        </div>
+    </div>
+    
+
+
+
+</body>
+</html>
+

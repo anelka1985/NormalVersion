@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg" >
+
+    <RelativeLayout
+        android:id="@+id/m_lative_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/m_find_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" >
+        </TextView>
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/egame_find_password" >
+        </TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_lative_top"
+        android:background="@drawable/egame_top_line" >
+    </TextView>
+
+    <!-- 找回密码方式提示 -->
+
+    <TextView
+        android:id="@+id/m_pass_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        style="@style/egame_noviceGrayDepth1"
+        android:text="@string/egame_findpass_prompt" >
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/m_find_ways"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_pass_prompt"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/m_find_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_btn_findpass"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingRight="10dp"
+            android:textColor="#1d1f1c"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/m_imview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/egame_search_clear_off" />
+
+        <EditText
+            android:id="@+id/m_input"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/m_imview"
+            android:layout_toRightOf="@id/m_find_way"
+            android:background="@drawable/egame_search_input"
+            android:imeOptions="actionDone"
+            android:paddingLeft="3.3dp"
+            android:singleLine="true"
+            android:textColor="#1d1f1c"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/m_find_password"
+        style="@style/egame_loginOther"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_find_ways"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/egame_user_other_login_selector"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="找回密码"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/m_prompt"
+        style="@style/egame_noviceGrayDepth1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="59秒后可再次找回" 
+        android:layout_below="@id/m_find_password"
+        android:layout_marginTop="10dp" 
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

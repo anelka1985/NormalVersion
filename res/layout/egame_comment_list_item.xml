@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="10dp"
+	android:background="#EBEBEB" android:orientation="vertical">
+
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="15dp" android:gravity="center_vertical" android:orientation="horizontal">
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp" android:layout_weight="1">
+
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="@string/egame_commenter" android:textColor="@color/egame_text_black"
+				android:textSize="14sp" />
+
+			<TextView android:id="@+id/commenter" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#0068b7"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1" android:gravity="center_vertical">
+
+			<ImageView android:id="@+id/star" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp" android:background="@drawable/egame_star4" />
+
+			<TextView android:id="@+id/time" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="#8C8D8D" android:textSize="12sp" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<TextView android:id="@+id/content" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginRight="8dp"
+		android:layout_marginBottom="10dp" android:textColor="#323232" android:textSize="12sp" />
+	<ImageView android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:background="@drawable/egame_line" />
+</LinearLayout>

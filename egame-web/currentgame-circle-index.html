@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" />
+<title>爱游戏--游戏主页--游戏圈</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/currentgame_common.js" type="text/javascript"></script>
+<script src="js/currentgame-circle-index.js" type="text/javascript"></script>
+</head>
+
+
+<body>
+<!--空DIV撑开与顶部的距离-->
+<div class="P_t_20"></div>
+
+<!--广告-->
+<div id="ad" class="square_ad pos" style="display:none;">
+    <img id="adImg" src="images/square_ad_preload.png" alt="activity" width="441" height="85" />
+    <span class="square_ad_close"><a onclick="closeAd()"></a></span>
+</div>
+<div id="ad_shadow" class="square_ad_shadow" style="display:none;"></div>
+
+<!--主题-->
+<div class="header">
+    <h3 id="numMsg" class="color_4 float_l hide">共有<span class="color_1" id="countnum">0</span>个主题</h3>
+    <div class="btu_gc_fbzt pos float_r"><a id="btnPublish" href="">
+        <span class="btu_gr_l"></span>
+        <span class="btu_gr_r"></span>
+        <span class="btu_fbzt">发布新主题</span>
+    </a></div>
+</div>
+
+<!--详情-->
+    <div class="weibo beento" id="listCon">
+
+    </div>
+
+<!--分页-->
+<div id="pageCon" class="m_auto blohi" style="display:none">
+    <div id="pageEnd" class="btu_page btu_green_s pos">
+        <a><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>末 页</a>
+    </div>
+
+    <div id="pageDown" class="btu_page btu_green_s pos">
+        <a><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+    </div>
+
+    <div id="pageUp" class="btu_page btu_gra_s pos btu_page_com">
+        <a><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>上一页</a>
+    </div>
+
+    <div id="pageHome" class="btu_page btu_gra_s pos btu_page_com">
+        <a><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>首 页</a>
+    </div>
+</div>
+
+</body>
+</html>
+

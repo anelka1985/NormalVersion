@@ -1,0 +1,322 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.ActivityGroup;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnPreDrawListener;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.egame.R;
+import com.egame.app.services.DBService;
+import com.egame.beans.DownloadListBean;
+import com.egame.config.Const;
+import com.egame.utils.common.L;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.UIUtils;
+import com.egame.utils.ui.Utils;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * @desc 存放管理的三个栏目的ActivityGroup
+ * 
+ * @Copyright lenovo
+ * 
+ * @Project Egame4th
+ * 
+ * @Author yaopp@gzylxx.com
+ * 
+ * @timer 2011-12-29
+ * 
+ * @Version 1.0.0
+ * 
+ * @JDK version used 6.0
+ * 
+ * @Modification history none
+ * 
+ * @Modified by none
+ */
+public class ManagerActivityGroup extends ActivityGroup implements
+		BaseActivity, OnClickListener {
+	View top;
+
+	/** 左起第一个按钮 */
+	private TextView tvTab1;
+
+	/** 左起第二个按钮 */
+	private TextView tvTab2;
+
+	/** 左起第三个按钮 */
+	private TextView tvTab3;
+
+	/** 存放activity的布局 */
+	private LinearLayout llMain;
+
+	private List<View> mViewList;
+
+	private OnPreDrawListener mOnPreDrawListener;
+
+	DBService dbService;
+
+	BroadcastReceiver br = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (ManagerActivityGroup.this.isFinishing()) {
+				return;
+			}
+			if (intent.getExtras().getString("msg").equals("change")) {
+				initViewData();
+			}
+		}
+	};
+
+	BroadcastReceiver br2 = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (!ManagerActivityGroup.this.isFinishing()) {
+				if (intent.getAction().equals(Utils.RECEIVER_UPGRADE)) {
+					UIUtils.buttonStateChange(mViewList, tvTab2,
+							mOnPreDrawListener);
+					llMain.removeViewAt(llMain.getChildCount() - 1);
+					llMain.addView(
+							getLocalActivityManager()
+									.startActivity(
+											"GameUpdateAbleActivity",
+											new Intent(
+													ManagerActivityGroup.this,
+													GameDownloadUpdateActivity.class)
+													.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+									.getDecorView(),
+							new LinearLayout.LayoutParams(
+									LinearLayout.LayoutParams.FILL_PARENT,
+									LinearLayout.LayoutParams.FILL_PARENT));
+				} else if (intent.getAction().equals(Utils.RECEIVER_DOWNTASK)) {
+					UIUtils.buttonStateChange(mViewList, tvTab3,
+							mOnPreDrawListener);
+					llMain.removeViewAt(llMain.getChildCount() - 1);
+					llMain.addView(
+							getLocalActivityManager()
+									.startActivity(
+											"GameDownloadMissionActivity",
+											new Intent(
+													ManagerActivityGroup.this,
+													GameDownloadMissionActivity.class)
+													.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+									.getDecorView(),
+							new LinearLayout.LayoutParams(
+									LinearLayout.LayoutParams.FILL_PARENT,
+									LinearLayout.LayoutParams.FILL_PARENT));
+				}
+			}
+		}
+	};
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_game_manager);
+		dbService = new DBService(this);
+		dbService.open();
+		initData();
+		initView();
+		initEvent();
+		initViewData();
+
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(Const.ACTION_DOWNLOAD_STATE);
+		this.registerReceiver(br, intentFilter);
+
+		IntentFilter intentFilter2 = new IntentFilter();
+		intentFilter2.addAction(Utils.RECEIVER_UPGRADE);
+		intentFilter2.addAction(Utils.RECEIVER_DOWNTASK);
+		this.registerReceiver(br2, intentFilter2);
+
+		llMain.addView(
+				getLocalActivityManager().startActivity(
+						"GameDownloadEdActivity",
+						new Intent(ManagerActivityGroup.this,
+								GameDownloadEdActivity.class)
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+						.getDecorView(), new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.FILL_PARENT,
+						LinearLayout.LayoutParams.FILL_PARENT));
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("ManagerActivityGroup");
+	}
+
+	public void initData() {
+		Cursor cursor4 = dbService.getGameByRunningTask();
+		if (cursor4 != null) {
+			if (cursor4.getCount() > 0) {
+				while (cursor4.moveToNext()) {
+					DownloadListBean downloadBean = new DownloadListBean(
+							cursor4);
+					String sid = downloadBean.getServiceid();
+					dbService.updateData(sid, DBService.KEY_STATE,
+							DBService.DOWNSTATE_BREAK);
+
+				}
+			}
+		}
+	}
+
+	public void initView() {
+		tvTab1 = (TextView) findViewById(R.id.tab1);
+		tvTab2 = (TextView) findViewById(R.id.tab2);
+		tvTab3 = (TextView) findViewById(R.id.tab3);
+
+		llMain = (LinearLayout) findViewById(R.id.main);
+		top = findViewById(R.id.top);
+
+		mViewList = new ArrayList<View>();
+		mViewList.add(tvTab1);
+		mViewList.add(tvTab2);
+		mViewList.add(tvTab3);
+		mOnPreDrawListener = UIUtils.initButtonState(tvTab1);
+	}
+
+	public void initViewData() {
+
+		Cursor cursor3 = dbService.getNotInstalledGame();
+		if (cursor3 != null && cursor3.getCount() != 0) {
+			L.d("dd", "cursor3 is not null");
+			String str = getString(R.string.egame_manager_downloadmission_args,
+					"<font color=#ce0000>(" + cursor3.getCount() + ")</font>");
+			tvTab3.setText(Html.fromHtml(str));
+		} else {
+			String str = getString(R.string.egame_manager_downloadmission_args,
+					"");
+			tvTab3.setText(Html.fromHtml(str));
+		}
+		if (cursor3 != null) {
+			cursor3.close();
+		}
+
+		Cursor cursor2 = dbService.getUpdateGame();
+		if (cursor2 != null) {
+			if (cursor2.getCount() != 0) {
+				L.d("dd", "cursor2 is not null");
+				String str = getString(R.string.egame_manager_updateable_args,
+						"<font color=#ce0000>(" + cursor2.getCount()
+								+ ")</font>");
+				tvTab2.setText(Html.fromHtml(str));
+				cursor2.close();
+			} else {
+				String str = getString(R.string.egame_manager_updateable_args,
+						"");
+				tvTab2.setText(Html.fromHtml(str));
+				cursor2.close();
+			}
+		} else {
+			String str = getString(R.string.egame_manager_updateable_args, "");
+			tvTab2.setText(Html.fromHtml(str));
+		}
+
+		Cursor cursor1 = dbService.getGameInstalledTest();
+		if (cursor1 != null) {
+			if (cursor1.getCount() != 0) {
+				L.d("dd", "cursor1 is not null");
+				String str = getString(R.string.egame_manager_installed_args,
+						"<font color=#ce0000>(" + cursor1.getCount()
+								+ ")</font>");
+				tvTab1.setText(Html.fromHtml(str));
+				cursor1.close();
+			} else {
+				String str = getString(R.string.egame_manager_installed_args,
+						"");
+				tvTab1.setText(Html.fromHtml(str));
+				cursor1.close();
+			}
+		} else {
+			String str = getString(R.string.egame_manager_installed_args, "");
+			tvTab1.setText(Html.fromHtml(str));
+		}
+
+	}
+
+	public void initEvent() {
+		tvTab1.setOnClickListener(this);
+		tvTab2.setOnClickListener(this);
+		tvTab3.setOnClickListener(this);
+		top.setOnClickListener(this);
+	}
+
+	public void onClick(View v) {
+		if (v == tvTab1 && !tvTab1.isSelected()) {
+			UIUtils.buttonStateChange(mViewList, tvTab1, mOnPreDrawListener);
+			llMain.removeViewAt(llMain.getChildCount() - 1);
+			llMain.addView(
+					getLocalActivityManager().startActivity(
+							"GameDownloadEdActivity",
+							new Intent(ManagerActivityGroup.this,
+									GameDownloadEdActivity.class)
+									.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+							.getDecorView(), new LinearLayout.LayoutParams(
+							LinearLayout.LayoutParams.FILL_PARENT,
+							LinearLayout.LayoutParams.FILL_PARENT));
+		} else if (v == tvTab2) {
+			UIUtils.buttonStateChange(mViewList, tvTab2, mOnPreDrawListener);
+			llMain.removeViewAt(llMain.getChildCount() - 1);
+			llMain.addView(
+					getLocalActivityManager().startActivity(
+							"GameUpdateAbleActivity",
+							new Intent(ManagerActivityGroup.this,
+									GameDownloadUpdateActivity.class)
+									.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+							.getDecorView(), new LinearLayout.LayoutParams(
+							LinearLayout.LayoutParams.FILL_PARENT,
+							LinearLayout.LayoutParams.FILL_PARENT));
+		} else if (v == tvTab3 && !tvTab3.isSelected()) {
+			UIUtils.buttonStateChange(mViewList, tvTab3, mOnPreDrawListener);
+			llMain.removeViewAt(llMain.getChildCount() - 1);
+			llMain.addView(
+					getLocalActivityManager().startActivity(
+							"GameDownloadMissionActivity",
+							new Intent(ManagerActivityGroup.this,
+									GameDownloadMissionActivity.class)
+									.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+							.getDecorView(), new LinearLayout.LayoutParams(
+							LinearLayout.LayoutParams.FILL_PARENT,
+							LinearLayout.LayoutParams.FILL_PARENT));
+		}
+		// else if (v == top) {
+		// Intent intent = new Intent(ManagerActivityGroup.this,
+		// TestDownloadCursorAdapterActivity.class);
+		// startActivity(intent);
+		// }
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbService.close();
+		unregisterReceiver(br);
+		unregisterReceiver(br2);
+	}
+
+}

@@ -1,0 +1,206 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.GameSortAdapter;
+import com.egame.app.tasks.GameSortTask;
+import com.egame.app.tasks.GetListIconAsyncTask;
+import com.egame.beans.GameSortBean;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.Loading;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * @desc 游戏分类页面
+ * 
+ * @Copyright lenovocw
+ * 
+ * @Project EGame4th
+ * 
+ * @Author zhangrh@lenovo-cw.com
+ * 
+ * @timer 2011-12-26
+ * 
+ * @Version 1.0.0
+ * 
+ * @JDK version used 6.0
+ * 
+ * @Modification history none
+ * 
+ * @Modified by none
+ */
+public class GameSortActivity extends Activity implements OnItemClickListener,
+		BaseActivity {
+
+	EgameApplication application;
+
+	/** 游戏分类列表 */
+	private ListView lvGameSort;
+
+	private List<GameSortBean> list = new ArrayList<GameSortBean>();
+
+	private GameSortAdapter adapter;
+
+	private GetListIconAsyncTask<GameSortBean> getListIconTask;
+
+	private String detailName;
+
+	private Loading loading;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		application = (EgameApplication) getApplication();
+		setContentView(R.layout.egame_gamesort);
+		initView();
+		adapter = new GameSortAdapter(GameSortActivity.this, list);
+		lvGameSort.setAdapter(adapter);
+		initData();
+		initViewData();
+		initEvent();
+		EgameApplication.Instance().addActivity(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("GameSortActivity");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (getListIconTask != null) {
+			getListIconTask.stop();
+		}
+		List<GameSortBean> cacheList = application.getSortListBeanCache()
+				.getList();
+		cacheList.clear();
+		cacheList.addAll(list);
+		application.getSortListBeanCache().releaseIcon();
+	}
+
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		if (arg2 == 0) {
+			Intent intent = new Intent(GameSortActivity.this,
+					GamePackageSortActivity.class);
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent(GameSortActivity.this,
+					GameSortDetailActivity.class);
+			if ("".equals(list.get(arg2).getGameClassName())) {
+				detailName = list.get(arg2).getTypeName();
+			} else {
+				detailName = list.get(arg2).getGameClassName();
+			}
+			intent.putExtras(GameSortDetailActivity.makeIntentData(detailName,
+					list.get(arg2).getTypeCode(),
+					list.get(arg2).getClassCode(), list.get(arg2)
+							.getTotalNumber(), list.get(arg2).getOrderType(),
+					list.get(arg2).getOrderDesc()));
+			startActivity(intent);
+		}
+	}
+
+	/**
+	 * 初始化数据
+	 */
+	public void initData() {
+		loading.showLoading();
+		if (application.getSortListBeanCache().isFinish()) {
+			if (application.getSortListBeanCache().getList().size() > 0) {
+				list.addAll(application.getSortListBeanCache().getList());
+				adapter.notifyDataSetChanged();
+				lvGameSort.setVisibility(View.VISIBLE);
+				loading.setVisibility(View.GONE);
+				getListIconTask = new GetListIconAsyncTask<GameSortBean>(list,
+						adapter);
+				getListIconTask.execute("");
+			}
+		} else {
+			// new GamePackageSortTask(GameSortActivity.this, list,
+			// application.getPhoneNum(),
+			// LoginDataStoreUtil.fetchUser(GameSortActivity.this,
+			// LoginDataStoreUtil.LOG_FILE_NAME)
+			// .getUserId(), application.getUA()).execute();
+			new GameSortTask(GameSortActivity.this, list, application.getUA())
+					.execute();
+		}
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	public void initView() {
+		loading = new Loading(GameSortActivity.this);
+		lvGameSort = (ListView) findViewById(R.id.gamesortlist);
+	}
+
+	/**
+	 * 初始化控件数据
+	 */
+	public void initViewData() {
+
+	}
+
+	/**
+	 * 初始化相关事件
+	 */
+	public void initEvent() {
+		lvGameSort.setOnItemClickListener(this);
+		loading.setOnReloadClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				lvGameSort.setVisibility(View.GONE);
+				list.clear();
+				adapter.notifyDataSetChanged();
+				loading.showLoading();
+				new GameSortTask(GameSortActivity.this, list, application
+						.getUA()).execute();
+			}
+		});
+	}
+
+	/**
+	 * 处理游戏分类页面基本数据读取结果
+	 * 
+	 * @param dataCode
+	 *            1:读取成功且非空 0:读取异常
+	 */
+	public void dataCodeProcess(String dataCode) {
+		if (dataCode.equals("0")) {
+			loading.showReload();
+		} else if (dataCode.equals("1")) {
+			application.getSortListBeanCache().setFinish(true);
+			adapter.notifyDataSetChanged();
+			loading.setVisibility(View.GONE);
+			lvGameSort.setVisibility(View.VISIBLE);
+			if (getListIconTask != null) {
+				getListIconTask.stop();
+			}
+			getListIconTask = new GetListIconAsyncTask<GameSortBean>(list,
+					adapter);
+			getListIconTask.execute("");
+		}
+	}
+}

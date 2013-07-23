@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlGameManagerAction"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/egame_action_bg"
+    android:paddingBottom="6dip"
+    android:paddingLeft="30dip"
+    android:paddingRight="30dip"
+    android:paddingTop="6dip"
+    android:visibility="gone" >
+
+    <Button
+        android:id="@+id/ib_ckxq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/egame_btn_green_selector"
+        android:focusable="false"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:text="@string/egame_manager_ckxq"
+        android:textColor="#2b9900"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/ib_qxsj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="25dip"
+        android:background="@drawable/egame_btn_green_selector"
+        android:focusable="false"
+        android:paddingLeft="24dip"
+        android:paddingRight="24dip"
+        android:text="@string/egame_manager_sj"
+        android:textColor="#2b9900"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/ib_ycgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dip"
+        android:background="@drawable/egame_btn_green_selector"
+        android:focusable="false"
+        android:paddingLeft="12dip"
+        android:paddingRight="12dip"
+        android:text="@string/egame_manager_ycgl"
+        android:textColor="#2b9900"
+        android:textSize="12sp" />
+
+</RelativeLayout>

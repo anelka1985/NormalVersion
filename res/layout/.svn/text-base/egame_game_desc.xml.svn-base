@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/desc"
+	android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+
+	<!-- 游戏介绍布局 -->
+
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:orientation="vertical">
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5dp" android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_provider" />
+
+			<TextView android:id="@+id/provider" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="@color/egame_text_orange"
+				android:textSize="14sp" />
+		</LinearLayout>
+		
+		
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_deployeetime" />
+
+			<TextView android:id="@+id/deployeetime" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="@color/egame_text_gray"
+				android:textSize="14sp" />
+		</LinearLayout>
+		
+		
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal" android:visibility="gone">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_updatetime" />
+
+			<TextView android:id="@+id/updatetime" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="@color/egame_text_gray"
+				android:textSize="14sp" />
+		</LinearLayout>
+		
+		
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_gameSize" />
+
+			<TextView android:id="@+id/gameSize" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="@color/egame_text_gray"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_gameType" />
+
+			<TextView android:id="@+id/gameType" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textColor="@color/egame_text_gray"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_gameTag" />
+
+			<TextView android:id="@+id/gameTag1" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginRight="5dp" android:textColor="@color/egame_text_orange"
+				android:textSize="14sp" android:visibility="gone" android:singleLine="true" />
+
+			<TextView android:id="@+id/gameTag2" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginRight="5dp" android:textColor="@color/egame_text_orange"
+				android:textSize="14sp" android:visibility="gone" android:singleLine="true" />
+
+			<TextView android:id="@+id/gameTag3" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginRight="5dp" android:textColor="@color/egame_text_orange"
+				android:textSize="14sp" android:visibility="gone" android:singleLine="true" />
+
+			<TextView android:id="@+id/gameTag4" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginRight="5dp" android:textColor="@color/egame_text_orange"
+				android:textSize="14sp" android:visibility="gone" android:singleLine="true" />
+
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="@string/egame_gameDesc" />
+
+			<FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+				<TextView android:id="@+id/gameDesc" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:lines="2" android:textColor="@color/egame_text_gray"
+					android:textSize="14sp" />
+
+				<TextView android:id="@+id/gameDescAll" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textColor="@color/egame_text_gray"
+					android:textSize="14sp" android:visibility="gone" />
+			</FrameLayout>
+		</LinearLayout>
+
+		<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_marginTop="5dp">
+
+			<Button android:id="@+id/desczhankai" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_alignParentRight="true" android:background="@drawable/egame_shouqi" />
+		</RelativeLayout>
+	</LinearLayout>
+	<FrameLayout android:layout_height="wrap_content" android:layout_width="fill_parent">
+		<Gallery android:id="@+id/gallery" android:layout_width="fill_parent"
+			android:layout_height="170dp" android:layout_marginTop="5dp" android:background="@drawable/egame_picsmallbg"
+			android:fadingEdgeLength="40dip" android:paddingBottom="3dp" android:paddingTop="3dp"
+			android:spacing="10dp" />
+		<ProgressBar android:id="@+id/screenshortProgress" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="center" android:visibility="gone" />
+	</FrameLayout>
+	<RelativeLayout android:id="@+id/moreLike" android:layout_width="fill_parent"
+		android:layout_height="30dp" android:background="@drawable/egame_listbg">
+
+		<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_centerVertical="true"
+			android:layout_marginLeft="10dp" android:text="@string/egame_moreLike" />
+
+		<Button android:id="@+id/more" android:layout_width="16dp" android:layout_height="16dp"
+			android:layout_alignParentRight="true" android:layout_centerVertical="true"
+			android:layout_marginRight="10dp" android:background="@drawable/egame_jiantouxia" />
+	</RelativeLayout>
+	<!-- 大家还喜欢 -->
+
+	<LinearLayout android:id="@+id/moreLikeGame" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+		android:layout_marginTop="5dp" android:orientation="horizontal">
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
+
+			<ImageView android:id="@+id/gameIcon1" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName1" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
+
+			<ImageView android:id="@+id/gameIcon2" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName2" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
+
+			<ImageView android:id="@+id/gameIcon3" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName3" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical">
+
+			<ImageView android:id="@+id/gameIcon4" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName4" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+	</LinearLayout>
+	<RelativeLayout android:id="@+id/moreuser" android:layout_width="fill_parent"
+		android:layout_height="30dp" android:background="@drawable/egame_listbg" 
+		android:visibility="gone"
+		>
+ 
+		<TextView style="@style/egame_gameDesc" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_centerVertical="true"
+			android:layout_marginLeft="10dp" android:text="@string/egame_moreuser" />
+
+		<Button android:id="@+id/moreuser11" android:layout_width="16dp" android:layout_height="16dp"
+			android:layout_alignParentRight="true" android:layout_centerVertical="true"
+			android:layout_marginRight="10dp" android:background="@drawable/egame_jiantouxia" />
+	</RelativeLayout>
+	<!-- 还有谁在玩 -->
+	<LinearLayout android:id="@+id/moreuserGame" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+		android:layout_marginTop="5dp" android:orientation="horizontal" android:visibility="gone">
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical"
+			android:id="@+id/linea1" android:visibility="invisible">
+
+			<ImageView android:id="@+id/gameIcon5" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName5" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical"
+			android:id="@+id/linea2" android:visibility="invisible">
+
+			<ImageView android:id="@+id/gameIcon6" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName6" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical"
+			android:id="@+id/linea3" android:visibility="invisible">
+
+			<ImageView android:id="@+id/gameIcon7" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName7" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="0dip" android:layout_height="wrap_content"
+			android:layout_weight="1" android:gravity="center_horizontal" android:orientation="vertical"
+			android:id="@+id/linea4" android:visibility="invisible">
+
+			<ImageView android:id="@+id/gameIcon8" android:layout_width="52dp"
+				android:layout_height="52dp" android:background="@drawable/egame_defaultgamepic"
+				android:scaleType="fitXY" android:src="@drawable/egame_touxiangzhezhao" />
+
+			<TextView android:id="@+id/gameName8" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:singleLine="true" android:textColor="#12120d"
+				android:textSize="14sp" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

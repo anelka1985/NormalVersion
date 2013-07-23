@@ -1,0 +1,742 @@
+package com.egame.app.uis;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.CacheManager;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.ZoomDensity;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.receivers.EgameWebReceiver;
+import com.egame.app.tasks.UpdateIconTask;
+import com.egame.app.tasks.UploadContacts;
+import com.egame.config.JsCallService;
+import com.egame.config.Urls;
+import com.egame.utils.common.HttpConnect;
+import com.egame.utils.common.L;
+import com.egame.utils.common.LoginDataStoreUtil;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.sys.DialogStyle;
+import com.egame.utils.ui.DialogUtil;
+import com.egame.utils.ui.ImageUtils;
+import com.egame.utils.ui.Utils;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 类说明：
+ * 
+ * @创建时间 2012-2-6 上午10:36:28
+ * @创建人： 陆林
+ * @邮箱：15366189868@189.cn
+ */
+public class EgameWebActivity extends Activity implements OnClickListener {
+	/**
+	 * 输入弹出框RequestCode
+	 */
+	public static final int INPUT_POPUP_REQUEST_CODE = 100;
+	/**
+	 * 图片剪切RequestCode
+	 */
+	public static final int IMAGE_CAPTURE_REQUEST_CODE = 101;
+	/**
+	 * 图片库选择图片RequestCode
+	 */
+	public static final int CATEGORY_OPENABLE_REQUEST_CODE = 102;
+
+	ProgressDialog progress;
+	private View mBack;
+	private View mClose;
+	private View mReload;
+	private View mReloadBtn;
+	private View mProgress;
+	private View mTipImage;
+	public WebView mWebView;
+	private View mIconNew;
+	private TextView mTitleView;
+	private EgameWebReceiver mReceiver;
+	private ImageButton mGuangChangBtn, mFriendBtn, mGeRenZhongXinBtn;
+	private String mGuangChangUrl = Urls.WEB_URL + "guangchang-index.html";
+	private String mFriendUrl = Urls.WEB_URL + "goodfriend-myfriend.html";
+	private String mGeRenZhongXinUrl = Urls.WEB_URL + "individual-centers.html";
+	private String mSearchFriendUrl = Urls.WEB_URL + "goodfriend-findfri.html";
+	private String mFriendMsgUrl = Urls.WEB_URL + "individual-centers-friendnd.html";
+	private String mSystemMsgUrl = Urls.WEB_URL + "individual-centers-symedit2.html";
+	private String mActivityUrl = Urls.WEB_URL + "guangchang-activity.html";
+	private String mFriendDetailUrl = Urls.WEB_URL + "goodfriend-deta.html";
+	private final static String GUANGCHANG_TAB = "guangchang-";
+	private final static String FRIEND_TAB = "goodfriend-";
+	private final static String MYCENTER_TAB = "individual-";
+	public static boolean isChangeName = false;
+	public LoginDataStoreUtil.User user;
+	public Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				hideProgress();
+				break;
+			case 2:
+				showProgress();
+				break;
+			case 10:
+				showProgress();
+				mWebView.loadUrl(Urls.WEB_URL + msg.obj);
+				break;
+			case 11:
+				mIconNew.setVisibility(View.VISIBLE);
+				break;
+			case 12:
+				mWebView.loadUrl("javascript:" + msg.obj);
+				break;
+			case 13:
+				try {
+					String callback = "picCallback()";
+					showProgress();
+					Bitmap cameraBitmap = (Bitmap) msg.obj;
+					new UpdateIconTask(EgameWebActivity.this, getUserId(), callback).execute(new Bitmap[] { cameraBitmap });
+				} catch (Exception e) {
+					Toast.makeText(EgameWebActivity.this, R.string.egame_get_pic_error, Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case 14:
+				Toast.makeText(EgameWebActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+				break;
+			case 15:
+				setTitle();
+				break;
+			}
+		}
+	};
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_web);
+		findViewById(R.id.top_no_text_title).setVisibility(View.VISIBLE);
+		progress = DialogUtil.getProgressDialog(EgameWebActivity.this);
+		// deleteCache();
+		user = LoginDataStoreUtil.fetchUser(getApplicationContext(), LoginDataStoreUtil.LOG_FILE_NAME);
+		mBack = findViewById(R.id.top_back);
+		mBack.setVisibility(View.VISIBLE);
+		mBack.setOnClickListener(this);
+		mClose = findViewById(R.id.top_close);
+		mClose.setVisibility(View.VISIBLE);
+		mClose.setOnClickListener(this);
+		mReload = findViewById(R.id.reload);
+		mReloadBtn = findViewById(R.id.reload_btn);
+		mReloadBtn.setOnClickListener(this);
+		mProgress = findViewById(R.id.progress);
+		mTipImage = findViewById(R.id.tip_bg);
+		mTipImage.setOnClickListener(this);
+		mWebView = (WebView) findViewById(R.id.web_view);
+		mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+		mIconNew = findViewById(R.id.icon_new);
+		mTitleView = (TextView) findViewById(R.id.title_text);
+		mTitleView.setText(user.getNickName() + " ,欢迎来到爱游戏社区");
+		mTitleView.setMovementMethod(LinkMovementMethod.getInstance());
+
+		mTitleView.setOnClickListener(this);
+		mTitleView.setVisibility(View.VISIBLE);
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Utils.EGAME_WEB_RECEIVER);
+		mReceiver = new EgameWebReceiver(this);
+		registerReceiver(mReceiver, filter);
+		showProgress();
+		JsCallService jsCallService = new JsCallService(this);
+		mWebView.addJavascriptInterface(jsCallService, "jsCall");
+		WebSettings set = mWebView.getSettings();
+		set.setSavePassword(false);
+		set.setDefaultZoom(ZoomDensity.FAR);
+		set.setBuiltInZoomControls(false);
+		set.setCacheMode(WebSettings.LOAD_NO_CACHE);
+		set.setJavaScriptEnabled(true);
+		mWebView.setWebViewClient(new WebViewClient() {
+			boolean isError = false;
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				super.onPageFinished(view, url);
+				L.d("onPageFinished url=" + url);
+				// 根据页面文件名前缀，切换标签
+				if (url.indexOf(GUANGCHANG_TAB) > 0) {
+					changSelBtn(mGuangChangBtn, false);
+				} else if (url.indexOf(FRIEND_TAB) > 0) {
+					changSelBtn(mFriendBtn, false);
+				} else if (url.indexOf(MYCENTER_TAB) > 0) {
+					changSelBtn(mGeRenZhongXinBtn, false);
+				}
+				if (isError) {
+					// 显示404界面
+					hideProgress();
+					mReload.setVisibility(View.VISIBLE);
+					mWebView.setVisibility(View.GONE);
+					isError = false;
+				} else {
+					if (PreferenceUtil.isFristWeb(getApplicationContext())) {
+						mTipImage.setVisibility(View.VISIBLE);
+					}
+					// 隐藏404界面
+					if (mReload.getVisibility() == View.VISIBLE) {
+						mReload.setVisibility(View.GONE);
+						mWebView.setVisibility(View.VISIBLE);
+					}
+				}
+			}
+
+			@Override
+			public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+				isError = true;
+			}
+
+			public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+				L.d("shouldOverrideUrlLoading url=" + url);
+				view.loadUrl(url);
+				return true;
+			}
+		});
+		mWebView.setWebChromeClient(new WebChromeClient() {
+
+			@Override
+			public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+				return super.onJsAlert(view, url, message, result);
+			}
+
+			public void onProgressChanged(WebView view, int progress) {// 载入进度改变而触发
+				super.onProgressChanged(view, progress);
+				if (progress == 100) {
+					// 暂时添加
+					// hideProgress();
+				} else if (progress < 100) {
+					// 显示加载进度界面
+					// if (mProgress.getVisibility() == View.GONE) {
+					// mProgress.setVisibility(View.VISIBLE);
+					// }
+				}
+			}
+		});
+		mGuangChangBtn = (ImageButton) findViewById(R.id.btn_guangchang);
+		mGuangChangBtn.setOnClickListener(this);
+		mFriendBtn = (ImageButton) findViewById(R.id.btn_haoyou);
+		mFriendBtn.setOnClickListener(this);
+		mGeRenZhongXinBtn = (ImageButton) findViewById(R.id.btn_gerenzhongxin);
+		mGeRenZhongXinBtn.setOnClickListener(this);
+		String page = getIntent().getStringExtra("page");
+		if (TextUtils.isEmpty(page)) {
+			onClick(mGuangChangBtn);
+		} else if (page.equals("activity")) {
+			mWebView.loadUrl(mActivityUrl + "?USERID=" + getUserId());
+			changSelBtn(mGuangChangBtn, false);
+		} else if (page.equals("msg")) {
+			mWebView.loadUrl(mFriendMsgUrl + "?USERID=" + getUserId());
+			changSelBtn(mGeRenZhongXinBtn, false);
+		} else if (page.equals("sysMsg")) {
+			mWebView.loadUrl(mSystemMsgUrl + "?USERID=" + getUserId());
+			changSelBtn(mGeRenZhongXinBtn, false);
+		} else if (page.equals("friendDetail")) {
+			String friendid = getIntent().getStringExtra("friendid");
+			mWebView.loadUrl(mFriendDetailUrl + "?USERID=" + getUserId() + "&friendId=" + friendid + "&OSFROMER=100");
+			changSelBtn(mGeRenZhongXinBtn, false);
+		}
+		new UploadContacts(getApplicationContext(), LoginDataStoreUtil.fetchUser(getApplicationContext(), LoginDataStoreUtil.LOG_FILE_NAME)
+				.getUserId()).execute();
+
+		// 未绑定手机号,进入引导绑定手机号流程
+		boolean isChcekPhone = getIntent().getBooleanExtra("isCheckPhone", true);
+		if (!isChcekPhone && PreferenceUtil.isShowBindPhoneDialog(this)) {
+			showBindPhoneDialog();
+		}
+		EgameApplication.Instance().addActivity(this);
+	}
+
+	public String getUserId() {
+		return LoginDataStoreUtil.fetchUser(getApplicationContext(), LoginDataStoreUtil.LOG_FILE_NAME).getUserId() + "";
+	}
+
+	private void setTitle() {
+		mTitleView.setText(LoginDataStoreUtil.fetchUser(getApplicationContext(), LoginDataStoreUtil.LOG_FILE_NAME).getNickName() + " ,欢迎来到爱游戏社区");
+	}
+
+	private void showProgress() {
+		// 显示加载进度界面
+		if (mProgress.getVisibility() == View.GONE) {
+			mProgress.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void hideProgress() {
+		// 隐藏加载进度界面
+		if (mProgress.getVisibility() == View.VISIBLE) {
+			mProgress.setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case INPUT_POPUP_REQUEST_CODE: {
+				String callback = data.getStringExtra("callback");
+				String nickname = LoginDataStoreUtil.fetchUser(getApplicationContext(), LoginDataStoreUtil.LOG_FILE_NAME).getNickName();
+				String content = data.getStringExtra("content");
+				String[] callJs = callback.split("_");
+				if (callJs.length > 0) {
+					List<String> pList = new ArrayList<String>();
+					for (int i = 1; i < callJs.length; i++) {
+						pList.add("'" + callJs[i] + "'");
+					}
+					pList.add("'" + nickname + "'");
+					pList.add("'" + content + "'");
+					String js = String.format(callJs[0], pList.toArray());
+					mWebView.loadUrl("javascript:" + js);
+				}
+			}
+				break;
+			case CATEGORY_OPENABLE_REQUEST_CODE: {
+				/* 保存并跳转 */
+				// try {
+				// String callback = "picCallback()";
+				// showProgress();
+				// Bitmap cameraBitmap = (Bitmap) data.getExtras().get("data");
+				// new UpdateIconTask(EgameWebActivity.this, getUserId(),
+				// callback).execute(new Bitmap[] { cameraBitmap });
+				// } catch (Exception e) {
+				// Toast.makeText(this, R.string.egame_get_pic_error,
+				// Toast.LENGTH_SHORT).show();
+				// }
+				try {
+					Uri uri = data.getData();
+					Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+					cursor.moveToFirst();
+					String srcFile = cursor.getString(1);
+					cursor.close();
+
+					Bitmap bitmap = ImageUtils.decodeFile(srcFile);
+					EgameWebActivity.this.handler.sendMessage(EgameWebActivity.this.handler.obtainMessage(13, bitmap));
+				} catch (Exception e) {
+					e.printStackTrace();
+					Toast.makeText(this, R.string.egame_get_pic_error, Toast.LENGTH_SHORT).show();
+				}
+				// Bitmap cameraBitmap = (Bitmap) data.getExtras().get("data");
+				// EgameWebActivity.this.handler.sendMessage(EgameWebActivity.this.handler
+				// .obtainMessage(13, cameraBitmap));
+			}
+				break;
+			case IMAGE_CAPTURE_REQUEST_CODE: {
+				try {
+					// 压缩图片
+					Bitmap bitmap = ImageUtils.decodeFile(Environment.getExternalStorageDirectory() + "/camera.png");
+					EgameWebActivity.this.handler.sendMessage(EgameWebActivity.this.handler.obtainMessage(13, bitmap));
+					/* 拍照后保存图片，并跳到裁剪功能 */
+					// Intent intent = new
+					// Intent("com.android.camera.action.CROP");
+					// intent.setData(Uri.parse(android.provider.MediaStore.Images.Media
+					// .insertImage(getContentResolver(),
+					// Environment.getExternalStorageDirectory()
+					// + "/camera.png", null, null)));
+					// intent.putExtra("crop", "true");
+					// intent.putExtra("aspectX", 1);
+					// intent.putExtra("aspectY", 1);
+					// intent.putExtra("outputX", 250);
+					// intent.putExtra("outputY", 250);
+					// intent.putExtra("return-data", true);
+					// startActivityForResult(intent,
+					// CATEGORY_OPENABLE_REQUEST_CODE);
+				} catch (Exception e) {
+					e.printStackTrace();
+					Toast.makeText(this, R.string.egame_camera_pic_error, Toast.LENGTH_SHORT).show();
+				}
+			}
+				break;
+			}
+		}
+	}
+
+	public void updateIconSuccess(String callback) {
+		hideProgress();
+		mWebView.loadUrl("javascript:" + callback);
+		Toast.makeText(this, R.string.egame_update_icon_ok, Toast.LENGTH_SHORT).show();
+	}
+
+	public void updateIconfail() {
+		hideProgress();
+		Toast.makeText(this, R.string.egame_update_icon_error, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * 后退
+	 */
+	public void back() {
+		if (mWebView.canGoBack()) {
+			mWebView.goBack();
+		} else {
+			finish();
+		}
+	}
+
+	/**
+	 * 重新加载
+	 */
+	public void reload() {
+		mWebView.reload();
+		// 用户昵称的更新
+		mTitleView.setText(LoginDataStoreUtil.fetchUser(this, LoginDataStoreUtil.LOG_FILE_NAME).getNickName() + " ,欢迎来到爱游戏社区");
+	}
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			back();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	/**
+	 * 设置选中标签
+	 * 
+	 * @param v
+	 *            选中标签
+	 * @param loadPage
+	 *            是否加载标签默认页
+	 */
+	private void changSelBtn(View v, boolean loadPage) {
+		mGuangChangBtn.setSelected(false);
+		mFriendBtn.setSelected(false);
+		mGeRenZhongXinBtn.setSelected(false);
+		if (mGuangChangBtn == v) {
+			mGuangChangBtn.setSelected(true);
+			if (loadPage)
+				mWebView.loadUrl(mGuangChangUrl + "?USERID=" + getUserId());
+		} else if (mFriendBtn == v) {
+			mFriendBtn.setSelected(true);
+			if (loadPage)
+				mWebView.loadUrl(mFriendUrl + "?USERID=" + getUserId());
+		} else if (mGeRenZhongXinBtn == v) {
+			mGeRenZhongXinBtn.setSelected(true);
+			if (loadPage) {
+				if (mIconNew.getVisibility() == View.VISIBLE) {
+					mIconNew.setVisibility(View.GONE);
+				}
+				mWebView.loadUrl(mGeRenZhongXinUrl + "?USERID=" + getUserId());
+			}
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (mBack == v) {
+			back();
+		} else if (mClose == v) {
+			finish();
+		} else if (mReloadBtn == v) {
+			showProgress();
+			mWebView.reload();
+		} else if (mGuangChangBtn == v || mFriendBtn == v || mGeRenZhongXinBtn == v) {
+			changSelBtn(v, true);
+		} else if (mTipImage == v) {
+			mTipImage.setVisibility(View.GONE);
+		} else if (mTitleView == v) {
+			changSelBtn(mGeRenZhongXinBtn, true);
+		}
+	}
+
+	private final static int MENU_RELOAD = 1;
+	private final static int MENU_SEARCH_FRIEND = 2;
+	private final static int MENU_MY_FRIEND = 3;
+	private final static int MENU_EXIT = 4;
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_RELOAD: {
+			mWebView.reload();
+		}
+			break;
+		case MENU_SEARCH_FRIEND: {
+			mWebView.loadUrl(mSearchFriendUrl + "?USERID=" + getUserId());
+		}
+			break;
+		case MENU_MY_FRIEND: {
+			mWebView.loadUrl(mFriendUrl + "?USERID=" + getUserId());
+		}
+			break;
+		case MENU_EXIT: {
+			finish();
+		}
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, MENU_RELOAD, Menu.NONE, R.string.egame_menu_reload);
+		menu.add(0, MENU_SEARCH_FRIEND, Menu.NONE, R.string.egame_menu_search_friend);
+		menu.add(0, MENU_MY_FRIEND, Menu.NONE, R.string.egame_menu_my_friend);
+		menu.add(0, MENU_EXIT, Menu.NONE, R.string.egame_menu_exit);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("EgameWebActivity");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(mReceiver);
+		deleteCache();
+		// mWebView.clearCache(true);
+	}
+
+	private void deleteCache() {
+		File file = CacheManager.getCacheFileBaseDir();
+		if (file != null && file.exists() && file.isDirectory()) {
+			for (File item : file.listFiles()) {
+				item.delete();
+			}
+			file.delete();
+		}
+		deleteDatabase("webview.db");
+		deleteDatabase("webviewCache.db");
+	}
+
+	/**
+	 * 显示绑定手机号的引导框
+	 * 
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-6-19
+	 */
+	private void showBindPhoneDialog() {
+		
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+
+				PreferenceUtil.setShowBindPhoneDialog(EgameWebActivity.this);
+			}
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+				showInputPhoneDialog();
+			}
+		};				
+		DialogStyle ds = new DialogStyle();
+AlertDialog.Builder builder = ds.getBuilder(EgameWebActivity.this, "下次再说", "立即绑定", comfirmL, cancelL);
+builder.setTitle("系统提示").setMessage("绑定手机可以登录爱游戏了!立即绑定还可获得50经验");	
+
+		builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					PreferenceUtil.setShowBindPhoneDialog(EgameWebActivity.this);
+				}
+				return false;
+			}
+		});
+		builder.show();
+	}
+
+	/**
+	 * 显示输入手机号的引导框
+	 * 
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-6-19
+	 */
+	private void showInputPhoneDialog() {
+		View view = LayoutInflater.from(EgameWebActivity.this).inflate(R.layout.egame_bindphone, null);
+		final AlertDialog builder = new AlertDialog.Builder(EgameWebActivity.this).setView(view).setTitle("系统提示").create();
+		builder.setTitle("系统提示");
+		final EditText et = (EditText) view.findViewById(R.id.phonenum);
+		final Button button = (Button) view.findViewById(R.id.send);
+		et.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if (et.getText().toString().equals("0")) {
+					Toast.makeText(EgameWebActivity.this, "请输入非0开头的手机号", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				final String phoneNum = et.getText().toString();
+				if (et.getText().length() == 11) {
+					button.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Log.i("DDDDD", phoneNum);
+							new BindPhoneTask(phoneNum).execute("");
+							builder.cancel();
+						}
+					});
+				} else {
+					button.setClickable(false);
+				}
+			}
+		});
+		builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					PreferenceUtil.setShowBindPhoneDialog(EgameWebActivity.this);
+				}
+				return false;
+			}
+		});
+		builder.show();
+
+	}
+
+	/**
+	 * 显示短信发送成功引导框
+	 * 
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-6-19
+	 */
+	private void showBindSuccess() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(EgameWebActivity.this).setTitle("系统提示").setMessage("验证短信已发出,点击短信中的链接即可完成验证");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+
+		});
+		builder.show();
+	}
+
+	/**
+	 * 显示短信发送失败引导框
+	 * 
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-6-19
+	 */
+	private void showBindFail() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(EgameWebActivity.this).setTitle("系统提示").setMessage("验证失败,请重新验证");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+
+		});
+		builder.show();
+	}
+
+	/**
+	 * 绑定手机号的异步任务
+	 */
+	class BindPhoneTask extends AsyncTask<String, Integer, JSONObject> {
+
+		String phoneNum;
+
+		public BindPhoneTask(String phoneNum) {
+			this.phoneNum = phoneNum;
+			progress.show();
+		}
+
+		@Override
+		protected JSONObject doInBackground(String... params) {
+			String url = Urls.getModifyPhoneNum(EgameWebActivity.this, phoneNum, user.getUserId());
+			try {
+				String s = HttpConnect.getHttpString(url);
+				return new JSONObject(s).getJSONObject("result");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			super.onPostExecute(result);
+			if (EgameWebActivity.this.isFinishing()) {
+				return;
+			}
+			progress.dismiss();
+			if (result != null) {
+				try {
+					if (result.getString("resultcode").equals("0")) {
+						showBindSuccess();
+					} else {
+						showBindFail();
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+					showBindFail();
+				}
+			}
+		}
+
+	}
+}

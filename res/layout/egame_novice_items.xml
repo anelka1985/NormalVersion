@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/egame_listbg" >
+
+    <!-- 用户头像 -->
+
+    <ImageView
+        android:id="@+id/m_friend_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/egame_icon_made"
+        android:scaleType="fitXY"
+        android:src="@drawable/egame_touxiangzhezhao" />
+    <!-- 加好友按钮 -->
+
+    <RelativeLayout
+        android:id="@+id/m_addfriend"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/egame_btn_green_selector" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/egame_add_friend" />
+
+            <TextView
+                android:id="@+id/m_add_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/egame_addfriend_text"
+                android:textColor="#49A61F"
+                android:textSize="15dp" >
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/m_addfriend1"
+        android:layout_width="100dp"
+        android:layout_height="37dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/egame_gray_bg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="请求已发送"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp" >
+        </TextView>
+    </RelativeLayout>
+    <!-- 信息描述 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="110dp"
+        android:layout_toRightOf="@id/m_friend_icon" >
+
+        <TextView
+            android:id="@+id/m_friend_gex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:textColor="#A3A3A3"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/m_friend_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/m_friend_gex"
+            android:textColor="#6B6B6B"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/m_friend_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/m_friend_name"
+            android:textColor="#A3A3A3"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

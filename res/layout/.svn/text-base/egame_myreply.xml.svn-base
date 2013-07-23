@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ECECEC"
+    android:orientation="vertical" >
+
+    <!-- tile -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/egame_back" />
+
+        <TextView
+            style="@style/egame_topTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_vertical"
+            android:paddingTop="10sp"
+            android:text="@string/egame_reply" />
+    </RelativeLayout>
+
+    <!-- 选项卡 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <TextView
+                android:id="@+id/yjfk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_blackon_selector"
+                android:gravity="center"
+                android:text="@string/egame_yjfk"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/wdfk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_blackoff_selector"
+                android:gravity="center"
+                android:text="@string/egame_wdfk"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/egame_top_line" />
+    </RelativeLayout>
+
+    <!-- 意见反馈布局 -->
+
+    <ScrollView
+        android:id="@+id/yjfktab"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/note"
+                style="@style/egame_shurukuangTextStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="120dip"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/egame_shurukuang"
+                android:gravity="top"
+                android:hint="@string/egame_your_relpy"
+                android:inputType="textMultiLine"
+                android:maxLength="180"
+                android:padding="10dp"
+                android:scrollbars="vertical" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_contact"
+                    style="@style/egame_Text16Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/egame_your_contact" />
+
+                <EditText
+                    android:id="@+id/contact"
+                    style="@style/egame_shurukuangTextStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toRightOf="@id/tv_contact"
+                    android:background="@drawable/egame_shurukuang"
+                    android:hint="@string/egame_your_tel"
+                    android:maxLength="40"
+                    android:maxLines="1"
+                    android:padding="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/submission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/egame_btn_feedback_selector"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/egame_yellow_icon" />
+
+                <TextView
+                    style="@style/egame_moreProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/egame_submission" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!-- 我的反馈布局 -->
+
+    <RelativeLayout
+        android:id="@+id/wdfktab"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/egame_listItemTextStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/egame_replyContent" />
+
+                <TextView
+                    style="@style/egame_listItemTextStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center_horizontal"
+                    android:text="@string/egame_replystate" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/egame_line" />
+
+            <ListView
+                android:id="@+id/lv_messageList"
+                android:listSelector="@drawable/egame_touming"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@drawable/egame_footer_buttonbg"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/replyQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/egame_btn_green_circularity_selector"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/egame_green_icon" />
+
+                <TextView
+                    style="@style/egame_greenText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="30dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/egame_replyQuestion" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 反馈详情 -->
+
+    <RelativeLayout
+        android:id="@+id/replyDetail"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/myReplyDetail"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="60dip"
+            android:cacheColorHint="#00000000"
+            android:divider="@null"
+            android:fadingEdge="none"
+            android:scrollbars="none" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/egame_footer_buttonbg"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/continueReply"
+                style="@style/egame_greenText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_green_selector"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="继续提问" />
+
+            <Button
+                android:id="@+id/newReply"
+                style="@style/egame_greenText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_green_selector"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="重新提问" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

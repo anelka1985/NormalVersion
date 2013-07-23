@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>爱游戏--游戏中心--成就--没有人达成</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/w_480.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<body>
+	<!--title-->
+    <div class="title_pk">
+    <!--所有人选中-->
+    	<ul>
+        	<li class="title_pk_nor"><a href="">好友</a></li>
+            <li class="title_pk_select"><a href=""><span class="head_mask_pknarrow"></span>所有人</a></li>
+        </ul>
+        
+        <!--好友选中
+        	<ul>
+                <li class="title_pk_select"><a href=""><span class="head_mask_pknarrow"></span>好友</a></li>
+                <li class="title_pk_nor"><a href="">所有人</a></li>
+            </ul>
+        -->
+    </div>
+    
+    <div class="text_pk">还没有人达成此成就!</div>
+    
+
+
+
+</body>
+</html>
+

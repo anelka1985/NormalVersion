@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/ttigame/!svn/ver/100551/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services
+END
+UpdateService.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/UpdateService.java
+END
+BackRunService.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/BackRunService.java
+END
+DBService.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/106704/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/DBService.java
+END
+LogoImageTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/LogoImageTask.java
+END
+DownloadService.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/ttigame/!svn/ver/106704/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/DownloadService.java
+END
+UpdateThread.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/services/UpdateThread.java
+END

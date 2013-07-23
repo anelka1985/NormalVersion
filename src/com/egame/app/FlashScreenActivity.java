@@ -1,0 +1,966 @@
+package com.egame.app;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Random;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnKeyListener;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.StatFs;
+import android.telephony.TelephonyManager;
+import android.text.Html;
+import android.text.TextUtils;
+import android.text.format.Formatter;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
+import android.view.View;
+import android.view.Window;
+import android.webkit.URLUtil;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
+import com.egame.R;
+import com.egame.app.services.DBService;
+import com.egame.app.services.UpdateService;
+import com.egame.app.tasks.AgreeRunnable;
+import com.egame.app.tasks.GetAllGameTask;
+import com.egame.app.tasks.GetPhoneNumberByImsiRunnable;
+import com.egame.app.tasks.SearchHotTask;
+import com.egame.app.uis.EgameHomeActivity;
+import com.egame.app.uis.WelcomeActivity;
+import com.egame.beans.AdPageBean;
+import com.egame.config.Const;
+import com.egame.config.Urls;
+import com.egame.utils.common.BroswerUtil;
+import com.egame.utils.common.HttpConnect;
+import com.egame.utils.common.L;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.sys.DialogStyle;
+import com.egame.utils.ui.Base64Coder;
+import com.egame.utils.ui.DialogUtil;
+import com.egame.utils.ui.ImageUtils;
+import com.egame.utils.ui.ToastUtil;
+import com.egame.utils.ui.UIUtils;
+import com.egame.utils.ui.Utils;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 
+ * 应用启动页面
+ * 
+ * @author ZhouZhe
+ * @version [版本号, 2011-11-15]
+ * @since [产品/模块版本]
+ */
+public class FlashScreenActivity extends Activity {
+
+	/**
+	 * 数据加载进度条的相关控制变量 进度条背景的宽带
+	 */
+	public int PROGRESS_WIDTH = 0;
+
+	/**
+	 * 进度条单元分割的宽度
+	 */
+	public float PROGRESS_CESS_WIDTH = 0;
+
+	/**
+	 * 当前时间间隔数组的行列值
+	 */
+	private int i = new Random().nextInt(5), k = 0;
+
+	/**
+	 * 计数变量
+	 */
+	private int counts = 0;
+
+	/**
+	 * 更新UI的handler
+	 */
+	private UpdateHandler myHandler;
+
+	/**
+	 * 更新进度条的值的线程
+	 */
+	private Thread threads;
+
+	/** 读取数据结束 */
+	private boolean isLoadFinish = false;
+
+	/** 进度条结束 */
+	private boolean isProgressFinish = false;
+
+	/**
+	 * 线程休眠时间数组
+	 */
+	private int[][] sleeptime = {
+			{ 20, 30, 10, 20, 10, 10, 10, 40, 30, 20, 10, 10 },
+			{ 50, 10, 30, 40, 10, 40, 20, 10, 20, 10, 30, 10 },
+			{ 30, 10, 19, 20, 20, 60, 10, 10, 10, 80, 10, 20 },
+			{ 30, 50, 10, 10, 10, 10, 50, 40, 20, 50, 10, 10 },
+			{ 10, 20, 20, 30, 20, 10, 40, 20, 10, 10, 10, 10 } };
+
+	/**
+	 * 其他相关变量及UI控件的引用 升级进度框
+	 */
+	private ProgressDialog updateProgressDialog;
+
+	/**
+	 * 是否升级提示框
+	 */
+	private AlertDialog updateAlertDialog;
+
+	/**
+	 * 网络异常提示框
+	 */
+	private AlertDialog netErrorDialog;
+
+	private SharedPreferences sharedPreferences = null;
+	private SharedPreferences logshare = null;
+
+	private TextView progressBg;
+
+	private TextView progressBlue;
+
+	private EgameApplication application;
+
+	private int updateType = 0;
+	private int newVersion = 100;
+	private int forceVersion = 100;
+	private String updatePath = "";
+	private String remark = "";
+	/**
+	 * 下载线程是否退出
+	 */
+	private boolean isAlive = true;
+
+	/**
+	 * 临时文件名称
+	 */
+	private final static String tempfile = "egametmp.apk";
+
+	private final static String tempfilepath = "/data/data/com.egame/files/";
+
+	private String updateFile = "";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.egame_flashscreen);
+		try {
+			if (getAvailableStore("/data/data/com.egame/")) {
+				DBService db = new DBService(getApplicationContext());
+				db.open();
+				String imageData = db.getImage();
+				if (!TextUtils.isEmpty(imageData)) {
+					try {
+						Bitmap bg = ImageUtils.decodeByteArray(Base64Coder
+								.decode(imageData));
+						if (bg != null) {
+							findViewById(R.id.loading_bg)
+									.setBackgroundDrawable(
+											new BitmapDrawable(bg));
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				db.close();
+
+				application = (EgameApplication) getApplication();
+				sharedPreferences = getSharedPreferences(
+						PreferenceUtil.SHARED_GAME, 0);
+				logshare = getSharedPreferences(PreferenceUtil.SHARE_LOG_NAME,
+						0);
+				// 取得控件的引用和实例化
+				initView();
+				// 初始化新浪微博的相关变量
+				initWeibo();
+				// PROGRESS_WIDTH = 300;
+				PROGRESS_WIDTH = (int) (UIUtils
+						.getDensity(FlashScreenActivity.this) * 200);
+				progressBg.setWidth(PROGRESS_WIDTH);
+				PROGRESS_CESS_WIDTH = PROGRESS_WIDTH / 100;
+				progressBlue.setVisibility(View.GONE);
+
+				// sharedPreferences.edit()
+				// .putBoolean(PreferenceUtil.KEY_ALERT_BOOLEAN, true).commit();
+
+				// 反查手机号
+				getPhoneNum();
+				if (sharedPreferences.getBoolean(
+						PreferenceUtil.KEY_ALERT_BOOLEAN, false)) {
+					progressBg.setVisibility(View.VISIBLE);
+					progressBlue.setVisibility(View.VISIBLE);
+					new GetUpdateAndUaTask().execute("");
+					myHandler = new UpdateHandler();
+					UpdateThread m = new UpdateThread();
+					threads = new Thread(m);
+					threads.start();
+				} else {
+					DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							dialog.dismiss();
+							progressBg.setVisibility(View.VISIBLE);
+							progressBlue.setVisibility(View.VISIBLE);
+							myHandler = new UpdateHandler();
+							UpdateThread m = new UpdateThread();
+							threads = new Thread(m);
+							threads.start();
+							new GetUpdateAndUaTask().execute("");
+							new Thread(new AgreeRunnable(0,
+									FlashScreenActivity.this)).start();
+							NetStat.onEvent("0000020003", "用户许可协议界面，用户点击同意",
+									"进入客户端");
+
+						}
+
+					};
+					DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							dialog.dismiss();
+							FlashScreenActivity.this.finish();
+							sharedPreferences.edit().putBoolean("alert", false)
+									.commit();
+							new Thread(new AgreeRunnable(1,
+									FlashScreenActivity.this)).start();
+							NetStat.onEvent("0000020004", "用户许可协议界面，用户点击不同意",
+									"退出客户端");
+
+						}
+					};
+					DialogStyle ds = new DialogStyle();
+					Builder builder = ds.getBuilder(FlashScreenActivity.this,
+							"同意", "不同意", comfirmL, cancelL);
+					builder.setCancelable(false);
+					View view = LayoutInflater.from(this).inflate(
+							R.layout.egame_alert, null);
+					CheckBox cb = (CheckBox) view
+							.findViewById(R.id.alert_checkbox);
+					TextView tv1 = (TextView) view
+							.findViewById(R.id.alert_content);
+					TextView tv2 = (TextView) view
+							.findViewById(R.id.alert_link);
+					tv1.setText("    尊敬的用户,本应用需要建立数据连接并提供信息推送服务,所产生的流量费用将根据您的套餐资费标准收取,详情请咨询10000");
+					tv2.setText(Html
+							.fromHtml("&nbsp;&nbsp;&nbsp;&nbsp;更多的协议说明,请参考<a href='http://wapgame.189.cn/agreement.html'>爱游戏服务协议</a>,如果您确定使用本应用,即表明您同意接受此服务条款和协议"));
+					tv2.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							// BroswerUtil.startIeDefault(
+							// "http://wapgame.189.cn/agreement.html",
+							// FlashScreenActivity.this);
+
+							Intent it = new Intent();
+							it.setAction("android.intent.action.VIEW");
+							Uri uri = Uri
+									.parse("http://wapgame.189.cn/agreement.html");
+							it.setData(uri);
+							FlashScreenActivity.this.startActivity(it);
+
+						}
+					});
+					cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView,
+								boolean isChecked) {
+							buttonView.playSoundEffect(SoundEffectConstants.CLICK);
+							NetStat.onEvent("0000020005", "用户许可协议界面，用户勾选不再提示",
+									"勾选不再提示");
+							sharedPreferences
+									.edit()
+									.putBoolean(
+											PreferenceUtil.KEY_ALERT_BOOLEAN,
+											isChecked).commit();
+						}
+					});
+
+					
+					
+					builder.setTitle("爱游戏").setView(view);
+					builder.setOnKeyListener(new OnKeyListener() {
+
+						@Override
+						public boolean onKey(DialogInterface dialog,
+								int keyCode, KeyEvent event) {
+							switch (event.getKeyCode()) {
+							case KeyEvent.KEYCODE_BACK:
+								L.d("backkey listener", "KeyEvent.KEYCODE_BACK");
+								FlashScreenActivity.this.finish();
+								sharedPreferences.edit()
+										.putBoolean("alert", false).commit();
+								break;
+							case KeyEvent.KEYCODE_SEARCH:
+								return true;
+							default:
+								break;
+							}
+							return false;
+						}
+					});
+
+					builder.setOnKeyListener(new OnKeyListener() {
+
+						@Override
+						public boolean onKey(DialogInterface arg0, int arg1,
+								KeyEvent event) {
+							if (event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
+								return true;
+							} else if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+								finish();
+							}
+							return false;
+						}
+					}).show();
+
+				}
+				new SearchHotTask(getApplicationContext()).execute();
+			} else {
+				ToastUtil.show(FlashScreenActivity.this, getResources()
+						.getString(R.string.egame_memory_warning));
+				this.finish();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.finish();
+		}
+
+	}
+
+	/**
+	 * 取得相关控件的引用
+	 */
+	public void initView() {
+		progressBg = (TextView) this.findViewById(R.id.progress_bg);
+		progressBlue = (TextView) this.findViewById(R.id.progress_blue);
+		updateAlertDialog = new AlertDialog.Builder(this).create();
+		updateAlertDialog.setTitle(R.string.egame_app_name);
+		updateAlertDialog.setCancelable(false);
+		updateProgressDialog = new ProgressDialog(FlashScreenActivity.this) {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent event) {
+				if (event.getKeyCode() == KeyEvent.KEYCODE_SEARCH
+						|| event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+					return true;
+				}
+				return super.dispatchKeyEvent(event);
+			}
+		};
+		updateProgressDialog.setTitle(R.string.egame_app_name);
+		updateProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		updateProgressDialog.setMax(100);
+		updateProgressDialog.setCancelable(false);
+		updateProgressDialog.setButton(
+				getResources().getString(R.string.egame_menu_qx),
+				new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				});
+		netErrorDialog = new AlertDialog.Builder(FlashScreenActivity.this)
+				.setTitle(R.string.egame_menu_tip)
+				.setMessage(
+						getResources().getString(R.string.egame_net_error_tip))
+				.create();
+		netErrorDialog.setCancelable(false);
+		netErrorDialog.setButton(
+				getResources().getString(R.string.egame_menu_qd),
+				new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						finish();
+					}
+				});
+	}
+
+	/**
+	 * 初始化微博的相关信息
+	 */
+	void initWeibo() {
+		// Weibo.CONSUMER_KEY = WeiBoUtil.SINA_KEY;
+		// Weibo.CONSUMER_SECRET = WeiBoUtil.SINA_SECRET;
+		// System.setProperty("weibo4j.oauth.consumerKey", Weibo.CONSUMER_KEY);
+		// System.setProperty("weibo4j.oauth.consumerSecret",
+		// Weibo.CONSUMER_SECRET);
+	}
+
+	/**
+	 * 进入游戏的方法
+	 */
+	public void startGameFunction() {
+		if (isLoadFinish && isProgressFinish) {
+			progressBlue.setWidth(PROGRESS_WIDTH);
+			new GetAllGameTask(FlashScreenActivity.this).execute("");
+			if (PreferenceUtil.isFrist(getApplicationContext())) {
+				PreferenceUtil.setFrist(FlashScreenActivity.this);
+				Intent intent = new Intent(this, WelcomeActivity.class);
+				startActivity(intent);
+			} else {
+				Intent intent = new Intent();
+				intent.setClass(FlashScreenActivity.this,
+						EgameHomeActivity.class);
+				int type = getIntent().getIntExtra("type", 0);
+				if (type > 0) {
+					String link = getIntent().getStringExtra("link");
+					intent.putExtra("type", type);
+					intent.putExtra("link", link);
+				}
+				startActivity(intent);
+			}
+			sharedPreferences.edit().putString("exitTag", "game").commit();
+			finish();
+		}
+	}
+
+	/**
+	 * 获取升级信息和UA信息的任务
+	 * 
+	 * @author zhouzhe
+	 */
+	class GetUpdateAndUaTask extends AsyncTask<String, Integer, String> {
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				application.getAdRecommondPageCache().clear();
+				application.getAdNewPageCache().clear();
+				String s = HttpConnect.getHttpString(Urls
+						.getAdUrl(FlashScreenActivity.this));
+				sharedPreferences.edit().putString(PreferenceUtil.KEY_AD, s)
+						.commit();
+				JSONObject obj = new JSONObject(s);
+				JSONArray array = obj.getJSONArray("advertList");
+				for (int i = 0; i < array.length(); i++) {
+					JSONObject json = array.getJSONObject(i);
+					AdPageBean page = new AdPageBean(json);
+					if (page.getAreaCode() == AdPageBean.AREA_RECOMMOND) { // 推荐页面广告
+						application.getAdRecommondPageCache().add(page);
+					} else if (page.getAreaCode() == AdPageBean.AREA_NEW) { // 新品页面广告
+						application.getAdNewPageCache().add(page);
+					}
+				}
+
+				PackageInfo packageInfo;
+				int versionCode = 0;
+				try {
+					packageInfo = FlashScreenActivity.this
+							.getPackageManager()
+							.getPackageInfo(
+									FlashScreenActivity.this
+											.getApplicationInfo().packageName,
+									0);
+					versionCode = packageInfo.versionCode;
+					// 删除掉升级过的文件
+					String path = Environment.getExternalStorageDirectory()
+							.getAbsolutePath();
+					updateFile = path + "/egame/" + "update" + versionCode
+							+ ".apk";
+					File upfile = new File(updateFile);
+					if (upfile.exists()) {
+						upfile.delete();
+					}
+				} catch (NameNotFoundException e) {
+					e.printStackTrace();
+				}
+				TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+				String imsi = telManager.getSubscriberId() + "";
+				// imsi = "460036650077648";
+				// String imei = telManager.getDeviceId() + "";
+				String model = URLEncoder.encode(android.os.Build.MODEL);
+				String os = android.os.Build.VERSION.SDK;
+				String brand = URLEncoder.encode(android.os.Build.BRAND);
+				String subchannel = "";
+				try {
+					BufferedReader br = new BufferedReader(
+							new InputStreamReader(new FileInputStream(new File(
+									"system/etc/egame_uid.txt"))));
+					subchannel = br.readLine();
+					br.close();
+				} catch (Exception e1) {
+					// e1.printStackTrace();
+					subchannel = "";
+				}
+
+				String channel = "";
+				try {
+					BufferedReader br = new BufferedReader(
+							new InputStreamReader(FlashScreenActivity.this
+									.getResources().getAssets()
+									.open("channel.txt")));
+					channel = br.readLine();
+					BufferedWriter bw = new BufferedWriter(
+							new OutputStreamWriter(new FileOutputStream(
+									Const.DIRECTORY + "/channel")));
+					bw.write(channel);
+					br.close();
+					bw.close();
+				} catch (IOException e) {
+					// 预装渠道，厂家
+					try {
+						BufferedReader br = new BufferedReader(
+								new InputStreamReader(new FileInputStream(
+										Const.DIRECTORY + "/channel")));
+						channel = br.readLine();
+						br.close();
+					} catch (Exception E) {
+						channel = "01345337";
+					}
+				}
+				Editor edit = logshare.edit();
+				edit.putString(PreferenceUtil.SHARE_LOG_KEY_CHANNEL, channel);
+				edit.putString(PreferenceUtil.SHARE_LOG_KEY_SUBCHANNEL,
+						subchannel);
+				edit.commit();
+				String s2 = HttpConnect.getHttpString(Urls.CheckUAAndUpdate(
+						FlashScreenActivity.this, model, os,
+						Utils.getVga(FlashScreenActivity.this), Const.ALIAS,
+						versionCode + "", imsi, brand));
+
+				JSONObject json = new JSONObject(s2);
+				String ua = json.optString("defineua");
+				updateType = json.optInt("updatecode");
+				newVersion = json.optInt("newVersion");
+				forceVersion = json.optInt("compelVersion");
+				updatePath = json.optString("softurl");
+				remark = json.optString("remark");
+				PreferenceUtil.setUpdateShrare(FlashScreenActivity.this,
+						updateType, newVersion, forceVersion, updatePath,
+						remark);
+				Editor editUa = logshare.edit();
+				application.setUA(ua);
+				editUa.putString(PreferenceUtil.SHARE_LOG_KEY_UA, ua);
+				editUa.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return "";
+		}
+
+		@Override
+		protected void onPostExecute(final String result) {
+			super.onPostExecute(result);
+			if (!isFinishing()) {
+				if (result != null) {
+					View softwareUpdate = LayoutInflater.from(
+							FlashScreenActivity.this).inflate(
+							R.layout.egame_software_update, null);
+					TextView tvRemark = (TextView) softwareUpdate
+							.findViewById(R.id.remark);
+					tvRemark.setText("更新内容：\n" + remark);
+					// updateType = 2;
+					if (updateType == 0) { // 不需要升级
+						Const.UPDATE_TYPE = "0";
+						isLoadFinish = true;
+						startEgame(true);
+						// NetStat.init(getApplicationContext(), (short) 5, 0);
+						NetStat.onError(FlashScreenActivity.this);
+						NetStat.init(FlashScreenActivity.this, (short) 5, 2);
+
+					} else if (updateType == 1) { // 可选择升级
+						Const.UPDATE_TYPE = "1";
+						DialogStyle ds = new DialogStyle();
+						DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Intent intent = new Intent(
+										FlashScreenActivity.this,
+										UpdateService.class);
+								startService(intent);
+								isLoadFinish = true;
+								startEgame(true);
+
+							}
+						};
+						DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								isLoadFinish = true;
+								startEgame(true);
+							}
+						};
+						AlertDialog.Builder builder = ds.getBuilder(
+								FlashScreenActivity.this, "升级", "取消", comfirmL,
+								cancelL);
+						builder.setTitle("软件升级")
+								.setMessage("检测到新版本，但未经全面兼容性测试，请谨慎选择是否升级")
+								.setView(softwareUpdate);
+						builder.create().show();
+					} else if (updateType == 2) {
+						updateAlertDialog.setView(softwareUpdate);
+						updateAlertDialog.setButton("升级",
+								new OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface arg0,
+											int arg1) {
+										new DownloadUpdate()
+												.execute(updatePath);
+									}
+								});
+						updateAlertDialog.setButton2("退出",
+								new OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface arg0,
+											int arg1) {
+										finish();
+									}
+								});
+						updateAlertDialog.show();
+					} else {
+						isLoadFinish = true;
+						startEgame(true);
+					}
+
+				} else {
+					DialogUtil.showDialog(FlashScreenActivity.this,
+							getResources()
+									.getString(R.string.egame_login_error),
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									finish();
+								}
+							});
+				}
+			}
+		}
+	}
+
+	/**
+	 * 启动游戏
+	 * 
+	 * @param isUpdate
+	 *            true:检查是否升级 false不检查直接进入程序
+	 */
+	public void startEgame(boolean isUpdate) {
+		// 数据加载完毕
+		startGameFunction();
+	}
+
+	/**
+	 * 更新进度条进度值的线程
+	 * 
+	 * @author JaffersonLiu
+	 * 
+	 */
+	class UpdateThread implements Runnable {
+		public void run() {
+			while (counts < 98) {
+				counts++;
+				if (counts == 98) {
+					isProgressFinish = true;
+				}
+				try {
+					Thread.sleep(sleeptime[i][k]);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Message msg = new Message();
+				msg.what = 12;
+				myHandler.sendMessage(msg); // 向Handler发送消息,更新UI
+			}
+			Message msg = new Message();
+			msg.what = 10;
+			myHandler.sendMessage(msg);
+		}
+
+	}
+
+	/**
+	 * 自定义Handler 实现 更新UI
+	 * 
+	 * @author JaffersonLiu
+	 * 
+	 */
+	class UpdateHandler extends Handler {
+		public UpdateHandler() {
+
+		}
+
+		public UpdateHandler(Looper L) {
+			super(L);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (msg.what == 12) {
+				if (k > sleeptime[i].length - 2) {
+					k = 0;
+				} else {
+					k++;
+				}
+				// 此处可以更新UI
+				if (progressBlue.getVisibility() == View.GONE) {
+					progressBlue.setVisibility(View.VISIBLE);
+				}
+				progressBlue.setWidth((int) (PROGRESS_CESS_WIDTH * counts));
+			} else if (msg.what == 10) {
+				startGameFunction();
+			}
+
+		}
+	}
+
+	void getPhoneNum() {
+		// String phone =
+		// sharedPreferences.getString(PreferenceUtil.KEY_PHONENUM_STRING, "");
+		// if (phone.length() < 1) {
+		// // 未查到手机号,启动反查
+		// L.d("IMSI", "start imsi search");
+		new Thread(new GetPhoneNumberByImsiRunnable(FlashScreenActivity.this))
+				.start();
+		// } else {
+		// L.d("IMSI", phone.length() + " loacl phoneNum is:" + phone);
+		// application.setPhoneNum(phone);
+		// }
+	}
+
+	/**
+	 * 下载更新文件的任务
+	 * 
+	 * @author zhouzhe
+	 * 
+	 */
+	class DownloadUpdate extends AsyncTask<String, Integer, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			String url = params[0];
+			if (!URLUtil.isNetworkUrl(url)) {
+
+			} else {
+				// 取得URL
+				URL myURL;
+				try {
+					myURL = new URL(url);
+					// 创建连接
+					HttpURLConnection conn;
+					InputStream is;
+					BufferedInputStream bis = null;
+					FileOutputStream fos;
+					BufferedOutputStream bos = null;
+					conn = (HttpURLConnection) myURL.openConnection();
+					if (conn != null) {
+						conn.setConnectTimeout(1000 * 20);
+						conn.setReadTimeout(1000 * 20);
+						conn.connect();
+						int size = conn.getContentLength();
+						publishProgress(1, size);
+						is = conn.getInputStream();
+						if (is == null) {
+							return false;
+						} else {
+							bis = new BufferedInputStream(is, Const.BUFFER_SIZE);
+							fos = FlashScreenActivity.this.openFileOutput(
+									tempfile, Context.MODE_WORLD_READABLE);
+							bos = new BufferedOutputStream(fos,
+									Const.BUFFER_SIZE);
+							byte buf[] = new byte[1024 * 32];
+							do {
+								int numread = bis.read(buf);
+								if (numread <= 0) {
+									break;
+								}
+								bos.write(buf, 0, numread);
+								publishProgress(2, numread);
+							} while (isAlive);
+							bos.flush();
+							try {
+								if (is != null)
+									is.close();
+								if (fos != null)
+									fos.close();
+								if (bos != null)
+									bos.close();
+								if (bis != null)
+									bis.close();
+								if (conn != null)
+									conn.disconnect();
+							} catch (Exception ex) {
+								// Log.e("getDataSource",
+								// "error: " + ex.getMessage(), ex);
+							}
+						}
+
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					return false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+			return true;
+		}
+
+		@Override
+		protected void onCancelled() {
+			super.onCancelled();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			if (!isAlive) {
+				return;
+			}
+			if (!FlashScreenActivity.this.isFinishing()) {
+				updateProgressDialog.dismiss();
+				if (result) {
+					DialogStyle ds = new DialogStyle();
+					DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							try {
+								Field field = dialog.getClass().getSuperclass()
+										.getDeclaredField("mShowing");
+								field.setAccessible(true);
+								// 将mShowing变量设为false，表示对话框已关闭
+								field.set(dialog, false);
+								dialog.dismiss();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setDataAndType(
+									Uri.parse("file://" + tempfilepath
+											+ tempfile),
+									"application/vnd.android.package-archive");
+							startActivity(intent);
+						}
+					};
+					DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					};
+					AlertDialog.Builder builder = ds.getBuilder(
+							FlashScreenActivity.this, "安装", "退出", comfirmL,
+							cancelL);
+					builder.setTitle("下载完成").setMessage("下载完成,请点击安装!");
+					builder.create().show();
+
+				} else {
+					new AlertDialog.Builder(FlashScreenActivity.this)
+							.setTitle("下载出错").setMessage("下载更新出错,请检查网络并重新更新")
+							.setPositiveButton("确定", new OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									finish();
+								}
+							}).show();
+				}
+			}
+
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			super.onProgressUpdate(values);
+			if (values[0] == 1) {
+				updateProgressDialog.setMax(values[1]);
+			} else if (values[0] == 2) {
+				updateProgressDialog.setProgress(updateProgressDialog
+						.getProgress() + values[1]);
+			}
+		}
+
+		@Override
+		protected void onPreExecute() {
+			updateProgressDialog.show();
+		}
+
+	}
+
+	@Override
+	protected void onPause() {
+		NetStat.onPausePage("ActivityMain"); // 统计在此页面打开时长 配合
+												// NetStat.onResumePage()
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage(); // 统计在此页面打开时长 配合NetStat.onPausePage()使用
+	}
+
+	public boolean getAvailableStore(String filePath) {
+		StatFs statFs = new StatFs(filePath);// 取得sdcard文件路径
+		long blocSize = statFs.getBlockSize();// 获取block的SIZE
+		long availaBlock = statFs.getAvailableBlocks();// 可使用的Block的数量
+		long availableSpare = availaBlock * blocSize;
+		if (availableSpare > 35 * 1024 * 1024l) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

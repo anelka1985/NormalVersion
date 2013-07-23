@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/m_game_comment"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#EBEBEB"
+    android:orientation="vertical"
+    >
+
+    <!-- 触发游戏评论的布局 -->
+
+    <RelativeLayout android:id="@+id/commentBg"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_gray_bg"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/m_star"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true" >
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/star"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/egame_text_orange"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/m_star"
+            android:background="@drawable/egame_btn_feedback_selector" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/m123"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/egame_yellow_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/m123"
+                    android:text="@string/egame_comment"
+                    android:textColor="@color/egame_text_orange" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.egame.app.widgets.NoScrollListView
+        android:id="@+id/egame_game_detail_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#EBEBEB"
+        android:cacheColorHint="#00000000"
+        android:divider="@null" >
+    </com.egame.app.widgets.NoScrollListView>
+
+</LinearLayout>

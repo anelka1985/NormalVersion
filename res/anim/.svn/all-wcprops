@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim
+END
+popup_enter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/popup_enter.xml
+END
+cycle_7.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/cycle_7.xml
+END
+fade_in.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/fade_in.xml
+END
+fade_out.xml
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/fade_out.xml
+END
+accelerate_interpolator.xml
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/accelerate_interpolator.xml
+END
+shake.xml
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/shake.xml
+END
+popup_exit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/popup_exit.xml
+END
+decelerate_interpolator.xml
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/res/anim/decelerate_interpolator.xml
+END

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg" >
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- 标题背景层 -->
+
+        <TextView
+            android:id="@+id/m_lative_top"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top" >
+        </TextView>
+        <!-- 返回按钮 -->
+
+        <TextView
+            android:id="@+id/m_finish_registback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" />
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/egame_user_register" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:background="@drawable/egame_top_line" >
+    </TextView>
+    <!-- 顶部文字 -->
+
+    <TextView
+        android:id="@+id/m_layoutz"
+        style="@style/egame_noviceCoffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/egame_welcom_register" />
+
+    <TextView
+        android:id="@+id/m_novice_prompt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_layoutz"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/egame_select_gender"
+        android:textColor="#696969"
+        android:textSize="12dp" />
+
+    <!-- 性别选择 -->
+
+    <RelativeLayout
+        android:id="@+id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_prompt1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <ImageView
+            android:id="@+id/m_icon_made"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/egame_headicon_unselect"
+            android:scaleType="centerInside"
+            android:src="@drawable/egame_icon_made" />
+
+        <ImageView
+            android:id="@+id/m_icon_man"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@id/m_icon_made"
+            android:background="@drawable/egame_headicon_unselect"
+            android:scaleType="centerInside"
+            android:src="@drawable/egame_icon_men" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <ImageView
+            android:id="@+id/m_point_made"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_radiobutton_unselect" />
+
+        <TextView
+            android:id="@+id/m_text_made"
+            style="@style/egame_noviceGrayDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/m_point_made"
+            android:paddingLeft="10dp"
+            android:text="@string/egame_text_made" />
+
+        <ImageView
+            android:id="@+id/m_point_men"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@id/m_text_made"
+            android:background="@drawable/egame_radiobutton_unselect" />
+
+        <TextView
+            android:id="@+id/m_text_men"
+            style="@style/egame_noviceGrayDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/m_point_men"
+            android:text="@string/egame_text_man" />
+    </RelativeLayout>
+
+    <!-- 同意注册协议 -->
+
+    <RelativeLayout
+        android:id="@+id/m_layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" >
+
+        <ImageView
+            android:id="@+id/m_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/egame_lselect_contactson" />
+
+        <TextView
+            android:id="@+id/m_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/m_icon"
+            android:text="@string/egame_accept_agreement" >
+        </TextView>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/m_finish_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_layout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/egame_btn_green_circularity_selector"
+        android:text="@string/egame_sure_text"
+        android:textColor="#5FB03E"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="客服热线："
+            android:textColor="#6B6B6B" />
+
+        <TextView
+            android:id="@+id/hotLine"
+            style="@style/egame_aboutSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="4008-289-289"
+            android:textColor="#6568fa" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,432 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.TestGameListAdapter;
+import com.egame.app.receivers.ListNotifyReceiver;
+import com.egame.app.tasks.GameSortDetailTask;
+import com.egame.beans.GameListBean;
+import com.egame.config.Const;
+import com.egame.utils.common.L;
+import com.egame.utils.common.SourceUtils;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.Footer;
+import com.egame.utils.ui.Loading;
+import com.egame.utils.ui.ToastUtil;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * @desc 游戏分类详情页
+ * 
+ * @Copyright lenovo
+ * 
+ * @Project EGame4th
+ * 
+ * @Author zhangrh@lenovo-cw.com
+ * 
+ * @timer 2012-1-4
+ * 
+ * @Version 1.0.0
+ * 
+ * @JDK version used 6.0
+ * 
+ * @Modification history none
+ * 
+ * @Modified by none
+ */
+public class GameSortDetailActivity extends Activity implements BaseActivity, OnItemClickListener, OnClickListener {
+
+	EgameApplication application;
+
+	/** 顶部返回按钮 */
+	private Button btnBack;
+
+	/** 顶部排序按钮 */
+	private Button btnSort;
+
+	/** 标题 */
+	private TextView tvTitle;
+
+	/** 游戏分类详情列表 */
+	private ListView lvGameSortDetail;
+
+	/** 接收数据的bundle */
+	private Bundle bundle;
+
+	private List<GameListBean> list = new ArrayList<GameListBean>();
+
+	private TestGameListAdapter adapter;
+	Loading loading;
+	public static final String[] sortContents = new String[] { "按游戏热门排序", "按下载次数排序", "按评论次数排序", "按分享次数排序", "按游戏星级排序",
+			"按上线时间排序" };
+	int selectedItem = 0;
+	private SimpleAdapter _adapter;
+	private List<Map<String, String>> popupList;
+	ListNotifyReceiver br;
+	private boolean isLastPage;
+	private int page = 0;
+	private int typeCode;
+	private int classCode;
+	private int totalNumber;
+	private int orderType = 9;
+	private String orderDesc = "desc";
+	Footer footer;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		application = (EgameApplication) getApplication();
+		setContentView(R.layout.egame_gamesortdetail);
+		initView();
+		bundle = this.getIntent().getExtras();
+		typeCode = bundle.getInt("typeCode");
+		classCode = bundle.getInt("classCode");
+		totalNumber = bundle.getInt("totalNumber");
+
+		initOrder();
+		adapter = new TestGameListAdapter(list, GameSortDetailActivity.this, SourceUtils.CLASSIFICATION_LIST, false);
+		lvGameSortDetail.addFooterView(footer.getFooter(), null, false);
+		lvGameSortDetail.setAdapter(adapter);
+		initData();
+		initViewData();
+		initEvent();
+		br = new ListNotifyReceiver(adapter);
+		IntentFilter intentFilter = new IntentFilter("com.egame.app.uis.GameDownloadMissionActivity");
+		this.registerReceiver(br, intentFilter);
+		if (totalNumber > 0) {
+			isLastPage = false;
+			loading.showLoading();
+			new GameSortDetailTask(GameSortDetailActivity.this, list, adapter, page, orderType, orderDesc, typeCode,
+					classCode, application.getUA()).execute();
+		} else {
+			isLastPage = true;
+		}
+		EgameApplication.Instance().addActivity(this);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("GameSortDetailActivity");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		adapter.getDbService().close();
+		unregisterReceiver(br);
+	}
+
+	@Override
+	public void initData() {
+
+	}
+
+	@Override
+	public void initView() {
+		loading = new Loading(GameSortDetailActivity.this);
+		btnBack = (Button) findViewById(R.id.back);
+		btnSort = (Button) findViewById(R.id.sort);
+		lvGameSortDetail = (ListView) findViewById(R.id.gameSortDetail);
+		tvTitle = (TextView) findViewById(R.id.title);
+		footer = new Footer(this);
+	}
+
+	@Override
+	public void initViewData() {
+		tvTitle.setText("分类-" + bundle.getString("typeName"));
+	}
+
+	@Override
+	public void initEvent() {
+		btnBack.setOnClickListener(this);
+		btnSort.setOnClickListener(this);
+		loading.setOnReloadClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				page = 0;
+				loading.showLoading();
+				new GameSortDetailTask(GameSortDetailActivity.this, list, adapter, page, orderType, orderDesc,
+						typeCode, classCode, application.getUA()).execute();
+			}
+		});
+		footer.setReloadButtonListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				footer.showLoading();
+				new GameSortDetailTask(GameSortDetailActivity.this, list, adapter, page, orderType, orderDesc,
+						typeCode, classCode, application.getUA()).execute();
+			}
+		});
+		lvGameSortDetail.setOnItemClickListener(this);
+		lvGameSortDetail.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
+
+			}
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int arg1) {
+				L.d("view", view.getLastVisiblePosition() + "|" + view.getCount());
+				if (isLastPage) {
+					// 如果没有下一页了,就不再进行滚动加载
+					L.d("view", "is last page");
+				} else {
+					if (view.getLastVisiblePosition() == view.getCount() - 1) {
+						if (view.getCount() < (page + 1) * Const.PAGE_SIZE) {
+							// 如果页数已经+1了,数据没有读取出来之前,不再+1
+							L.d("view", view.getCount() + "|" + page * Const.PAGE_SIZE + "|" + page);
+						} else {
+							L.d("view", "page + 1");
+							page = page + 1;
+							footer.showLoading();
+							new GameSortDetailTask(GameSortDetailActivity.this, list, adapter, page, orderType,
+									orderDesc, typeCode, classCode, application.getUA()).execute();
+						}
+					}
+				}
+
+			}
+		});
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+		Intent intent = new Intent(GameSortDetailActivity.this, GamesDetailActivity.class);
+		intent.putExtras(GamesDetailActivity
+				.makeIntentData(list.get(arg2).getGameId(), SourceUtils.CLASSIFICATION_LIST));
+		startActivity(intent);
+	}
+
+	public static Bundle makeIntentData(String typeName, int typeCode, int classCode, int totalNumber, int orderType,
+			String orderDesc) {
+		Bundle bd = new Bundle();
+		bd.putString("typeName", typeName);
+		bd.putInt("typeCode", typeCode);
+		bd.putInt("classCode", classCode);
+		bd.putInt("totalNumber", totalNumber);
+		bd.putInt("orderType", orderType);
+		bd.putString("orderDesc", orderDesc);
+		return bd;
+	}
+
+	/**
+	 * @param v
+	 */
+	@Override
+	public void onClick(View v) {
+		if (v == btnBack) {
+			this.finish();
+		} else if (v == btnSort) {
+			showOrder();
+		}
+	}
+
+	private void initOrder() {
+		orderDesc = bundle.getString("orderDesc");
+		orderType = bundle.getInt("orderType");
+		if (orderType == 9) {
+			selectedItem = 0;
+		} else if (orderType == 4) {
+			selectedItem = 1;
+		} else if (orderType == 2) {
+			selectedItem = 2;
+		} else if (orderType == 10) {
+			selectedItem = 3;
+		} else if (orderType == 1) {
+			selectedItem = 4;
+		} else if (orderType == 3) {
+			selectedItem = 5;
+		}
+	}
+
+	private void showOrder() {
+
+		LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LinearLayout l = null;
+		l = (LinearLayout) inflater.inflate(R.layout.egame_popupwindow, null);
+		final PopupWindow pw = new PopupWindow(l, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+		pw.setFocusable(true);
+		pw.setAnimationStyle(R.style.egame_PopupAnimation);
+		l.setFocusableInTouchMode(true);
+		l.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+					pw.dismiss();// 这里写明模拟menu的PopupWindow退出就行
+					return true;
+				}
+				return false;
+			}
+		});
+		pw.showAtLocation(findViewById(R.id.main), Gravity.CENTER_VERTICAL | Gravity.TOP, 0, 35);
+		ListView listView = (ListView) l.findViewById(R.id.listview);
+		RelativeLayout btnSortBack = (RelativeLayout) l.findViewById(R.id.sortback);
+		Button btnSort = (Button) l.findViewById(R.id.sort);
+		popupList = new ArrayList<Map<String, String>>();
+		for (int i = 0; i < sortContents.length; i++) {
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("content", sortContents[i]);
+			if (i == selectedItem) {
+				m.put("select", "1");
+			} else {
+				m.put("select", "0");
+			}
+			popupList.add(m);
+		}
+		_adapter = new SimpleAdapter(this, popupList, R.layout.egame_popup_item, new String[] { "content", "select" },
+				new int[] { R.id.content, R.id.select }) {
+			public View getView(int position, View convertView, ViewGroup parent) {
+				convertView = (LinearLayout) LayoutInflater.from(GameSortDetailActivity.this).inflate(
+						R.layout.egame_popup_item, null);
+				ImageView select = (ImageView) convertView.findViewById(R.id.select);
+				TextView order = (TextView) convertView.findViewById(R.id.content);
+				order.setText(popupList.get(position).get("content") + "");
+				if (popupList.get(position).get("select") == "1") {
+					select.setBackgroundResource(R.drawable.egame_radiobutton_select);
+				} else {
+					select.setBackgroundResource(R.drawable.egame_radiobutton_unselect);
+				}
+				return convertView;
+			}
+
+		};
+		listView.setAdapter(_adapter);
+		_adapter.notifyDataSetChanged();
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				if (arg2 == selectedItem) {
+				} else {
+					popupList.get(selectedItem).put("select", "0");
+					popupList.get(arg2).put("select", "1");
+					selectedItem = arg2;
+					_adapter.notifyDataSetChanged();
+					list.clear();
+					adapter.notifyDataSetChanged();
+					page = 0;
+					if (arg2 == 0) {
+						orderType = 9;
+					} else if (arg2 == 1) {
+						orderType = 4;
+					} else if (arg2 == 2) {
+						orderType = 2;
+					} else if (arg2 == 3) {
+						orderType = 10;
+					} else if (arg2 == 4) {
+						orderType = 1;
+					} else if (arg2 == 5) {
+						orderType = 3;
+					}
+
+					/**
+					 * orderType 1:星级 2:评论总量 3:上线时间 4:总下载量 5:月下载量 6:周下载量
+					 * 7:日下载量8:WAP运行次数9:热门排序 10:分享次数
+					 */
+					isLastPage = false;
+					/** 重新加上foot并添加foot相关监听事件 */
+					if (lvGameSortDetail.getFooterViewsCount() == 0) {
+						// lvGameSortDetail.addFooter();
+						// lvGameSortDetail.onFootRefreshComplete(13);
+					}
+					loading.showLoading();
+					lvGameSortDetail.setVisibility(View.GONE);
+					new GameSortDetailTask(GameSortDetailActivity.this, list, adapter, page, orderType, orderDesc,
+							typeCode, classCode, application.getUA()).execute();
+
+				}
+				pw.dismiss();
+			}
+		});
+		btnSortBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				pw.dismiss();
+			}
+		});
+		btnSort.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				pw.dismiss();
+			}
+		});
+	}
+
+	public void dataCodeProcess(String dataCode) {
+		if (page == 0) {
+			loading.setVisibility(View.GONE);
+			if (lvGameSortDetail.getFooterViewsCount() == 0) {
+				lvGameSortDetail.addFooterView(footer.getFooter());
+			}
+			lvGameSortDetail.setVisibility(View.VISIBLE);
+			lvGameSortDetail.setSelection(0);
+			// 排序方式切换时，需要将之前的footer的状态清除，还原到原先的加载状态
+			footer.showLoading();
+		}
+		if (list.size() == 0 || "exception".equals(dataCode)) {
+			if (page == 0) {
+				loading.setVisibility(View.VISIBLE);
+				lvGameSortDetail.setVisibility(View.GONE);
+				loading.showReload();
+			} else {
+				footer.showReload();
+			}
+			ToastUtil.show(GameSortDetailActivity.this, R.string.egame_request_wrong);
+		} else if ("loadOver".equals(dataCode)) {
+			isLastPage = true;
+			footer.setVisibility(View.GONE);
+			lvGameSortDetail.removeFooterView(footer.getFooter());
+		}
+	}
+}

@@ -1,0 +1,95 @@
+package com.egame.config;
+
+public class Const {
+	/** stream缓冲大小 */
+	public static final int BUFFER_SIZE = 1024 * 16;
+
+	/** 更新版本号 */
+	public static String UPDATE_VERSION = "";
+
+	public static String VERSION_CODE = "1.0";
+
+	public static final String ALIAS = "TP_WVGA";
+
+	/** 默认电话号码 */
+	public static String PHONE_NUM = "00000000000";
+
+	/** 集中客服平台key-爱游戏 */
+	public final static String KEY_FOR_GAME = "894063857b4afe00dcab1106a10a1d3b";
+
+	/** 集中平台爱游戏应用编号 */
+	public final static String APPLICATION_ID = "5";
+
+	/** 返回数据中启示条目key */
+	public final static String KEY_STARTINDEX = "startIndex";
+
+	/** 返回数据中总条目key */
+	public final static String KEY_TOTALRECORD = "totalRecord";
+
+	/** 游戏图标文件名 */
+	public final static String GAME_ICON_PREFIX = "pic1.jpg";
+
+	/**
+	 * 获取数据成功
+	 */
+	public static final int MSG_GET_SUCCESS = 1;
+
+	/**
+	 * 获取数据失败
+	 */
+	public static final int MSG_GET_FAIL = 2;
+
+	/** 常量0 */
+	public static final int ZERO = 0;
+
+	/** 常量1 */
+	public static final int ONE = 1;
+
+	/** 常量2 */
+	public static final int TWO = 2;
+
+	private final static String SDCARD_PATH = android.os.Environment
+			.getExternalStorageDirectory().getAbsolutePath();
+
+	/**
+	 * 下载路径 INSTALLED_PATH+packageName
+	 */
+	public static String DIRECTORY = SDCARD_PATH + "/egame";
+	/**
+	 * 下载路径
+	 */
+	public static String NoSDCardDIRECTORY = "/data/data/com.egame/files";
+	/** 分页每页条数 */
+	public static final int PAGE_SIZE = 10;
+
+	public static final int ARRAY_SIZE = 1024 * 8; // 读取图片每次读取缓冲大小
+
+	public static String type = "0";
+
+	public static final int HEAD_PIC_SMALL = 90;
+
+	/** 游戏图片图片名称 */
+	public static final String GAME_PIC_NAME = "pic1.jpg";
+
+	public static final String ACTION_DOWNLOAD_SERVICE = "com.egame.app.services.DownloadService";
+
+	public static final String ACTION_DOWNLOAD_STATE = "com.egame.app.uis.GameDownloadMissionActivity";
+
+	/** 未注册 */
+	public static final String UN_REGISTER = "no_register";
+	/** 已注册 */
+	public static final String HAD_REGISTER = "had_register";
+	/** 当前软件是否有更新 0:没有更新 1：普通更新 2：重要更新(关于界面 不执行更新信息的检查 故，只判断0和1两种类型) */
+	public static String UPDATE_TYPE = "0";
+
+	public static String UPLOAD_IMSI_SERVER_NUM = "02586588753";
+
+	/** 保存当前进行新手任务的用户的经验值 */
+	public static String EXP_USER = "0";
+
+	/** 用来标示启动新手任务 是否是从社区启动的 */
+	// TODO 可以去掉
+	public static String isWebStart = "";
+
+	public final static boolean ISICS = true;
+}

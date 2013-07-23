@@ -1,0 +1,1084 @@
+package com.egame.config;
+
+import java.net.URLEncoder;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.os.Build;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+
+import com.egame.utils.common.HttpConnect;
+import com.egame.utils.common.L;
+import com.egame.utils.common.LoginDataStoreUtil;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.ui.StringUtil;
+
+/**
+ * @desc 存放Url
+ * 
+ * @Copyright lenovo
+ * 
+ * @Project Egame4th
+ * 
+ * @Author zhouzhe@lenovo-cw.com
+ * 
+ * @timer 2011-12-26
+ * 
+ * @Version 1.0.0
+ * 
+ * @JDK version used 6.0
+ * 
+ * @Modification history none
+ * 
+ * @Modified by none
+ */
+public class Urls {
+	/**
+	 * 注册协议网络链接
+	 */
+	final public static String REGISTER_AGREEMENT_URL = "http://wapgame.189.cn/agreement.html";
+
+	private static final String TAG = "URLS";
+
+	// 开发服
+	// public final static String URL = "http://221.226.177.158:9010";
+
+	// 正式环境验证服
+	// public final static String URL = "http://202.102.39.18:8088";
+	// public final static String URL = "http://202.102.111.26:9058";
+	// 正式服务器
+	public final static String URL = "http://202.102.39.13:8084";
+
+	// 测试服
+	// public final static String URL = "http://202.102.111.22:80";
+	/**
+	 * 接口地址前缀
+	 */
+	public final static String BASE_URL = URL + "/sns-clientV4/";
+
+	// public final static String BASE_URL = URL + "/sns-client/";
+
+	public final static String WEB_URL = URL + "/egame-web/";
+
+	// private final static String BASE_URL =
+	// "http://202.102.39.30/sns-client/";
+
+	public final static String VERSION_DATE = "20130723";
+
+	/**
+	 * 帮助中心的wap链接
+	 */
+	public static String getHelpURL(Context context) {
+		return "http://wapgame.189.cn/c/tohelp?" + getLogParams(context);
+	}
+
+	/**
+	 * 热门推荐列表
+	 * 
+	 * @param startIndex
+	 *            启示数据索引
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-9
+	 *       http://202.102.39.30/sns-client/four/game/getGameListByHot.
+	 *       json?startIndex=3
+	 */
+	public static String getRecommendGameUrl(Context context, int page,
+			String ua) {
+		// String s = BASE_URL + "four/game/getGameListByHot.json?startIndex=" +
+		// ((page - 1) * Const.PAGE_SIZE) + "&pageSize=" + Const.PAGE_SIZE;
+		String s = BASE_URL + "four/game/getGameListByHot.json?startIndex="
+				+ ((page - 1) * Const.PAGE_SIZE) + "&pageSize="
+				+ Const.PAGE_SIZE + "&UA=" + ua + "&" + getLogParams(context);
+		L.d(TAG, "getRecommendGameUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 新品推荐列表
+	 * 
+	 * @param startIndex
+	 *            启示数据索引
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-9
+	 *       http://202.102.39.30/sns-client/four/game/getGameListByHot.
+	 *       json?startIndex=3
+	 */
+	public static String getNewGameUrl(Context context, int page, String ua) {
+		// String s = BASE_URL + "four/game/getGameListByNew.json?startIndex=" +
+		// ((page - 1) * Const.PAGE_SIZE) + "&pageSize=" + Const.PAGE_SIZE;
+		String s = BASE_URL + "four/game/getGameListByNew.json?startIndex="
+				+ ((page - 1) * Const.PAGE_SIZE) + "&pageSize="
+				+ Const.PAGE_SIZE + "&UA=" + ua + "&" + getLogParams(context);
+		L.d(TAG, "getNewGameUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 获取游戏排行列表
+	 * 
+	 * @param rankType
+	 *            排行榜类型：1：2：3=周：月：总
+	 * @param page
+	 *            页
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-15
+	 */
+	public static String getGameRankUrl(Context context, int rankType,
+			int page, String UA) {
+		String s = BASE_URL + "four/game/getGameListByRank.json?rankType="
+				+ rankType + "&startIndex=" + ((page - 1) * Const.PAGE_SIZE)
+				+ "&pageSize=" + Const.PAGE_SIZE + "&UA=" + UA + "&"
+				+ getLogParams(context);
+		L.d(TAG, "getGameRankUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 游戏分类列表
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-10
+	 *       http://221.226.177.158:9010/sns-client/four/game/classFicationGame
+	 *       .json?UA=MOT-XT800
+	 */
+	public static String getGameSortUrl(Context context, String UA) {
+		String sort = BASE_URL + "four/game/classFicationGame.json?UA=" + UA
+				+ "&" + getLogParams(context);
+		L.d(TAG, "getGameSortUrl:" + sort);
+		return sort;
+	}
+
+	/**
+	 * 游戏分类详情列表
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-10
+	 *       http://192.168.16.91:9010/sns-client/four/game/search.json
+	 *       ?startIndex =0&pageSize=10&typeCode=11&classCode=1&UA=MOTO-XT800
+	 * 
+	 */
+	public static String getGameSortDetailUrl(Context context, int startIndex,
+			int orderType, String orderDesc, int typeCode, int classCode,
+			String UA) {
+		String sortDetail;
+		if (typeCode == 20) {
+			// WAP游戏
+			sortDetail = BASE_URL + "four/game/search.json?startIndex="
+					+ startIndex + "&orderType=" + orderType + "&orderDesc="
+					+ orderDesc + "&pageSize=10&typeCode=" + typeCode + "&UA="
+					+ UA + "&" + getLogParams(context);
+		} else if (classCode == 0) {
+			sortDetail = BASE_URL + "four/game/search.json?startIndex="
+					+ startIndex + "&orderType=" + orderType + "&orderDesc="
+					+ orderDesc + "&pageSize=10&typeCode=" + typeCode
+					+ "&classCode=&UA=" + UA + "&" + getLogParams(context);
+		} else {
+			sortDetail = BASE_URL + "four/game/search.json?startIndex="
+					+ startIndex + "&orderType=" + orderType + "&orderDesc="
+					+ orderDesc + "&pageSize=10&typeCode=" + typeCode
+					+ "&classCode=" + classCode + "&UA=" + UA + "&"
+					+ getLogParams(context);
+		}
+		L.d(TAG, "getGameSortDetailUrl:" + sortDetail);
+		return sortDetail;
+	}
+
+	/**
+	 * 游戏包列表
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-11
+	 *       http://221.226.177.158:9010/sns-client/four/gamePkg/getGamePackageList
+	 *       .json?MSISDN=18014540412&USERID=0&UA=MOT-XT800
+	 */
+	public static String getGamePackageUrl(Context context, String MSISDN,
+			String userId, String UA) {
+		String gamePackage = BASE_URL
+				+ "four/gamePkg/getGamePackageList.json?MSISDN=" + MSISDN
+				+ "&USERID=" + userId + "&UA=" + UA + "&"
+				+ getLogParams(context);
+		L.d(TAG, "getGamePackageUrl:" + gamePackage);
+		return gamePackage;
+	}
+
+	/**
+	 * 游戏包详情
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-12
+	 *       http://192.168.16.91:9010/sns-client/four/gamePkg/getGamePackageDetail
+	 *       .json?MSISDN=18014540412&packageId=320&USERID=0&UA=MOT-XT800
+	 */
+	public static String getGamePackageDetailUrl(Context context,
+			String phoneNum, String packageId, String userId, String UA) {
+
+		String gamePackgeDetail = BASE_URL
+				+ "four/gamePkg/getGamePackageDetail.json?MSISDN=" + phoneNum
+				+ "&packageId=" + packageId + "&USERID=" + userId + "&UA=" + UA
+				+ "&" + getLogParams(context);
+
+		L.d(TAG, "getGamePackageDetailUrl:" + gamePackgeDetail);
+		return gamePackgeDetail;
+	}
+
+	/**
+	 * 非CTWAP的本网用户订购游戏包时获取验证码
+	 * */
+	public static String getPackageValidateCodeUrl(String phoneNum) {
+
+		String packageValidateCode = BASE_URL
+				+ "four/gamePkg/packageValidateCode.json?phone=" + phoneNum;
+		L.d(TAG, "getPackageValidateCodeUrl:" + packageValidateCode);
+		return packageValidateCode;
+	}
+
+	/**
+	 * 游戏详情
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-13
+	 *       http://221.226.177.158:9010/sns-client/four/game/getGameDetail
+	 *       .json?gameId=130092&MSISDN=15301586820
+	 */
+	public static String getGameDetailUrl(Context context, String gameId,
+			String MSISDN, String userId, String UA) {
+		String gameDetail = BASE_URL + "four/game/getGameDetail.json?gameId="
+				+ gameId + "&MSISDN=" + MSISDN + "&USERID=" + userId + "&UA="
+				+ UA;
+		L.d(TAG, "getGameDetailUrl:" + gameDetail);
+		return gameDetail;
+	}
+
+	/**
+	 * 游戏收藏
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-2-15
+	 *       http://221.226.177.158:9010/sns-client/four/game/favoriteGame
+	 *       .json?gameId=227591&userId=100060
+	 */
+	public static String getGameCollect(Context context, String gameId,
+			String userId) {
+		String gameCollect = BASE_URL + "four/game/favoriteGame.json?gameId="
+				+ gameId + "&USERID=" + userId + "&" + getLogParams(context);
+		L.d(TAG, "getGameCollect:" + gameCollect);
+		return gameCollect;
+	}
+
+	/**
+	 * 游戏评论列表
+	 * 
+	 * @param gameId
+	 *            游戏的ID
+	 * @param getFlag
+	 *            0：游戏评论，1：活动评论
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-14
+	 *       http://221.226.177.158:9010/sns-client/four/game/getCommentList
+	 *       .json?gameId=101&USERID=16289163
+	 */
+	public static String getGameCommentUrl(Context context, int gameId,
+			String userId) {
+		String gameComment = BASE_URL + "four/game/getCommentList.json?gameId="
+				+ gameId + "&USERID=" + userId + "&pageSize=50&"
+				+ getLogParams(context);
+		L.d(TAG, "getGameCommentUrl:" + gameComment);
+		return gameComment;
+	}
+
+	/**
+	 * 发表游戏评论
+	 * 
+	 * @param gameId
+	 *            游戏的ID
+	 * @param score
+	 *            星级
+	 * @param userId
+	 *            用户的ID
+	 * @param comment
+	 *            评论内容
+	 * @param nickName
+	 *            用户昵称
+	 * @param gameName
+	 *            游戏名称
+	 * @param type
+	 *            为null时发表评论，非空时获取上次评论
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-14
+	 *       http://221.226.177.158:9010/sns-client/four/game/publishGameComment
+	 *       .json?gameId=219241&score=20&userId=100300&comment=ok
+	 */
+	public static String publishGameComment(Context context, String gameId,
+			String score, String userId, String comment, String nickName,
+			String gameName, int type) {
+		String publishGameComment = "";
+
+		if (type == 0) {
+			// 查看用户之前是否发表过相关评论
+			publishGameComment = BASE_URL
+					+ "four/game/publishGameComment.json?gameId=" + gameId
+					+ "&USERID=" + userId + "&type=" + type + "&"
+					+ getLogParams(context);
+		} else if (score == null) {
+			nickName = URLEncoder.encode(nickName);
+			gameName = URLEncoder.encode(gameName);
+			// 发表文字评论
+			publishGameComment = BASE_URL
+					+ "four/game/publishGameComment.json?gameId=" + gameId
+					+ "&USERID=" + userId + "&comment=" + comment
+					+ "&nickName=" + nickName + "&gameName=" + gameName + "&"
+					+ getLogParams(context);
+		} else {
+			nickName = URLEncoder.encode(nickName);
+			gameName = URLEncoder.encode(gameName);
+			// 发表文字和星级评论
+			publishGameComment = BASE_URL
+					+ "four/game/publishGameComment.json?gameId=" + gameId
+					+ "&score=" + score + "&USERID=" + userId + "&comment="
+					+ comment + "&nickName=" + nickName + "&gameName="
+					+ gameName + "&" + getLogParams(context);
+		}
+		L.d(TAG, "publishGameComment:" + publishGameComment);
+		return publishGameComment;
+	}
+
+	/**
+	 * 大家还喜欢
+	 * 
+	 * @return
+	 * @author zhangrh@lenovo-cw.com
+	 * @time 2012-1-15
+	 *       http://192.168.16.91:9010/sns-client/four/game/getWhatGameList
+	 *       .json?UA=SCH-i909&size=4
+	 */
+	public static String getMoreLikeUrl(Context context, String UA) {
+		String moreLike = BASE_URL + "four/game/getWhatGameList.json?UA=" + UA
+				+ "&size=4" + "&" + getLogParams(context);
+		L.d(TAG, "getMoreLikeUrl:" + moreLike);
+		return moreLike;
+	}
+
+	/**
+	 * 获取游戏点播结果
+	 * */
+	public static String getDianboResult(String dianboUrl, String gameId,
+			String opTime, String key) {
+		String s = dianboUrl + "&gameID=" + gameId + "&opTime=" + opTime
+				+ "&keys=" + key + "&egameAndroid=egameAndroid";
+		L.d(TAG, "getDianboResult:" + s);
+		return s;
+	}
+
+	public static String getSaveOrderStatues(String msisdn, String gameid) {
+		String saveOrderStatues = "http://202.102.39.13:8080/sns-client/orderDown?MSISDN="
+				+ msisdn + "&VERSION=0&PRODUCTID=" + gameid;
+		L.d(TAG, "getSaveOrderStatues:" + saveOrderStatues);
+		return saveOrderStatues;
+	}
+
+	/**
+	 * 专题列表
+	 * 
+	 * @return 专题url
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-10 http://202.102.39.30/sns-client/four/game/topicsList.json
+	 */
+	public static String getGameTopicUrl(Context context, String UA) {
+		String s = BASE_URL + "four/game/topicsList.json?" + "&UA=" + UA + "&"
+				+ getLogParams(context);
+		L.d(TAG, "getGameTopicUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 专题详情
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-14
+	 */
+	public static String getGameTopicDetailUrl(Context context, String topicId) {
+		String s = BASE_URL + "four/game/getGameListByTopicsId.json?topicId="
+				+ topicId + "&" + getLogParams(context);
+		L.d(TAG, "getGameTopicDetailUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 得到搜索结果列表
+	 * 
+	 * @param type
+	 *            搜索类型 1-游戏，2-标签，3-厂商
+	 * @param key
+	 *            搜索关键字
+	 * @return
+	 */
+	public static String getSearchResultUrl(Context context, String key,
+			String ua) {
+		String s = BASE_URL + "four/game/searchByTag.json?keyWordType=" + 0
+				+ "&keyWord=" + StringUtil.encode(key) + "&UA=" + ua + "&"
+				+ getLogParams(context);
+		L.d(TAG, "getSearchResultUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 提交输入内容
+	 * 
+	 * @param callService
+	 * @param content
+	 * @param userID
+	 * @return
+	 */
+	public static String submitInput(Context context, String callService,
+			String content, String userID) {
+		String s = BASE_URL + callService + "&content="
+				+ StringUtil.encode(content) + "&USERID=" + userID + "&"
+				+ getLogParams(context);
+		L.d(TAG, "submitInput:" + s);
+		return s;
+	}
+
+	/**
+	 * 得到搜索标签列表
+	 * 
+	 * @return
+	 */
+	public static String getSearchHotUrl(Context context) {
+		String s = BASE_URL + "four/config/getGameLabelList.json?"
+				+ getLogParams(context);
+		L.d(TAG, "getSearchHotUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 得到常驻内存的url
+	 * 
+	 * @param gameSwitch
+	 * @param messageSwitch
+	 * @param packageNames
+	 * @return
+	 */
+	public static String getBackRunUrl(Context context, boolean gameSwitch,
+			boolean messageSwitch, String packageNames, int newGameSign,
+			int newActivitySign, int newSystemSign, String userId,
+			String phone, String ua, String vga, String os, String imsi) {
+		PackageInfo packageInfo;
+		int versionCode = 0;
+		try {
+			packageInfo = context.getPackageManager().getPackageInfo(
+					context.getApplicationInfo().packageName, 0);
+			versionCode = packageInfo.versionCode;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String s = BASE_URL + "four/basic/memoryMsg.json?gameMessage="
+				+ gameSwitch + "&systemMessage=true&SNSmessage="
+				+ messageSwitch + "&gamePackage=" + packageNames
+				+ "&newGameSign=" + newGameSign + "&newActivitySign="
+				+ newActivitySign + "&newSystemSign=" + newSystemSign
+				+ "&alias=" + Const.ALIAS + "&USERID=" + userId + "&MSISDN="
+				+ phone + "&UA=" + ua + "&model="
+				+ StringUtil.encode(Build.MODEL) + "&version=" + versionCode
+				+ "&os=" + os + "&vga=" + vga + "&IMSI=" + imsi + "&"
+				+ getLogParams(context);
+
+		L.d(TAG, "getBackRunUrl:" + s);
+		return s;
+	}
+
+	// /**
+	// *返回发表游戏评论的url
+	// *
+	// * @param type
+	// * 0:只发表星星评论 1：只发表文字评论 2：两者都发表
+	// * @param gameId
+	// * 游戏ID
+	// * @param userId
+	// * 用户ID
+	// * @param score
+	// * 星星个数
+	// * @param content
+	// * 语言内容
+	// * @return
+	// */
+	// public static String getPostCommentUrl(int type, String gameId, String
+	// userId, String score, String content) {
+	// if (0 == type) {
+	// return BASE_URL + "/four/game/publishCharacterComment.json?gameId=" +
+	// gameId + "&score=" + score + "&userId=" + userId;
+	// } else if (1 == type) {
+	// return BASE_URL + "/four/game/publishCharacterComment.json?gameId=" +
+	// gameId + "&comment=" + content + "&userId=" + userId;
+	// } else {
+	// return BASE_URL + "/four/game/publishCharacterComment.json?gameId=" +
+	// gameId + "&score=" + score + "&comment=" + content + "&userId=" + userId;
+	// }
+	// }
+
+	/**
+	 * 获取广告列表
+	 * 
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-16
+	 */
+	public static String getAdUrl(Context context) {
+		String s = BASE_URL + "four/advert/getAdvertList.json?"
+				+ getLogParams(context);
+		L.d(TAG, "getAdUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 获取ota下载链接
+	 * 
+	 * @param cpcode
+	 * @param servicecode
+	 * @param channelcode
+	 * @param ua
+	 * @param userid
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-1-30
+	 */
+	public static String getDownloadUrl(Context context, String cpcode,
+			String servicecode, String channelcode, String ua, String userid,
+			String downloadFromer) {
+		String s = "http://202.102.39.11/DownloadGame?PackageID=&Fee=&support=apk&From=a&CpID="
+				+ cpcode
+				+ "&CPServiceID="
+				+ servicecode
+				+ "&ChannelID="
+				+ channelcode
+				+ "&headerStr="
+				+ ua
+				+ "&USERID="
+				+ userid
+				+ "&downloadFrome="
+				+ downloadFromer
+				+ "&"
+				+ getLogParams(context);
+		L.d(TAG, "downloadFromer=" + downloadFromer);
+		L.d("downloadurl", s);
+		return s;
+	}
+
+	/**
+	 * 获得产品列表URL
+	 * 
+	 * @return
+	 */
+	public static String getProductListUrl(Context context, String ua) {
+		String s = BASE_URL + "four/game/moreProduct.json?UA=" + ua + "&"
+				+ getLogParams(context);
+		return s;
+	}
+
+	/**
+	 * 判断游戏是否适配
+	 * 
+	 * @param gameid
+	 *            游戏id
+	 * @return
+	 */
+	public static String getCheckUaUrl(Context context, String gameid, String UA) {
+		// String s = "http://202.102.39.13:8080/sns-client/game/isAdapter" +
+		// "?GAMEID=" + gameid + "&UA=" + UA + "&"
+		// + getLogParams(context);
+		String s = "http://202.102.39.13:8080/sns-client/game/isAdapter"
+				+ "?GAMEID=" + gameid + "&UA=" + UA;
+		L.d(TAG, "getCheckUaUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 反查imsi获取手机号
+	 * 
+	 * @param imsi
+	 *            :460036660069503
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-2-14
+	 */
+	public static String getPhoneNumberByImsiUrl(Context context, String imsi) {
+		String s = BASE_URL + "four/basic/getMobilePhone.json?imsi=" + imsi
+				+ "&" + getLogParams(context);
+		L.d(TAG, "getPhoneNumberByImsiUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 检查升级和UA
+	 * 
+	 * @param model
+	 * @param os
+	 * @param vga
+	 * @param alias
+	 * @param version
+	 * @param imsi
+	 * @param brand
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-2-14
+	 */
+	public static String CheckUAAndUpdate(Context context, String model,
+			String os, String vga, String alias, String version, String imsi,
+			String brand) {
+		String s = BASE_URL + "four/basic/softupdate.json?model="
+				+ URLEncoder.encode(model) + "&os=" + os + "&vga=" + vga
+				+ "&version=" + version + "&alias=" + alias + "&imsi=" + imsi
+				+ "&brand=" + URLEncoder.encode(brand) + "&"
+				+ getLogParams(context) + "&versiondate=" + VERSION_DATE;
+		L.d(TAG, "CheckUAAndUpdate:" + s);
+		return s;
+	}
+
+	/**
+	 * 隐私设置
+	 * 
+	 * @param homePage
+	 * @param sendMessage
+	 * @param myAge
+	 * @param mySite
+	 * @param userId
+	 * @return
+	 */
+	public static String saveHide(Context context, int homePage,
+			int sendMessage, int myAge, int mySite, String userId) {
+		String s = BASE_URL + "four/config/privacySettings.json?USERID="
+				+ userId + "&canSeeHomepage=" + homePage + "&canSendMessage="
+				+ sendMessage + "&showAge=" + myAge + "&showLocation=" + mySite
+				+ "&" + getLogParams(context);
+		return s;
+	}
+
+	public static String modifyPassword(Context context, String userId,
+			String oldCipher, String newCipher) {
+		String s = BASE_URL + "four/config/passwordModify.json?USERID="
+				+ userId + "&oldCipher=" + oldCipher + "&newCipher="
+				+ newCipher + "&" + getLogParams(context);
+		return s;
+	}
+
+	/**
+	 * 用户注册
+	 * 
+	 * @param phoneNum
+	 *            手機號碼
+	 * @param grender
+	 *            性別
+	 * @return 註冊的URL
+	 */
+	public static String getRegisterUrl(Context context, String phoneNum,
+			int grender) {
+		return BASE_URL + "four/user/userRegister.json?mobilePhone=" + phoneNum
+				+ "&gender=" + grender + "&" + getLogParams(context);
+	}
+
+	/**
+	 * 是否上传过手机通讯录
+	 * */
+	public static String getIsUploadContacts(String userId) {
+		String s = BASE_URL + "four/user/isupload.json?USERID=" + userId;
+		L.d(TAG, "getIsUploadContacts:" + s);
+		return s;
+	}
+
+	/**
+	 * 获取验证码
+	 * 
+	 * @param phoneNum
+	 *            手机号
+	 * @param validate
+	 * @return 请求验证码的url
+	 */
+	public static String getVerificaterUrl(Context context, String phoneNum) {
+		return BASE_URL + "four/action/getValidateCode.json?phone=" + phoneNum
+				+ "&" + getLogParams(context);
+	}
+
+	/**
+	 * 返回用户信息请求链接
+	 */
+	public static String getUserInfoUrl(Context context, String userId) {
+		return BASE_URL + "four/user/myInfo.json?USERID=" + userId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 得到上传图片链接
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public static String getUpdateIconUrl(Context context, String userId) {
+		return BASE_URL + "four/user/uploadIcon.json?USERID=" + userId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 用户登录
+	 * 
+	 * @param account
+	 *            用户名
+	 * @param clipher
+	 *            密码
+	 * @param imsi
+	 * @return
+	 */
+	public static String getLoginUrl(Context context, String account,
+			String clipher, String imsi) {
+		return BASE_URL + "four/user/userLogin.json?account=" + account
+				+ "&cipher=" + clipher + "&imsi=" + imsi + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param userid
+	 * @param oldClipher
+	 * @param newClipher
+	 * @return
+	 */
+	public static String getModifyPassUrl(Context context, String userid,
+			String oldClipher, String newClipher) {
+		return BASE_URL + "four/config/passwordModify.json?USERID=" + userid
+				+ "&oldCipher=" + oldClipher + "&newCipher=" + newClipher + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 获取找朋友列表
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public static String getFindFriendUrl(Context context, int age,
+			String province, String city, String userid, int index, int gender) {
+		return BASE_URL + "four/user/autoSearchFriend.json?USERID=" + userid
+				+ "&yourAge=" + age + "&province=" + province + "&city=" + city
+				+ "&startIndex=" + index + "&gender=" + gender + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 新手任务提交用户的修改
+	 * 
+	 * @param userid
+	 *            用户id
+	 * @param showAge
+	 *            是否显示年龄91=显示；92=隐藏
+	 * @param showLocation
+	 *            是否显示所在地101=显示；102=隐藏
+	 * @param birthday
+	 *            生日
+	 * @param nickName
+	 *            昵称
+	 * @param province
+	 *            省份
+	 * @param city
+	 *            城市
+	 * @param hobby
+	 *            爱好
+	 * @return
+	 */
+	public static String getModifyUrl(Context context, String userid,
+			int showAge, int showLocation, String birthday, String nickName,
+			String province, String city, String interestId, int sex,
+			String type) {
+		if ("name".equals(type)) {
+			return BASE_URL + "four/user/perfectInfo.json?USERID=" + userid
+					+ "&nickName=" + StringUtil.encode(nickName) + "&"
+					+ getLogParams(context);
+		} else if ("birthday".equals(type)) {
+			return BASE_URL + "four/user/perfectInfo.json?USERID=" + userid
+					+ "&birthday=" + birthday + "&" + getLogParams(context);
+		} else if ("address".equals(type)) {
+			return BASE_URL + "four/user/perfectInfo.json?USERID=" + userid
+
+			+ "&province=" + province + "&city=" + city + "&"
+					+ getLogParams(context);
+		} else if ("hide".equals(type)) {
+			return BASE_URL + "four/user/perfectInfo.json?USERID=" + userid
+					+ "&showAge=" + showAge + "&showLocation=" + showLocation
+					+ "&" + getLogParams(context);
+		} else {
+			return BASE_URL + "four/user/perfectInfo.json?USERID=" + userid
+					+ "&interestId=" + interestId + "&sex=" + sex + "&"
+					+ getLogParams(context);
+		}
+	}
+
+	/**
+	 * @param flag
+	 *            0:1 全站：只显示省
+	 * @return
+	 */
+	public static String getProvinceCitUrl(Context context, String flag) {
+		return BASE_URL + "four/basic/provinceAndCityList.json?fetchCityFlag="
+				+ flag + "&" + getLogParams(context);
+	}
+
+	/**
+	 * 取得爱好url
+	 */
+	public static String getHobbyUrl(Context context) {
+		return BASE_URL + "four/basic/getHobbyList.json?"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 找回密码Url
+	 * 
+	 * @param phone
+	 *            [接口人 确认过 该字段 可以 接受 ：手机号 和 邮箱 两种方式】
+	 * @return
+	 */
+	public static String getFindPasswordUrl(String phone, Context context,
+			String str) {
+		return BASE_URL + "four/user/retrievePassword.json?" + str + "="
+				+ phone + "&" + getLogParams(context);
+	}
+
+	public static String getNoviceHideUrl(String userId, int showAge,
+			int showLocation, Context context) {
+		return BASE_URL + "four/config/privacySettings.json?USERID=" + userId
+				+ "&showAge=" + showAge + "&showLocation=" + showLocation + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 加好友链接
+	 * 
+	 * @param friendId
+	 * @param userId
+	 * @return
+	 */
+	public static String getAddFriendUrl(long friendId, String userId,
+			Context context) {
+		return BASE_URL + "four/user/requestAddFriend.json?friendId="
+				+ friendId + "&USERID=" + userId + "&" + getLogParams(context);
+	}
+
+	public static String getUploadIconUrl(String userId, Context context) {
+		return BASE_URL + "four/user/uploadIcon.json?USERID=" + userId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 完成新手任务
+	 */
+	public static String getFinishNoviceUrl(String userId, Context context) {
+		return BASE_URL + "four/user/finishNoviceTask.json?USERID=" + userId
+				+ "&" + getLogParams(context);
+	}
+
+	/** 获取日志参数 */
+	public static String getLogParams(Context context) {
+		PackageInfo packageInfo;
+		int versionCode = 0;
+		try {
+			// L.d("dd", "getLogParams");
+			// L.d("dd", "" + context.getApplicationInfo().packageName);
+			packageInfo = context.getPackageManager().getPackageInfo(
+					context.getApplicationInfo().packageName, 0);
+			versionCode = packageInfo.versionCode;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		TelephonyManager telManager = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		String imsi = telManager.getSubscriberId() + "";
+		String meid = telManager.getDeviceId();
+
+		LoginDataStoreUtil.User user = LoginDataStoreUtil.fetchUser(context,
+				LoginDataStoreUtil.LOG_FILE_NAME);
+		SharedPreferences share = context.getSharedPreferences(
+				PreferenceUtil.SHARE_LOG_NAME, 0);
+		String channel = share.getString(PreferenceUtil.SHARE_LOG_KEY_CHANNEL,
+				"01345337");
+		String subchannel = share.getString(
+				PreferenceUtil.SHARE_LOG_KEY_SUBCHANNEL, "");
+
+		String ua = share.getString(PreferenceUtil.SHARE_LOG_KEY_UA, "");
+		String fromer = "10010104";
+		SharedPreferences shareg = context.getApplicationContext()
+				.getSharedPreferences(PreferenceUtil.SHARED_GAME, 0);
+		String phone = shareg.getString(PreferenceUtil.KEY_PHONENUM_STRING,
+				"00000000000");
+		String params = "LOGUSERID=" + user.getUserId() + "&LOGUA=" + ua
+				+ "&CHANNEL=" + channel + "&SUBCHANNEL=" + subchannel
+				+ "&LOGIMSI=" + imsi + "&LOGMEID=" + meid + "&PHONENUM="
+				+ phone + "&FROMER=" + fromer + "&LOGVERSION=" + versionCode;
+
+		return params;
+	}
+
+	/**
+	 * 下载记录
+	 * http://221.226.177.158:9010/sns-client/four/game/gameDownloadLog.json
+	 * ?USERID=100300&gameId=163675
+	 * */
+
+	public static void gameDownloadLog(Context context, String userId,
+			String gameId) {
+		String s = BASE_URL + "four/game/gameDownloadLog.json?USERID=" + userId
+				+ "&gameId=" + gameId + "&" + getLogParams(context);
+		try {
+			HttpConnect.getHttpString(s);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		L.d(TAG, "gameDownloadLog:" + s);
+	}
+
+	/**
+	 * 获取好友列表
+	 */
+	public static String getFriendListUrl(String userId, int startIndex,
+			Context context) {
+		return BASE_URL + "four/user/friendList.json?startIndex=" + startIndex
+				* 10 + "&pageSize=10&USERID=" + userId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 发送游戏分享到平台好友
+	 */
+	public static String getShareToFriendsUrl(String userId, String friendId,
+			String gameId, Context context) {
+		return BASE_URL + "four/user/sharetofriends.json?USERID=" + userId
+				+ "&friendId=" + friendId + "&gameId=" + gameId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 获得隐私设置
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public static String getHideUrl(String userId, Context context) {
+		return BASE_URL + "four/user/myInfo.json?USERID=" + userId + "&"
+				+ getLogParams(context);
+	}
+
+	/**
+	 * 统计分享的次数URL
+	 */
+	// public static String getShareNumber(String type, String id, Context
+	// context) {
+	// return BASE_URL + "four/action/recordShareToOut.json?type=" + type +
+	// "&gameId=" + id + "&" + getLogParams(context);
+	// }
+	public static String getShareNumber(String type, String id) {
+		Log.i("AAAAA", "userid=" + id + "type=" + type);
+
+		return BASE_URL + "four/action/recordShareToOut.json?USERID=" + id
+				+ "&type=" + type;
+
+	}
+
+	/**
+	 * 统计推荐给好友并增加经验值的Url
+	 */
+	public static String gettoFrinendNumber(String id) {
+		return BASE_URL + "/four/action/recommendEgame.json?USERID=" + id;
+	}
+
+	/**
+	 * 关键词联想
+	 * 
+	 * @param key
+	 *            搜索关键字
+	 * @return
+	 */
+	public static String getQueyrListByGameName(Context context, String UA) {
+		String s = BASE_URL + "four/game/keyWordList.json?keyWord=&UA="
+				+ StringUtil.encode(UA) + "&" + getLogParams(context);
+		L.d(TAG, "info:" + s);
+		return s;
+	}
+
+	/**
+	 * 修改手机号(进入社区引导绑定手机号使用)
+	 * 
+	 * @param context
+	 * @param phoneNum
+	 * @param userid
+	 * @return
+	 * @author zhouzhe@lenovo-cw.com
+	 * @time 2012-6-20
+	 */
+	public static String getModifyPhoneNum(Context context, String phoneNum,
+			String userid) {
+		String s = BASE_URL + "four/user/modifyMyInfo.json?USERID=" + userid
+				+ "&phone=" + phoneNum + "&" + getLogParams(context);
+		L.d(TAG, "getModifyPhoneNum:" + s);
+		return s;
+	}
+
+	/**
+	 * 得到搜索全部结果列表
+	 * 
+	 * @param key
+	 *            搜索关键字
+	 * @return
+	 */
+	public static String getSearchAllUrl(Context context, String key, String ua) {
+		String s = BASE_URL + "four/game/searchForAll.json?keyWord="
+				+ StringUtil.encode(key) + "&UA=" + ua + "&"
+				+ getLogParams(context);
+		// String s1 = BASE_URL + "four/game/searchForAll.json?keyWord="
+		// + StringUtil.encode(key) + "&UA=" + ua + "&"
+		// + getLogParams(context);
+		L.d(TAG, "getSearchResultUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 记录同意/不同意流量协议
+	 * 
+	 * @param agree
+	 *            0:同意 1不同意
+	 * @param context
+	 * @return
+	 */
+	public static String getAgreeUrl(int agree, Context context) {
+		String s = BASE_URL + "four/action/statisticsAgree.json?agreeType="
+				+ agree + getLogParams(context);
+		L.d(TAG, "getSearchResultUrl:" + s);
+		return s;
+	}
+
+	/**
+	 * 社区邀请好友增加经验
+	 * 
+	 * @param userid
+	 *            用户id
+	 * @param context
+	 * @return
+	 */
+	public static String getInvite(String userid, Context context) {
+		String s = BASE_URL + "four/user/inviteFriends.json?USERID=" + userid;
+		L.d(TAG, "getSearchResultUrl:" + s);
+		return s;
+	}
+}

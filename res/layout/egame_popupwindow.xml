@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/popup"
+	android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<RelativeLayout android:layout_alignParentTop="true" android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:background="@drawable/egame_top" android:text="请选择排序方式" android:gravity="center"
+			style="@style/egame_topTitle" />
+
+		<Button android:id="@+id/sort" android:layout_alignParentRight="true" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:background="@drawable/egame_btn_paixu_selector"
+			android:text="排序" android:gravity="center" android:layout_marginTop="5dp"
+			android:layout_marginRight="8dp" android:textColor="#ffffff" />
+	</RelativeLayout>
+
+	<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<ListView android:id="@+id/listview" android:fadingEdge="none" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:divider="@null" android:cacheColorHint="#00000000"
+				android:layout_centerHorizontal="true" android:layout_marginTop="5dp" />
+
+			<RelativeLayout android:id="@+id/sortback" android:layout_width="fill_parent"
+				android:layout_height="40dp" android:background="@drawable/egame_search_result_bg">
+				<ImageView android:layout_height="wrap_content" android:layout_width="wrap_content"
+					android:layout_alignParentRight="true" android:background="@drawable/egame_zhankai"
+					android:layout_centerVertical="true" android:layout_marginRight="10dp" />
+			</RelativeLayout>
+			<ImageView android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:background="@drawable/egame_bgpaixu" />
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:background="@drawable/egame_top_line" />
+	</RelativeLayout>
+
+</LinearLayout>

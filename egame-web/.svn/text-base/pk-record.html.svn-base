@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--PK--记录</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/wqz-globalObject.js" language="javascript" type="text/javascript"></script>
+<script src="js/pk-record.js" language="javascript" type="text/javascript"></script>
+</head>
+
+
+<body>
+
+    <!--详情-->
+    <div class="beento m_1_10 P_t_20">
+        
+        <table class="dunit1 m_tb_10">
+        	<tr class="dunit1_out1">
+            	<td class="dunit1_inner4 table_line">对手</td>
+                <td class="table_line">奖金（PK币）</td>
+                <td class="">操作</td>
+            </tr>
+            <tbody id="listDetail">
+            	<!-- detail list data -->
+			</tbody>
+        </table>
+ 
+    </div>
+
+<!--分页-->
+      	<div class="m_auto p_b_20 blohi">  
+            <div id="tailButId" class="btu_page btu_green_s pos">
+                <a id="tailPageId"><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>末 页</a>
+            </div>
+            
+            <div id="nextButId" class="btu_page btu_green_s pos">
+                <a id="nextPageId"><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+            </div>
+            
+            <div id="previousButId" class="btu_page btu_gra_s pos btu_page_com">
+                <a id="previousPageId"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>上一页</a>
+            </div>
+            
+            <div id="firstButId" class="btu_page btu_gra_s pos btu_page_com">
+                <a id="firstPageId"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>首 页</a>
+            </div>
+        </div>
+</body>
+</html>
+

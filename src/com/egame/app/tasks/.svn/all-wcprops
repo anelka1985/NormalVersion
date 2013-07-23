@@ -1,0 +1,413 @@
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/ttigame/!svn/ver/95440/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks
+END
+SearchHotTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SearchHotTask.java
+END
+GetListIconAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetListIconAsyncTask.java
+END
+GameIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameIconTask.java
+END
+FinishNoviceTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/FinishNoviceTask.java
+END
+GetUserInfoTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetUserInfoTask.java
+END
+RenrenGetGameIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/RenrenGetGameIconTask.java
+END
+UrlInfoTask2.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UrlInfoTask2.java
+END
+NoviceCommitModifyTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/NoviceCommitModifyTask.java
+END
+SharePlatFormTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SharePlatFormTask.java
+END
+checkOrderTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/checkOrderTask.java
+END
+ModifyPasswdTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/ModifyPasswdTask.java
+END
+ReplyDetailTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/ReplyDetailTask.java
+END
+OrderGamePackageAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/OrderGamePackageAsyncTask.java
+END
+GameSortTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameSortTask.java
+END
+StatusSetListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/StatusSetListener.java
+END
+GetPhoneNumberTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetPhoneNumberTask.java
+END
+ShareNumberCommitTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/ShareNumberCommitTask.java
+END
+GamePackageTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GamePackageTask.java
+END
+GetPlatForFriendTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetPlatForFriendTask.java
+END
+UserReplyPostTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UserReplyPostTask.java
+END
+MoreUserTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/MoreUserTask.java
+END
+GetPhoneNumberByImsiRunnable.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetPhoneNumberByImsiRunnable.java
+END
+GameSortDetailTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/91180/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameSortDetailTask.java
+END
+GameTopIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameTopIconTask.java
+END
+UserLoginAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UserLoginAsyncTask.java
+END
+PostCommentAsycnTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/PostCommentAsycnTask.java
+END
+GetFindFriendAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetFindFriendAsyncTask.java
+END
+MoreLikeTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/MoreLikeTask.java
+END
+GamePackageDetailTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GamePackageDetailTask.java
+END
+GetStringRunnable.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetStringRunnable.java
+END
+ContactsAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/ContactsAsyncTask.java
+END
+ProductListTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/ProductListTask.java
+END
+AddFriendAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/AddFriendAsyncTask.java
+END
+GameOnlineTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameOnlineTask.java
+END
+UserRegisterAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UserRegisterAsyncTask.java
+END
+GetRunnable.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetRunnable.java
+END
+CheckUaTask2.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/CheckUaTask2.java
+END
+GetTopicIconAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetTopicIconAsyncTask.java
+END
+GetReplyListTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetReplyListTask.java
+END
+SatisfactionTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SatisfactionTask.java
+END
+GetAdIconAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/ttigame/!svn/ver/105845/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetAdIconAsyncTask.java
+END
+GameCommentTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/95440/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameCommentTask.java
+END
+CommenttoFriendTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/CommenttoFriendTask.java
+END
+GetAllGameTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetAllGameTask.java
+END
+PopUpTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/PopUpTask.java
+END
+SearchTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SearchTask.java
+END
+GetHideSettingTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetHideSettingTask.java
+END
+HideSettingTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/HideSettingTask.java
+END
+MoreUserIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/MoreUserIconTask.java
+END
+CityProvinceTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/CityProvinceTask.java
+END
+UrlInfoTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UrlInfoTask.java
+END
+GetVerificateAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetVerificateAsyncTask.java
+END
+MoreLikeIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/MoreLikeIconTask.java
+END
+GetImageTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GetImageTask.java
+END
+BindSinaAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/BindSinaAsyncTask.java
+END
+CollectTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/CollectTask.java
+END
+AgreeRunnable.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/AgreeRunnable.java
+END
+NoviceHideSetTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/NoviceHideSetTask.java
+END
+UpdateIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UpdateIconTask.java
+END
+GameDetailTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameDetailTask.java
+END
+UploadContacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/UploadContacts.java
+END
+CheckUaTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/91180/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/CheckUaTask.java
+END
+FindPasswordTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/FindPasswordTask.java
+END
+GameScreentShotIconTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameScreentShotIconTask.java
+END
+GameRecommendRunnable.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/GameRecommendRunnable.java
+END
+SendSMSAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/90191/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SendSMSAsyncTask.java
+END
+DownloadUpdateTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/DownloadUpdateTask.java
+END
+SinaShareAsyncTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/tasks/SinaShareAsyncTask.java
+END

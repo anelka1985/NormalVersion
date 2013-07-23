@@ -1,0 +1,113 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.ProductListAdapter;
+import com.egame.app.tasks.ProductListTask;
+import com.egame.beans.ProductListBean;
+import com.egame.config.Urls;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 
+ * 类说明：产品列表
+ * 
+ * @创建时间 2011-12-30
+ * @创建人： 王先云
+ * @邮箱：wangxy@gzylxx.com
+ */
+public class ProductLitActivity extends Activity implements OnClickListener {
+	private ListView lvProductList;
+
+	private List<ProductListBean> productList = new ArrayList<ProductListBean>();
+
+	private ProductListAdapter adapter;
+
+	private ImageView ivBack;
+
+	private EgameApplication application;
+
+	/** 有产品列表 */
+	private TextView moreProductY;
+
+	/** 无产品列表 */
+	private TextView moreProductN;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_productlist);
+		initView();
+		initEvent();
+		adapter = new ProductListAdapter(productList, ProductLitActivity.this);
+		lvProductList.setAdapter(adapter);
+
+		ProductListTask productListTask = new ProductListTask(adapter, productList, ProductLitActivity.this);
+		application = new EgameApplication();
+		productListTask.execute(Urls.getProductListUrl(ProductLitActivity.this, application.getUA()));
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("ProductLitActivity");
+	}
+
+	/**
+	 * 初始化ui，主要是实现findViewById的操作
+	 */
+	void initView() {
+		lvProductList = (ListView) findViewById(R.id.productList);
+		ivBack = (ImageView) findViewById(R.id.back);
+		moreProductY = (TextView) findViewById(R.id.moreProductY);
+		moreProductN = (TextView) findViewById(R.id.moreProductN);
+	}
+
+	/**
+	 * 初始化事件,主要是实现按钮点击等事件的处理
+	 */
+	void initEvent() {
+		ivBack.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (v == ivBack) {
+			ProductLitActivity.this.finish();
+		}
+
+	}
+
+	public void getTaskResult(List<ProductListBean> result) {
+		if (result.size() == 0) {
+			moreProductY.setVisibility(View.GONE);
+
+			moreProductN.setVisibility(View.VISIBLE);
+			moreProductN.setText("产品列表信息无数据!");
+		}
+	}
+
+}

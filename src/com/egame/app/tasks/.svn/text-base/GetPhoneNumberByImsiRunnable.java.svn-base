@@ -1,0 +1,111 @@
+package com.egame.app.tasks;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+
+import com.egame.app.EgameApplication;
+import com.egame.config.Urls;
+import com.egame.utils.common.HttpConnect;
+import com.egame.utils.common.L;
+import com.egame.utils.common.LoginDataStoreUtil;
+import com.egame.utils.common.PreferenceUtil;
+
+/**
+ * 反查手机号
+ */
+public class GetPhoneNumberByImsiRunnable implements Runnable {
+	private final static String LOG_TAG = GetPhoneNumberByImsiRunnable.class.getCanonicalName();
+	private Activity context;
+	private String imsi = LoginDataStoreUtil.NULL_VALUE;
+
+	public GetPhoneNumberByImsiRunnable(Activity context) {
+		this.context = context;
+		/** 清空上次反查存储的数据 */
+		LoginDataStoreUtil.clearUser(context, LoginDataStoreUtil.PAG_FILE_NAME);
+	}
+
+	@Override
+	public void run() {
+		EgameApplication application = (EgameApplication) context.getApplication();
+		SharedPreferences share = context.getSharedPreferences(PreferenceUtil.SHARED_GAME, 0);
+		TelephonyManager telManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		imsi = telManager.getSubscriberId() + "";
+//		imsi = "460029520807915";
+		if (null != imsi && !"".equals(imsi) && !LoginDataStoreUtil.NULL_VALUE.equals(imsi)) {
+			// 取到手机的imsi号
+			try {
+				Editor edit = share.edit();
+				String s = HttpConnect.getHttpString(Urls.getPhoneNumberByImsiUrl(context, imsi));
+				JSONObject obj = new JSONObject(s);
+				String phone = obj.optString("mobilePhone", "");
+//				phone = "15952082159";
+				if (phone.length() > 0) {
+					application.setPhoneNum(phone);
+					edit.putString(PreferenceUtil.KEY_PHONENUM_STRING, phone).commit();
+				} else {
+					L.i("Phone  Number", "没有取得的手机号");
+				}
+				/** 反查用户信息的保存 */
+				storeData(obj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			L.i(LOG_TAG, "没有有效的手机卡");
+			LoginDataStoreUtil.PAGGING_STATE = 2;
+		}
+
+	}
+
+	/**
+	 * 反查用户信息的保存
+	 */
+	private void storeData(JSONObject obj) {
+		try {
+			JSONObject json = obj.getJSONObject("result");
+			if (0 == json.optInt("resultcode", -1)) {
+				// 反查成功
+				LoginDataStoreUtil.User user = new LoginDataStoreUtil.User();
+				user.setAccountName(obj.optString("mobilePhone", LoginDataStoreUtil.NULL_VALUE));
+				user.setCurrentImsi(this.imsi);
+				user.setUserId(obj.optString("userId", LoginDataStoreUtil.NULL_VALUE));
+				user.setNickName(obj.optString("nickName", LoginDataStoreUtil.NULL_VALUE));
+				user.setIsCompleteNoviceTask(obj.optInt("isCompleteNoviceTask", 0));
+				// 存储数据
+				LoginDataStoreUtil.storeUser(context, user, LoginDataStoreUtil.PAG_FILE_NAME);
+				LoginDataStoreUtil.PAGGING_STATE = 0;
+				changeLoginInfo(user);
+			} else {
+				// 反查失败
+				LoginDataStoreUtil.PAGGING_STATE = 1;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 有卡 且 反查成功以后 用户信息 不为空时调用 存储当前有效的登录数据信息
+	 */
+	private void changeLoginInfo(LoginDataStoreUtil.User user) {
+		// 取出上次成功登录的用户的信息
+		LoginDataStoreUtil.User desUser = LoginDataStoreUtil.fetchUser(context, LoginDataStoreUtil.LOG_FILE_NAME);
+		// 更新用户的信息存储 条件：手机换卡了 && 成功取到了手机号
+		if (!LoginDataStoreUtil.NULL_VALUE.equals(user.getAccountName())
+				&& !user.getCurrentImsi().equals(desUser.getCurrentImsi())) {
+			Log.i("GetPhoneNumberByImsiRunnable", "更新登录表中的用户信息");
+			LoginDataStoreUtil.clearUser(context, LoginDataStoreUtil.LOG_FILE_NAME);
+			LoginDataStoreUtil.storeUser(context, user, LoginDataStoreUtil.LOG_FILE_NAME);
+		} else {
+			//
+		}
+	}
+}

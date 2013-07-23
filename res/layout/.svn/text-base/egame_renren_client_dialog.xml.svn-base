@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:background="@drawable/egame_renren_sdk_activity_title_bg"
+        android:orientation="horizontal"
+        android:padding="1dip" >
+
+        <ImageView
+            android:layout_width="85dip"
+            android:layout_height="30dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/egame_renren_android_title_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="1dip"
+            android:paddingLeft="3dip"
+            android:text="@string/egame_renren_sdk_title_upload_label"
+            android:textColor="#FFFFFF"
+            android:textSize="16dip" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/myword"
+        android:layout_width="260dip"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/egame_inputtext_bg"
+        android:paddingLeft="5dip"
+        android:textSize="13dip" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:background="#FFFFFF"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="#E4ECF1"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip" >
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/egame_renren_sdk_default_button_unselected"
+            android:text="取消"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/publish_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/cancel_button"
+            android:background="@drawable/egame_renren_sdk_default_button_unselected"
+            android:text="确定"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+</LinearLayout>

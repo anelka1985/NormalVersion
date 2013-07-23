@@ -1,0 +1,389 @@
+/**   
+ * @Title: DialogUtil.java
+ * @Package com.lenovocw.android.ui
+ * @Description: Dialog有关的工具类
+ * @author zhouzhe@lenovo-cw.com   
+ * @date 2011-7-29 上午01:06:30
+ * @version V1.0   
+ */
+
+package com.egame.utils.ui;
+
+import java.util.List;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.services.DownloadService;
+import com.egame.app.tasks.NoviceCommitModifyTask;
+import com.egame.app.uis.EgameWebActivity;
+import com.egame.app.uis.NovicePrimaryActivity;
+import com.egame.config.Const;
+import com.egame.utils.common.LoginDataStoreUtil;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.sys.DialogStyle;
+
+/**
+ * @ClassName: DialogUtil
+ * @Description: Dialog有关的工具类
+ * @author zhouzhe@lenovo-cw.com
+ * @date 2011-7-29 上午01:06:30
+ */
+
+public class DialogUtil {
+	/**
+	 * 获取一个Progress对话框
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static ProgressDialog getProgressDialog(Context context, String s) {
+		ProgressDialog progress = new ProgressDialog(context);
+		progress.setCancelable(false);
+		progress.setMessage(s);
+		return progress;
+	}
+
+	/**
+	 * 获取一个“请稍候”的对话框
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static ProgressDialog getProgressDialog(Context context) {
+		return getProgressDialog(context,
+				context.getResources().getString(R.string.egame_menu_qsh));
+	}
+
+	/**
+	 * 弹出一个提示框
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param content
+	 *            提示的内容
+	 */
+	public static void showDialog(Context context, String content) {
+		new AlertDialog.Builder(context).setTitle(R.string.egame_menu_tip)
+				.setMessage(content)
+				.setNegativeButton(R.string.egame_menu_qd, null).show();
+	}
+
+	/**
+	 * 弹出一个提示框
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param content
+	 *            提示的内容
+	 */
+	public static void showDialog(Context context, int content) {
+		new AlertDialog.Builder(context).setTitle(R.string.egame_menu_tip)
+				.setMessage(content)
+				.setNegativeButton(R.string.egame_menu_qd, null).show();
+	}
+
+	/**
+	 * 弹出一个提示框
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param content
+	 *            提示的内容
+	 */
+	public static void showDialog(Context context, String content,
+			DialogInterface.OnClickListener listener) {
+		new AlertDialog.Builder(context).setCancelable(false)
+				.setTitle(R.string.egame_menu_tip).setMessage(content)
+				.setNegativeButton(R.string.egame_menu_qd, listener).show();
+	}
+
+	/**
+	 * 退出提示框
+	 * 
+	 * @param context
+	 *            上下文
+	 */
+	public static void showExitDialog(final Activity context) {
+
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				Intent intent = new Intent(
+						"com.egame.app.services.DownloadService");
+				intent.putExtra("msg", "stop");
+				/********** add by samsung 20130111 ****************/
+				SharedPreferences sp = context.getSharedPreferences(
+						PreferenceUtil.SHARED_GAME, 0);
+				// sp.edit().putString("homeexit", "normal").commit();
+				sp.edit().putBoolean("downexit", false);
+				/********** add end ****************/
+
+				context.sendBroadcast(intent);
+				context.finish();
+				List<Activity> list = EgameApplication.Instance().activitylist;
+				for (Activity act : list) {
+					if (!act.isFinishing()) {
+						act.finish();
+					}
+				}
+				 System.exit(0);
+			}
+
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder alert = ds.getBuilder(context, context
+				.getResources().getString(R.string.egame_menu_yes), context
+				.getResources().getString(R.string.egame_menu_no), comfirmL,
+				cancelL);
+		alert.setTitle(
+				context.getResources().getString(R.string.egame_menu_exit))
+				.setMessage(
+						context.getResources().getString(
+								R.string.egame_menu_confrim_exit)).create();
+		alert.show();
+	}
+
+	public static void showLogoffDialog(final Activity context, String nickName) {
+
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				LoginDataStoreUtil.logOffUser(context);
+			}
+
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder alert = ds.getBuilder(context, context
+				.getResources().getString(R.string.egame_menu_yes), context
+				.getResources().getString(R.string.egame_menu_no), comfirmL,
+				cancelL);
+		alert.setTitle("系统提示").setMessage("Hi " + nickName + ", 是否注销登录?")
+				.create();
+		alert.show();
+
+	}
+
+	public static void showNoviceCancelDialog(final Activity context) {
+
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				dialog.dismiss();
+				// 发送消息提示社区界面刷新相应数据
+				if ("web".equals(Const.isWebStart)) {
+					Intent intent = new Intent(Utils.EGAME_WEB_RECEIVER);
+					context.sendBroadcast(intent);
+					context.finish();
+				} else {
+					Intent communityIntent = new Intent();
+					communityIntent.setClass(context, EgameWebActivity.class);
+					context.startActivity(communityIntent);
+					context.finish();
+				}
+
+			}
+
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder alert = ds.getBuilder(context, context
+				.getResources().getString(R.string.egame_menu_yes), context
+				.getResources().getString(R.string.egame_menu_no), comfirmL,
+				cancelL);
+		alert.setTitle("系统提示")
+				.setMessage(
+						context.getResources().getString(
+								R.string.egame_novice_cancel_prompt)).create();
+		alert.show();
+
+	}
+
+	public static void closeSoft(Activity activity) {
+		InputMethodManager imm = (InputMethodManager) activity
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		View view = activity.getCurrentFocus();
+		if (view != null) {
+			imm.hideSoftInputFromWindow(view.getWindowToken(), 0);// 隐藏软键盘
+		}
+	}
+
+	/**
+	 * 
+	 * @param activity
+	 * @param oldName
+	 * @param isMatch
+	 */
+	public static void showModifyNameDialog(
+			final NovicePrimaryActivity activity, String oldName) {
+		final EditText edit = new EditText(activity);
+		edit.setText(oldName);
+		edit.requestFocus();
+		FrameLayout fl = new FrameLayout(activity);
+		fl.setPadding(10, 10, 10, 10);
+		fl.setLayoutParams(new LayoutParams(150, 50));
+		fl.addView(edit);
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (Utils.isNickname(edit.getText().toString())) {
+					new NoviceCommitModifyTask(activity, LoginDataStoreUtil
+							.fetchUser(activity,
+									LoginDataStoreUtil.LOG_FILE_NAME)
+							.getUserId(), 0, 0, "", edit.getText().toString(),
+							"", "", "7", 0, "name").execute("");
+				} else {
+					if ("".equals(edit.getText().toString())) {
+						Toast.makeText(activity, "请输入昵称", Toast.LENGTH_SHORT)
+								.show();
+					} else {
+						Toast.makeText(activity, "输入昵称不合法", Toast.LENGTH_SHORT)
+								.show();
+					}
+
+				}
+				dialog.dismiss();
+
+			}
+
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder alert = ds.getBuilder(activity, "立即领取", "进入社区",
+				comfirmL, cancelL);
+		alert.setView(fl).setTitle("昵称").create();
+		alert.show();
+
+	}
+
+	/**
+	 * s
+	 * 
+	 * @param activity
+	 * @param myProvince
+	 * @param myCity
+	 * @param views
+	 */
+	public static void showModifyAddressDialog(
+			final NovicePrimaryActivity activity, final String myProvince,
+			final String myCity, RelativeLayout views) {
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (!"".equals(myProvince) && !"".equals(myCity)) {
+					// 修改城市
+					new NoviceCommitModifyTask(activity, LoginDataStoreUtil
+							.fetchUser(activity,
+									LoginDataStoreUtil.LOG_FILE_NAME)
+							.getUserId(), 0, 0, "", "", myProvince, myCity, "",
+							9, "address").execute("");
+				} else {
+					Toast.makeText(activity, "请完善信息", Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+
+			}
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder builder = ds.getBuilder(activity, "确定", "取消",
+				comfirmL, cancelL);
+		builder.setTitle("请选择住址").setView(views).create().show();
+	}
+
+	/**
+	 * 显示新手任务弹出框
+	 * 
+	 * @author zhouzhe@lenovo-cw.com
+	 */
+	public static void showEnterNoviceDialog(final Activity activity,
+			final String enterPage) {
+
+		DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent();
+				intent.setClass(activity, NovicePrimaryActivity.class);
+				activity.startActivity(intent);
+			}
+
+		};
+		DialogInterface.OnClickListener cancelL = new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				EnterCommunity enterCommunity = new EnterCommunity(activity,
+						enterPage);
+				enterCommunity.enter();
+			}
+
+		};
+		DialogStyle ds = new DialogStyle();
+		AlertDialog.Builder alert = ds.getBuilder(activity, "立即领取", "进入社区",
+				comfirmL, cancelL);
+		alert.setTitle("系统提示").setMessage("做新手任务领取礼包！花两分钟时间完善您的个人资料即可领取。")
+				.create();
+		alert.show();
+	}
+
+}

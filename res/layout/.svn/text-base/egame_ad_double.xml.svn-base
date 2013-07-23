@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp" >
+
+    <!-- the left frame -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="103dp"
+        android:layout_marginRight="2dp"
+        android:layout_weight="1" >
+
+        <!-- the pic of ad -->
+
+        <ImageView
+            android:id="@+id/adPic1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <!-- the text of ad -->
+
+        <TextView
+            android:id="@+id/adText1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/egame_harf_black_transparent"
+            android:gravity="top|center_horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="1px"
+            android:textColor="@color/egame_white"
+            android:textSize="16sp" 
+            android:visibility="invisible"/>
+
+        <!-- the mask over the ad -->
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/egame_ad_mask" />
+    </FrameLayout>
+
+    <!-- the right frame -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="103dp"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1" >
+
+        <!-- the pic of ad -->
+
+        <ImageView
+            android:id="@+id/adPic2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <!-- the text of ad -->
+
+        <TextView
+            android:id="@+id/adText2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/egame_harf_black_transparent"
+            android:gravity="top|center_horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="1px"
+            android:textColor="@color/egame_white"
+            android:textSize="16sp" 
+            android:visibility="invisible"/>
+
+        <!-- the mask over the ad -->
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/egame_ad_mask" />
+    </FrameLayout>
+
+</LinearLayout>

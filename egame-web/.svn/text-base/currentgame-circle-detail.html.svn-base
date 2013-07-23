@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" />
+<title>爱游戏--游戏圈--主题详细</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/currentgame_common.js" type="text/javascript"></script>
+<script src="js/currentgame-circle-detail.js" type="text/javascript"></script>
+</head>
+
+
+<body class="br_color2">
+
+    <!--头像&详情-->
+    <div id="icon_box" class="weibo P_t_20 m_b_10 hide_gone">
+            <div class="picture_pLeft picture_pCom"><a id="subjectIco"><span class="head_mask_76c"></span></a></div>
+            <div class="picture_pMid picture_pCom">
+                <h2 id="subjectTitle"></h2>
+                <h3 id="sendTime" class="color_4"></h3>
+            </div>
+        </div>
+
+    <!--心情-->
+    <div id="msg_box" class="mood color_4 hide_gone">
+        <P id="subjectContent" class="P_tb_10"></P>
+        <div class="btu_zl">
+            <div class="but_man btu_m5  pos"><a id="userInfo"><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span><span class="icon_zl">他的资料</span></a></div>
+        </div>
+
+        <span class="mood_triangle"></span><span class="mood_absolute mood_top_left"></span><span class="mood_absolute mood_top_right"></span><span class="mood_absolute mood_bottom_left"></span><span class="mood_absolute mood_bottom_right"></span></a>
+
+
+    </div>
+
+
+
+    <!--回复-->
+    <div id="header" class="weibo beento m_t_10">
+        <P id="repNum" class=" font_20 color_4 m_10 hide">共有0个回复</P>
+
+    </div>
+
+
+
+    <!--详情-->
+    <div id="repCon" class="weibo beento P_t_10">
+
+
+    </div>
+
+   <!--分页-->
+     <div id="pageCon" class="m_auto blohi" style="display:none">
+        <div id="pageEnd" class="btu_page btu_green_s pos">
+            <a><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>末 页</a>
+        </div>
+
+        <div id="pageDown" class="btu_page btu_green_s pos">
+            <a><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+        </div>
+
+        <div id="pageUp" class="btu_page btu_gra_s pos btu_page_com">
+            <a><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>上一页</a>
+        </div>
+
+        <div id="pageHome" class="btu_page btu_gra_s pos btu_page_com">
+            <a><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span class="btu_gra_s_right"></span>首 页</a>
+        </div>
+    </div>
+
+
+    <!--发送消息-->
+    <div class="br_color3 p_10 blohi">
+
+        <!--返回游戏圈-->
+        <div class="btu_top float_l">
+            <div class="btu_fri_bg pos m_r_10"><a id="btnBack" href="">
+                <span class="btu_g_l"></span>
+                <span class="btu_g_r"></span>
+                <span class="icon_fah">返回游戏圈</span>
+            </a></div>
+        </div>
+
+        <!--发表回复-->
+        <div class="btu_top float_l">
+            <div class="btu_fri_bg pos m_r_10"><a id="btnRe">
+                <span class="btu_g_l"></span>
+                <span class="btu_g_r"></span>
+                <span class="icon_fb">发表回复</span>
+            </a></div>
+        </div>
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,323 @@
+package com.egame.app;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.Application;
+import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.egame.beans.AdPageBean;
+import com.egame.beans.GameListBean;
+import com.egame.beans.ListBeanCache;
+import com.egame.beans.PackageBeanCache;
+import com.egame.beans.SortListBeanCache;
+import com.egame.beans.TopicListBeanCache;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 类说明：
+ * 
+ * @创建时间 2011-12-14 上午09:27:36
+ * @创建人： 陆林
+ * @邮箱：15366189868@189.cn
+ */
+public class EgameApplication extends Application {
+	public final static String ALIAS_WVGA = "TP_WVGA";
+
+	/** 游戏详情中的截图 */
+	private List<BitmapDrawable> mBitmap;
+
+	/** 手机号 */
+	private String phoneNum = "00000000000";
+
+	private String UA = "MOT-XT800";
+
+	/**
+	 * 当前版本号
+	 */
+	private int versionCode = 0;
+	/**
+	 * 当前版本名称
+	 */
+	private String versionName = "";
+
+	/** 可用更新的版本号 */
+	private int UPDATE_VERSION;
+
+	/** 游戏推荐缓存 */
+	private ListBeanCache<GameListBean> gameRecommendCache = new ListBeanCache<GameListBean>();
+
+	/** 游戏新品缓存 */
+	private ListBeanCache<GameListBean> gameNewCache = new ListBeanCache<GameListBean>();
+
+	/** 网游列表缓 */
+	private ListBeanCache<GameListBean> onlineGameCache = new ListBeanCache<GameListBean>();
+
+	/** 推荐广告缓存 */
+	private List<AdPageBean> adRecommondPageCache = new ArrayList<AdPageBean>();
+
+	/** 新品广告缓存 */
+	private List<AdPageBean> adNewPageCache = new ArrayList<AdPageBean>();
+
+	/** 专题缓存 */
+	private TopicListBeanCache topicPageCache = new TopicListBeanCache();
+
+	/** 分类缓存 */
+	private SortListBeanCache sortListBeanCache = new SortListBeanCache();
+
+	/** 游戏包缓存 */
+	private PackageBeanCache packageListBeanCache = new PackageBeanCache();
+
+	/** 联想词缓存 */
+	private List<String> autoText = new ArrayList<String>();
+
+	private String recoListJson = "";
+
+	public String getRecoListJson() {
+		try {
+			JSONObject obj = new JSONObject(recoListJson);
+			JSONArray array = obj.getJSONArray("gameListByHot");
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject json = array.getJSONObject(i);
+				json.remove("typeName");
+				json.remove("servicedsc");
+				json.remove("className");
+				json.remove("typeCode");
+				json.remove("packageName");
+				json.remove("osName");
+				json.remove("status");
+				json.remove("tag");
+				json.remove("userScore");
+				json.remove("serviceCode");
+				json.remove("score");
+				json.remove("money");
+				json.remove("payName");
+				json.remove("payCode");
+				json.remove("isPackageFlag");
+				json.remove("modifyDate");
+				json.remove("cpId");
+				json.remove("cpcode");
+				json.remove("counts");
+				json.remove("classCode");
+				json.remove("feelCode");
+				json.remove("feelName");
+				json.remove("osCode");
+				json.remove("cpname");
+				json.remove("channelcode");
+				json.remove("entityId");
+				json.remove("commentTimes");
+				json.remove("fileSize");
+				json.remove("deployTime");
+				json.remove("wapUrl");
+				json.remove("manuFactureId");
+				json.remove("modelId");
+				json.remove("sharedTimes");
+				json.remove("hotFlag");
+				json.remove("isFavorite");
+				json.remove("packageVersionCode");
+				json.remove("packageVersionName");
+			}
+			return obj.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return "";
+		}
+
+	}
+
+	public void setRecoListJson(String recoListJson) {
+		this.recoListJson = recoListJson;
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		NetStat.prepare(this);
+	}
+
+	public List<BitmapDrawable> getBitmap() {
+		return mBitmap;
+	}
+
+	public void setBitmap(List<BitmapDrawable> list) {
+		this.mBitmap = list;
+	}
+
+	public ListBeanCache<GameListBean> getGameRecommendCache() {
+		return gameRecommendCache;
+	}
+
+	public void setGameRecommendCache(
+			ListBeanCache<GameListBean> gameRecommendCache) {
+		this.gameRecommendCache = gameRecommendCache;
+	}
+
+	public ListBeanCache<GameListBean> getGameNewCache() {
+		return gameNewCache;
+	}
+
+	public void setGameNewCache(ListBeanCache<GameListBean> gameNewCache) {
+		this.gameNewCache = gameNewCache;
+	}
+
+	public List<AdPageBean> getAdRecommondPageCache() {
+		return adRecommondPageCache;
+	}
+
+	public void setAdRecommondPageCache(List<AdPageBean> adRecommondPageCache) {
+		this.adRecommondPageCache = adRecommondPageCache;
+	}
+
+	public List<AdPageBean> getAdNewPageCache() {
+		return adNewPageCache;
+	}
+
+	public void setAdNewPageCache(List<AdPageBean> adNewPageCache) {
+		this.adNewPageCache = adNewPageCache;
+	}
+
+	public TopicListBeanCache getTopicPageCache() {
+		return topicPageCache;
+	}
+
+	public ListBeanCache<GameListBean> getOnlineGameCache() {
+		return onlineGameCache;
+	}
+
+	public void setOnlineGameCache(ListBeanCache<GameListBean> onlineGameCache) {
+		this.onlineGameCache = onlineGameCache;
+	}
+
+	public void setTopicPageCache(TopicListBeanCache topicPageCache) {
+		this.topicPageCache = topicPageCache;
+	}
+
+	public SortListBeanCache getSortListBeanCache() {
+		return sortListBeanCache;
+	}
+
+	public void setSortListBeanCache(SortListBeanCache sortListBeanCache) {
+		this.sortListBeanCache = sortListBeanCache;
+	}
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		if (!TextUtils.isEmpty(phoneNum)) {
+			this.phoneNum = phoneNum;
+		}
+	}
+
+	/**
+	 * @return 返回 packageListBeanCache
+	 */
+	public PackageBeanCache getPackageListBeanCache() {
+		return packageListBeanCache;
+	}
+
+	/**
+	 * @param 对packageListBeanCache进行赋值
+	 */
+	public void setPackageListBeanCache(PackageBeanCache packageListBeanCache) {
+		this.packageListBeanCache = packageListBeanCache;
+	}
+
+	/**
+	 * @return 返回 uA
+	 */
+	public String getUA() {
+		return UA;
+	}
+
+	/**
+	 * @param 对uA进行赋值
+	 */
+	public void setUA(String uA) {
+		this.UA = uA;
+	}
+
+	public void initCache() {
+		gameRecommendCache = new ListBeanCache<GameListBean>();
+		gameNewCache = new ListBeanCache<GameListBean>();
+		adRecommondPageCache = new ArrayList<AdPageBean>();
+		adNewPageCache = new ArrayList<AdPageBean>();
+		topicPageCache = new TopicListBeanCache();
+		sortListBeanCache = new SortListBeanCache();
+		packageListBeanCache = new PackageBeanCache();
+	}
+
+	/**
+	 * @return 返回 versionCode
+	 */
+	public int getVersionCode() {
+		return versionCode;
+	}
+
+	/**
+	 * @param 对versionCode进行赋值
+	 */
+	public void setVersionCode(int versionCode) {
+		this.versionCode = versionCode;
+	}
+
+	/**
+	 * @return 返回 versionName
+	 */
+	public String getVersionName() {
+		return versionName;
+	}
+
+	/**
+	 * @param 对versionName进行赋值
+	 */
+	public void setVersionName(String versionName) {
+		this.versionName = versionName;
+	}
+
+	/**
+	 * @return 返回 uPDATE_VERSION
+	 */
+	public int getUPDATE_VERSION() {
+		return UPDATE_VERSION;
+	}
+
+	/**
+	 * @param 对uPDATE_VERSION进行赋值
+	 */
+	public void setUPDATE_VERSION(int uPDATE_VERSION) {
+		UPDATE_VERSION = uPDATE_VERSION;
+	}
+
+	public List<String> getAutoText() {
+		return autoText;
+	}
+
+	public void setAutoText(List<String> autoText) {
+		this.autoText = autoText;
+	}
+
+	public static EgameApplication app = null;
+	public ArrayList<Activity> activitylist = new ArrayList<Activity>();
+
+	public static EgameApplication Instance() {
+		if (app == null) {
+			app = new EgameApplication();
+		}
+		return app;
+	}
+
+	public void addActivity(Activity a) {
+		if (!activitylist.contains(a)) {
+			activitylist.add(a);
+		}
+	}
+}

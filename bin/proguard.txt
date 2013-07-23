@@ -1,0 +1,185 @@
+# view AndroidManifest.xml #generated:30
+-keep class com.egame.app.EgameApplication { <init>(...); }
+
+# view AndroidManifest.xml #generated:36
+-keep class com.egame.app.FlashScreenActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:370
+-keep class com.egame.app.receivers.CollectedGamesReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:380
+-keep class com.egame.app.services.BackRunService { <init>(...); }
+
+# view AndroidManifest.xml #generated:383
+-keep class com.egame.app.services.DownloadService { <init>(...); }
+
+# view AndroidManifest.xml #generated:388
+-keep class com.egame.app.services.UpdateService { <init>(...); }
+
+# view AndroidManifest.xml #generated:196
+-keep class com.egame.app.uis.AboutActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:134
+-keep class com.egame.app.uis.AlertActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:301
+-keep class com.egame.app.uis.BaseInfoRegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class com.egame.app.uis.EgameHomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:268
+-keep class com.egame.app.uis.EgameWebActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:180
+-keep class com.egame.app.uis.EnlargeImageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:345
+-keep class com.egame.app.uis.FindPassWordActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:306
+-keep class com.egame.app.uis.FinishRegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.egame.app.uis.GameActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:186
+-keep class com.egame.app.uis.GameCommentActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:108
+-keep class com.egame.app.uis.GameDownloadEdActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:126
+-keep class com.egame.app.uis.GameDownloadMissionActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:114
+-keep class com.egame.app.uis.GameDownloadUpdateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:94
+-keep class com.egame.app.uis.GameHomeActivityGroup { <init>(...); }
+
+# view AndroidManifest.xml #generated:332
+-keep class com.egame.app.uis.GameOnlineActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:169
+-keep class com.egame.app.uis.GamePackageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:175
+-keep class com.egame.app.uis.GamePackageDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:280
+-keep class com.egame.app.uis.GamePackageSortActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:157
+-keep class com.egame.app.uis.GameRankActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:139
+-keep class com.egame.app.uis.GameRecommendActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class com.egame.app.uis.GameSortActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:163
+-keep class com.egame.app.uis.GameSortDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:145
+-keep class com.egame.app.uis.GameTopicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:151
+-keep class com.egame.app.uis.GameTopicDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:120
+-keep class com.egame.app.uis.GameUpdateAbleActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.egame.app.uis.GamesDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:191
+-keep class com.egame.app.uis.HelpCenterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:224
+-keep class com.egame.app.uis.HideSettingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:285
+-keep class com.egame.app.uis.ImageViewActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:275
+-keep class com.egame.app.uis.InputPopupActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:82
+-keep class com.egame.app.uis.ManagerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:102
+-keep class com.egame.app.uis.ManagerActivityGroup { <init>(...); }
+
+# view AndroidManifest.xml #generated:87
+-keep class com.egame.app.uis.MoreActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:202
+-keep class com.egame.app.uis.MyReplyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:291
+-keep class com.egame.app.uis.NoviceAssignmentUIActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:311
+-keep class com.egame.app.uis.NoviceFindFriendActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:322
+-keep class com.egame.app.uis.NoviceFinishActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:327
+-keep class com.egame.app.uis.NoviceGrendActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:296
+-keep class com.egame.app.uis.NovicePrimaryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:316
+-keep class com.egame.app.uis.NoviceUpPhotoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:235
+-keep class com.egame.app.uis.ProductLitActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:207
+-keep class com.egame.app.uis.RecomFriendActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:212
+-keep class com.egame.app.uis.RecomPlatFormActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:229
+-keep class com.egame.app.uis.RecommContactsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.egame.app.uis.SearchActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:218
+-keep class com.egame.app.uis.SystemSettingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:252
+-keep class com.egame.app.uis.TencentShareActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:246
+-keep class com.egame.app.uis.TestDownloadCursorAdapterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:241
+-keep class com.egame.app.uis.UpdateSoftWareActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:338
+-keep class com.egame.app.uis.UserLoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:47
+-keep class com.egame.app.uis.WelcomeActivity { <init>(...); }
+
+# view res/layout/egame_game_detial_head.xml #generated:24
+-keep class com.egame.app.widgets.AlwaysMarqueeTextView { <init>(...); }
+
+# view res/layout/egame_game_rank.xml #generated:37
+# view res/layout/egame_novice_findfriend.xml #generated:83
+# view res/layout/egame_share_friend_layot.xml #generated:123
+-keep class com.egame.app.widgets.MyListView { <init>(...); }
+
+# view res/layout/egame_game_comment.xml #generated:78
+-keep class com.egame.app.widgets.NoScrollListView { <init>(...); }
+
+# view res/layout/egame_search.xml #generated:123
+-keep class com.egame.app.widgets.SearchHotView { <init>(...); }
+

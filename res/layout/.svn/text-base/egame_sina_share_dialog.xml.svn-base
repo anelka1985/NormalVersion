@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="260dip"
+  android:layout_height="wrap_content">
+   <TextView android:layout_width="fill_parent" 
+   android:layout_height="wrap_content"
+   android:text="请编辑您的微博："
+   android:gravity="left"
+    android:textSize="16dip"
+   android:layout_margin="5dip"/>
+   <EditText android:id="@+id/share_my_say"
+   android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:textSize="16dip"
+   android:layout_margin="5dip"></EditText>
+  <RelativeLayout android:layout_width="fill_parent"
+   android:layout_height="wrap_content">
+      <Button android:id="@+id/send_button" 
+      android:layout_width="150dip"
+      android:layout_height="wrap_content"
+      android:text="分享" 
+      android:layout_alignParentLeft="true"></Button>
+       <Button android:id="@+id/cancel_button"
+       android:layout_toRightOf="@id/send_button" 
+      android:layout_width="150dip"
+      android:layout_alignParentRight="true"
+      android:layout_height="wrap_content"
+      android:text="取消"></Button>
+   </RelativeLayout>
+</LinearLayout>

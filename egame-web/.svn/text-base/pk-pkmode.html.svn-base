@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--PK模式</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/wqz-globalObject.js" language="javascript" type="text/javascript"></script>
+<script src="js/pk-pkmode.js" language="javascript" type="text/javascript"></script>
+</head>
+
+
+<body>
+	
+
+	<!--您的得分-->
+	<div class="pri_setting" onclick="">
+    	<span class="probdnu_absolute probdnu_top_left"></span><span class="probdnu_absolute probdnu_top_right"></span><span class="probdnu_absolute probdnu_bottom_left"></span><span class="probdnu_absolute probdnu_bottom_right"></span>      
+    	
+        <p class="P_lrt_10">您选择了PK模式</p>
+        <div class="line_2"></div>
+         
+        <div class="p_10">       
+			<p class="icon_narrow_r blohi">发挥您的最佳水平完成游戏</p>
+            <p class="icon_narrow_r blohi">自信的输入您的押注奖金数额</p>
+            <p class="icon_narrow_r blohi">邀请好友切磋或对所有玩家发起挑战</p>
+            <p class="icon_narrow_r blohi">玩会儿游戏耐心的等待挑战结果</p>
+        </div>
+
+            
+    </div>   
+     
+   <!--立即开始-->
+    <div class="btu_pkbegin pos"><a id="startModeId">
+        <span class="btu_g_l"></span>
+        <span class="btu_g_r"></span>
+        立即开始
+    </a></div>
+    
+    <!--我再想想-->
+    <div class="btu_ps pos m_tb_10"><a id="backHomeId">
+        <span class="btu_gr_l"></span>
+        <span class="btu_gr_r"></span>
+        我再想想
+    </a></div>
+    
+
+</body>
+</html>
+

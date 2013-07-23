@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:background="@drawable/egame_contacts_items" >
+
+    <!-- 顶部布局 -->
+
+    <RelativeLayout
+        android:id="@+id/m_lative_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top" >
+
+        <TextView
+            android:id="@+id/m_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" >
+        </TextView>
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingTop="6dp"
+            android:text="通讯录" >
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/m_linear"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_lative_top" >
+
+        <TextView
+            android:id="@+id/topline"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/egame_top_line" >
+        </TextView>
+    </RelativeLayout>
+    <!-- 底部布局 -->
+
+    <RelativeLayout
+        android:id="@+id/contact_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/egame_contacts_bottomblack" >
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="注：发送邀请会收取短信费（由运营商收取）"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+        <RelativeLayout
+            android:id="@+id/m_share"
+            android:layout_below="@id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/egame_btn_contacts_selector" 
+            android:layout_marginTop="3dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width=" 13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/egame_share_contacticon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="分 享"
+                    android:textColor="#BA8C33"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- 联系人列表 -->
+
+    <ListView
+        android:id="@+id/m_contacts_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/contact_bottom"
+        android:layout_below="@id/m_linear"
+        android:cacheColorHint="#00000000"
+        android:divider="@null" >
+    </ListView>
+
+</RelativeLayout>

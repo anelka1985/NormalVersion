@@ -1,0 +1,177 @@
+package com.egame.app.uis;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.egame.R;
+import com.egame.app.EgameApplication;
+import com.egame.app.adapters.GamePackageAdapter;
+import com.egame.app.tasks.GetListIconAsyncTask;
+import com.egame.beans.GameInPackageBean;
+import com.egame.beans.GamePackageBean;
+import com.egame.utils.ui.BaseActivity;
+import com.egame.utils.ui.Loading;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * @desc 游戏包页面
+ * 
+ * @Copyright lenovo
+ * 
+ * @Project EGame4th
+ * 
+ * @Author zhangrh@lenovo-cw.com
+ * 
+ * @timer 2011-12-27
+ * 
+ * @Version 1.0.0
+ * 
+ * @JDK version used 6.0
+ * 
+ * @Modification history none
+ * 
+ * @Modified by none
+ */
+public class GamePackageActivity extends Activity implements BaseActivity,
+		OnItemClickListener {
+	private EgameApplication application;
+	private ListView lvGamePackage;
+	private List<GamePackageBean> list = new ArrayList<GamePackageBean>();
+	private GamePackageAdapter adapter;
+	private Loading loading;
+	private List<GetListIconAsyncTask<GameInPackageBean>> taskList = new ArrayList<GetListIconAsyncTask<GameInPackageBean>>();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		application = (EgameApplication) getApplication();
+		setContentView(R.layout.egame_gamepackage);
+		initView();
+		adapter = new GamePackageAdapter(GamePackageActivity.this, list);
+		lvGamePackage.setAdapter(adapter);
+		initData();
+		initViewData();
+		initEvent();
+		EgameApplication.Instance().addActivity(this);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("GamePackageActivity");
+	}
+
+	@Override
+	protected void onDestroy() {
+		for (int i = 0; i < taskList.size(); i++) {
+			if (taskList.get(i) != null) {
+				taskList.get(i).stop();
+			}
+		}
+		List<GamePackageBean> cacheList = application.getPackageListBeanCache()
+				.getList();
+		cacheList.clear();
+		cacheList.addAll(list);
+		application.getPackageListBeanCache().releaseIcon();
+		super.onDestroy();
+	}
+
+	public void initData() {
+		loading.setVisibility(View.VISIBLE);
+		if (application.getPackageListBeanCache().isFinish()) {
+			if (application.getPackageListBeanCache().getList().size() > 0) {
+				list.addAll(application.getPackageListBeanCache().getList());
+				adapter.notifyDataSetChanged();
+				lvGamePackage.setVisibility(View.VISIBLE);
+				loading.setVisibility(View.GONE);
+			}
+			for (int i = 0; i < list.size(); i++) {
+				taskList.add(new GetListIconAsyncTask<GameInPackageBean>(list
+						.get(i).getList(), adapter));
+				taskList.get(i).execute("");
+			}
+
+		} else {
+//			new GamePackageTask(GamePackageActivity.this, list,
+//					application.getPhoneNum(), LoginDataStoreUtil.fetchUser(
+//							GamePackageActivity.this,
+//							LoginDataStoreUtil.LOG_FILE_NAME).getUserId(),
+//					application.getUA()).execute();
+		}
+	}
+
+	public void initView() {
+		lvGamePackage = (ListView) findViewById(R.id.gamepackagelist);
+		loading = new Loading(GamePackageActivity.this);
+	}
+
+	public void initViewData() {
+
+	}
+
+	public void initEvent() {
+		lvGamePackage.setOnItemClickListener(this);
+		loading.setOnReloadClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loading.showLoading();
+//				new GamePackageTask(GamePackageActivity.this, list, application
+//						.getPhoneNum(), LoginDataStoreUtil.fetchUser(
+//						GamePackageActivity.this,
+//						LoginDataStoreUtil.LOG_FILE_NAME).getUserId(),
+//						application.getUA()).execute();
+			}
+		});
+	}
+
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		Intent intent = new Intent(GamePackageActivity.this,
+				GamePackageDetailActivity.class);
+		intent.putExtras(GamePackageDetailActivity.makeIntentData(list
+				.get(arg2).getPackageId()));
+		startActivity(intent);
+	}
+
+	/**
+	 * 处理游戏包页面基本数据读取结果
+	 * 
+	 * @param dataCode
+	 *            1:读取成功且 0:读取异常
+	 */
+	public void dataCodeProcess(String dataCode) {
+		if (dataCode.equals("0")) {
+			loading.showReload();
+		} else if (dataCode.equals("1")) {
+			application.getPackageListBeanCache().setFinish(true);
+			adapter.notifyDataSetChanged();
+			lvGamePackage.setVisibility(View.VISIBLE);
+			loading.setVisibility(View.GONE);
+			for (int i = 0; i < list.size(); i++) {
+				taskList.add(new GetListIconAsyncTask<GameInPackageBean>(list
+						.get(i).getList(), adapter));
+				taskList.get(i).execute("");
+			}
+		}
+	}
+}

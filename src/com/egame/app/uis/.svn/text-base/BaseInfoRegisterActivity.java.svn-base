@@ -1,0 +1,353 @@
+package com.egame.app.uis;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.egame.R;
+import com.egame.app.tasks.GetVerificateAsyncTask;
+import com.egame.app.tasks.UserRegisterAsyncTask;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.sys.DialogStyle;
+import com.egame.utils.ui.ContactsUtils;
+import com.egame.utils.ui.MyTextWatcher;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 描述：填写基本信息界面类
+ * 
+ * @author LiuHan
+ * @version 1.0 create on:Thursday,February 09,2012
+ */
+public class BaseInfoRegisterActivity extends Activity implements OnClickListener {
+
+	public final static String MSG_CONTENT_STR = "com.egame.app.receivers.GetMsgContextReceiver";
+	public static BaseInfoRegisterActivity instance;
+	/** 触发返回事件的UI控件 */
+	private TextView mRegistBack, mTextMade, mTextMen;
+	/** 发送验证码UI控件 */
+	private Button mSendVerificate;
+	/** 手机号码输入UI控件 */
+	private EditText mPhoneNum;
+
+	/** 完成注册UI 控件 */
+	private Button mFinishRegister;
+	/** 验证码输入UI控件 */
+	private EditText mInputVerificate;
+
+	/** 女性頭像显示UI控件 */
+	private ImageView mViewMade, mPointMade;
+	/** 男性头像显示UI 控件 */
+	private ImageView mViewMen, mPointMen;
+	/** 性别选择计数器 */
+	private int mGrendCount = -1;
+	private UpdateHandler myHandler;
+	private Thread threads;
+	private int timer = 60000;
+	/** 验证码输入正确提示 */
+	private TextView mVerificatePrompt;
+	/** 热线电话 */
+	private TextView tvHotLine;
+	int mCount = 0;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.egame_register_home);
+		instance = this;
+		// 取得UI 控件的引用
+		initControlUI();
+		// 注册接受短信内容的广播
+		registerBoradcastReceiver();
+	}
+
+	/**
+	 * 初始化 发送验证码 和 完成注册的按钮的显示状态
+	 */
+	private void initButtonStatus() {
+		// 发送验证码
+		if ("".equals(mPhoneNum.getText().toString())) {
+			mSendVerificate.setEnabled(false);
+			mSendVerificate.setTextColor(Color.WHITE);
+			mSendVerificate.setBackgroundResource(R.drawable.egame_update_forbid_bg);
+		}
+		// 完成注册
+		if ("".equals(mInputVerificate.getText().toString())) {
+			mFinishRegister.setEnabled(false);
+			mFinishRegister.setTextColor(Color.WHITE);
+			mFinishRegister.setBackgroundResource(R.drawable.egame_update_forbid_bg);
+
+		}
+		//
+		mFinishRegister.setVisibility(View.GONE);
+		mInputVerificate.setVisibility(View.GONE);
+	}
+
+	/**
+	 * 相关按钮的事件处理函数
+	 */
+	@Override
+	public void onClick(View v) {
+		if (v == mRegistBack) {
+			// 返回按钮
+			BaseInfoRegisterActivity.this.finish();
+		} else if (v == mSendVerificate) {
+			sendVerificater();
+		} else if (v == mFinishRegister) {
+			finishRegister();
+		} else if (v == mViewMade || v == mTextMade || v == mPointMade) {
+			mGrendCount = 2;
+			// 改变用户性别的选择
+			mViewMade.setBackgroundResource(R.drawable.egame_people_woman_on);
+			mPointMade.setBackgroundResource(R.drawable.egame_radiobutton_select);
+			mViewMen.setBackgroundResource(R.drawable.egame_people_man_off);
+			mPointMen.setBackgroundResource(R.drawable.egame_radiobutton_unselect);
+		} else if (v == mViewMen || v == mTextMen || v == mPointMen) {
+			mGrendCount = 1;
+			mViewMade.setBackgroundResource(R.drawable.egame_people_woman_off);
+			mPointMade.setBackgroundResource(R.drawable.egame_radiobutton_unselect);
+			mViewMen.setBackgroundResource(R.drawable.egame_people_man_on);
+			mPointMen.setBackgroundResource(R.drawable.egame_radiobutton_select);
+		} else if (v == tvHotLine) {
+			DialogInterface.OnClickListener comfirmL = new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent dialIntent = new Intent(Intent.ACTION_CALL,
+							Uri.parse("tel:" + "4008289289"));
+					startActivity(dialIntent);
+				}
+			};
+			DialogStyle ds = new DialogStyle();
+			AlertDialog.Builder builder = ds.getBuilder(BaseInfoRegisterActivity.this,
+					"确定", "取消", comfirmL, null);
+			builder.setMessage("拨打技术支持热线？");
+			builder.create().show();
+		}
+	}
+
+	/**
+	 * 完成注册
+	 */
+	private void finishRegister() {
+		if (-1 == mGrendCount) {
+			Toast.makeText(BaseInfoRegisterActivity.this, "请选择您的性别哦", Toast.LENGTH_SHORT).show();
+		} else {
+			if (isVerificater()) {
+				// 验证码输入正确 启动注册异步任务
+				new UserRegisterAsyncTask(BaseInfoRegisterActivity.this, mPhoneNum.getText().toString(), mGrendCount).execute("");
+			} else {
+				mVerificatePrompt.setText("验证码输入错误，请重新输入");
+				mInputVerificate.setText("");
+				mVerificatePrompt.setVisibility(View.VISIBLE);
+			}
+		}
+	}
+
+	/**
+	 * 发送验证码的事件处理
+	 */
+	private void sendVerificater() {
+		String phone = mPhoneNum.getText().toString();
+		if (mCount >= 5) {
+			Toast.makeText(BaseInfoRegisterActivity.this, "对不起，您发送次数过多，请稍后重试", Toast.LENGTH_SHORT).show();
+		} else {
+			// 对手机号码进行合法性检查
+			if (ContactsUtils.checkPhoneNum(phone)) {
+				int curTime = (int) System.currentTimeMillis();
+				int storeTime = PreferenceUtil.fetchVerificateFailTime(BaseInfoRegisterActivity.this, phone);
+				// 查看当前是不是可可以获取
+				if (-1 == storeTime || 60000 - (curTime - storeTime) < 1000) {
+					PreferenceUtil.storeGetVerificateFail(BaseInfoRegisterActivity.this, phone, (int) System.currentTimeMillis());
+					// 启动发送验证码的异步任务
+					new GetVerificateAsyncTask(BaseInfoRegisterActivity.this, phone).execute("");
+					timer = 60000;
+					myHandler = new UpdateHandler();
+					UpdateThread m = new UpdateThread();
+					threads = new Thread(m);
+					threads.start();
+					mCount++;
+				} else {
+					Toast.makeText(BaseInfoRegisterActivity.this, "再过" + (60000 - (curTime - storeTime)) / 1000 + "秒才可再次发送", Toast.LENGTH_SHORT)
+							.show();
+				}
+			} else {
+				Toast.makeText(BaseInfoRegisterActivity.this, R.string.egame_phone_wrong, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	public void showControlUI() {
+		mInputVerificate.setVisibility(View.VISIBLE);
+		mFinishRegister.setVisibility(View.VISIBLE);
+	}
+
+	public void clearUserInput() {
+		mPhoneNum.setText("");
+	}
+
+	/**
+	 * 判断验证码的正确性
+	 * 
+	 * @return
+	 */
+	public boolean isVerificater() {
+		if (mInputVerificate.getText().toString()
+				.equals(PreferenceUtil.fetchPhonevalidate(BaseInfoRegisterActivity.this, mPhoneNum.getText().toString()))) {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	class UpdateThread implements Runnable {
+		public void run() {
+			while (timer > 0) {
+				timer = timer - 1000;
+				Message msg = new Message();
+				msg.what = timer;
+				myHandler.sendMessage(msg);
+				try {
+					Thread.sleep(1000);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+	}
+
+	class UpdateHandler extends Handler {
+		public UpdateHandler() {
+
+		}
+
+		public UpdateHandler(Looper L) {
+			super(L);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (msg.what >= 1000) {
+
+				mSendVerificate.setEnabled(false);
+				mSendVerificate.setTextColor(Color.WHITE);
+				mSendVerificate.setBackgroundResource(R.drawable.egame_update_forbid_bg);
+				mSendVerificate.setText(msg.what / 1000 + "秒后可再次发送");
+			} else {
+				if (mPhoneNum.getText().length() == 11) {
+					mSendVerificate.setEnabled(true);
+					mSendVerificate.setTextColor(getResources().getColor(R.color.egame_register_color));
+					mSendVerificate.setBackgroundResource(R.drawable.egame_btn_green_circularity_selector);
+				} else {
+					mSendVerificate.setEnabled(false);
+					mSendVerificate.setTextColor(Color.WHITE);
+					mSendVerificate.setBackgroundResource(R.drawable.egame_update_forbid_bg);
+				}
+				mSendVerificate.setText("免费发送验证码");
+			}
+		}
+	}
+
+	/**
+	 * 自定义广播处理类
+	 */
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(MSG_CONTENT_STR)) {
+				// 填充验证码
+				mInputVerificate.setText(intent.getStringExtra("verificater"));
+				Toast.makeText(BaseInfoRegisterActivity.this, "验证码自动获取成功", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	};
+
+	/**
+	 * 注册广播
+	 */
+	public void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(MSG_CONTENT_STR);
+		// 注册广播
+		registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		this.unregisterReceiver(mBroadcastReceiver);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("BaseInfoRegisterActivity");
+	}
+
+	/**
+	 * 取得相关UI 控件的引用
+	 */
+	private void initControlUI() {
+		mRegistBack = (TextView) this.findViewById(R.id.m_register_back);
+		mRegistBack.setOnClickListener(this);
+		mViewMade = (ImageView) this.findViewById(R.id.m_icon_made);
+		mViewMade.setOnClickListener(this);
+		mPointMade = (ImageView) this.findViewById(R.id.m_point_made);
+		mPointMade.setOnClickListener(this);
+		mTextMade = (TextView) this.findViewById(R.id.m_text_made);
+		mTextMade.setOnClickListener(this);
+		mViewMen = (ImageView) this.findViewById(R.id.m_icon_man);
+		mViewMen.setOnClickListener(this);
+		mPointMen = (ImageView) this.findViewById(R.id.m_point_men);
+		mPointMen.setOnClickListener(this);
+		mTextMen = (TextView) this.findViewById(R.id.m_text_men);
+		mTextMen.setOnClickListener(this);
+		mPhoneNum = (EditText) this.findViewById(R.id.m_phone_num);
+		mSendVerificate = (Button) this.findViewById(R.id.m_send_verificate);
+		mPhoneNum.addTextChangedListener(new MyTextWatcher(BaseInfoRegisterActivity.this, 11, mPhoneNum, mSendVerificate, null, "register"));
+		tvHotLine = (TextView) findViewById(R.id.hotLine);
+		tvHotLine.setOnClickListener(this);
+		tvHotLine.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+		mSendVerificate.setOnClickListener(this);
+		mFinishRegister = (Button) this.findViewById(R.id.m_finish_register);
+		mFinishRegister.setOnClickListener(this);
+		mFinishRegister.setVisibility(View.GONE);
+		mInputVerificate = (EditText) this.findViewById(R.id.m_input_verificate);
+		mVerificatePrompt = (TextView) this.findViewById(R.id.m_verificate_prompt);
+		mInputVerificate.addTextChangedListener(new MyTextWatcher(this, 6, mInputVerificate, mFinishRegister, mVerificatePrompt, "register"));
+
+		// 初始化 发送验证码 和 完成注册 的按钮显示状态
+		initButtonStatus();
+
+	}
+}

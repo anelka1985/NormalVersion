@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--广场</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/guangchang-index.js" type="text/javascript"></script>
+</head>
+
+
+<body id="body">
+
+<!--title-->
+<div class="square_tit">
+    <ul>
+        <li class="title_pk_select square_tit_w1"><a id="guangchang_index" href=""><span class="head_mask_pknarrow"></span>广场</a></li>
+        <li class="title_pk_nor square_tit_w1"><a id="friend_index" href="">好友动态</a></li>
+        <li class="title_pk_nor square_tit_w2"><a id="activity_index" href="">活动</a></li>
+    </ul>
+</div>
+    
+<!--最新动态-->
+<div id="ad" class="square_ad pos" style="display:none;">
+    <img id="adImg" src="images/square_ad_preload.png" alt="activity" width="441" height="85" />
+    <span class="square_ad_close"><a onclick="closeAd()"></a></span>
+</div>
+<div id="ad_shadow" class="square_ad_shadow" style="display:none;"></div>
+
+<!--最新动态-->
+<div class="header">
+    <h2 class="color_2">最新动态</h2>
+</div>
+<!--微博-->
+<div id="dynamic_list" class="weibo">
+</div>
+
+<!--分页-->
+  <div class="m_auto p_b_20 blohi" id="button">  
+            <div class="btu_page btu_green_s pos">
+                <a id="pageEnd" href=""><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>末 页</a>
+            </div>
+            
+            <div class="btu_page btu_green_s pos">
+                <a id="pageDown" href=""><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>下一页</a>
+            </div>
+            
+            <div class="btu_page btu_green_s pos">
+                <a id="pageUp" href=""><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>上一页</a>
+            </div>
+            
+            <div class="btu_page btu_green_s pos">
+                <a id="pageHome" href=""><span class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span class="btu_green_s_right"></span>首 页</a>
+            </div>
+        </div>
+</body>
+</html>
+

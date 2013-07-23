@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg"
+    android:orientation="vertical" >
+
+    <!-- title bar on the top -->
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top_title" />
+
+    <!-- a LinearLayout contains 5 buttons and a mask on them -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- contains 5 buttons -->
+        <!-- named tab1 to tab5 from left to right -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tab1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:text="@string/egame_game_tuijian"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:text="@string/egame_game_xinpin"
+                android:singleLine="true"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/egame_game_zhuanti"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/egame_game_fenlei"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/egame_game_youxibao"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- the mask -->
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top_line" />
+    </RelativeLayout>
+
+    <!-- the main layout to set each layout -->
+
+</LinearLayout>

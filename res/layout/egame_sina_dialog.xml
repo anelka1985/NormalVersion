@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dip"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:gravity="left"
+        android:text="请输入您要绑定的新浪微博账号:"
+        android:textColor="#ffffff"
+        android:textSize="16dip" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip" >
+
+        <LinearLayout
+            android:id="@+id/user_tabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingTop="6dip"
+                android:text="账 号："
+                android:textColor="#ffffff"
+                android:textSize="18dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:gravity="left"
+                android:paddingTop="5dip"
+                android:text="密 码："
+                android:textColor="#ffffff"
+                android:textSize="18dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/user_tabel"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/sina_account"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:hint="请输入账号"
+                android:textSize="18dip" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/sina_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:hint="请输入密码"
+                android:password="true"
+                android:textSize="18dip" >
+            </EditText>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/request_bind"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="确定" >
+        </Button>
+
+        <Button
+            android:id="@+id/cancel_request"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/request_bind"
+            android:text="取消" >
+        </Button>
+    </RelativeLayout>
+
+</LinearLayout>

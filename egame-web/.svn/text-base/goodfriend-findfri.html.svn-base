@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--个人中心--我的好友</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script type="text/javascript" src="js/callAndroid.js"></script> 
+<script type="text/javascript" src="js/common.js"></script> 
+<script src="js/common_html.js" type="text/javascript"></script>
+<!--页面本身的JS-->
+<script type="text/javascript" src="js/goodfriend-findfri.js"></script> 
+</head>
+
+
+<body>
+
+	<!--title-->
+    <div class="title_pk fri_pk">
+    	<ul>
+        	<li class="title_pk_nor"><a href="" id="myfriend_index">我的好友</a></li>
+            <li class="title_pk_nor"><a href="" id="possiblefriend_index">可能认识</a></li>
+            <li class="title_pk_select"><a href="" id="searchfriend_index"><span class="head_mask_pknarrow"></span>找朋友</a></li>
+            <li class="title_pk_nor"><a href="" id="invitefriend">邀请朋友</a></li>
+        </ul>
+    </div>
+    <div id="allContent">
+	 <div class="list pos P_tb_10 fri_bdnu_bg">
+        	<div class="fri_bdnu pos"><a href="#" onclick="findfir_serachbyname();" id="findfir_serachbyname" ></a></div>
+            <div class="friLeft">
+            	<div class="bdnu_nu fri_input" onclick="nickNameinput();">
+                    <span class="bdnu_nu_left"></span><span class="bdnu_nu_right"></span>
+                    <span id="nickNameinput" class="P_lr_10">按姓名关键字搜索</span>
+                </div>
+            </div>
+            
+		</div>
+         
+     
+    <!--详情-->
+    <div class="weibo beento">
+    	<div class="line_1"></div>
+        
+    	<div class="nav_title m_t_18">条件搜索</div>
+        
+		
+        <div class="list pos P_lr_10">
+            <span class="float_l font_20 m_t_11">性别：</span>
+            <span class="float_l">
+            	<form id="form1" method="post" action="#" class="m_tb_10">
+                    <div class="blohi">
+                        <input type="radio" name="no" id="no1" value="1" class="float_l" />
+                        <label for="no1">
+                        	<div class="float_l m_1_10 p_t_2"><P class="font_w font_20">男 生</P></div>
+                                
+                         </label>
+                         
+                         <input type="radio" name="no" id="no2" value="2" class="float_l" />
+                        <label for="no2">
+                        	<div class="float_l m_1_10 p_t_2"><P class="font_w font_20">女 生</P></div>
+                                
+                         </label>
+                          <input type="radio" name="no" id="no0" value="0" checked="true" class="float_l" />
+                        <label for="no0">
+                        	<div class="float_l m_1_10 p_t_2"><P class="font_w font_20">全部</P></div>
+                                
+                         </label>
+                     </div>
+                </form>
+             </span>
+        </div>
+        
+        <div class="line_1"></div>
+        <div class="list pos P_lr_10"><a href="#" class="P_tb_10 blohi">
+            <span class="float_l font_20 m_t_4">年龄：</span>
+            <span>
+            	<div class="float_l blohi">
+            	<select class="fri_sel font_w" id="serachage" name="">
+                	<option value="0">不限</option>
+                    <option value="1">16-22岁</option>
+                    <option value="2">23-30岁</option>
+                    <option value="3">31-40岁</option>
+                    <option value="4">40岁以上</option>
+                </select>
+                </div>
+             </span>
+        </a></div>
+        
+        <div class="line_1"></div>
+        <div class="list pos P_lr_10"><a href="#" class="P_tb_10 blohi">
+            <span class="float_l font_20 m_t_4">城市：</span>
+            <span>
+            	<div class="float_l blohi">
+            	<select id="province" class="fri_sel font_w" name="" onchange="provincechange();" >
+                </select> -  
+                </div>
+                <div class="float_l blohi"> -
+            	<select id="city" class="fri_sel font_w" name="">
+                </select>
+                </div>
+             </span>
+        </a></div>
+        
+        <div class="line_1"></div>
+        <div class="list pos P_lr_10"><a href="#" class="P_tb_10 blohi">
+            <span class="float_l font_20 m_t_4">爱好：</span>
+            <span>
+            	<select id="hobby" class="pro_sele font_w" name="">
+                	<option value="体育">体育</option>
+                    <option value="益智">益智</option>
+                    <option value="射击">射击</option>
+                    <option value="策略">策略</option>
+                    <option value="冒险">冒险</option>
+                    <option value="动作">动作</option>
+                    <option value="角色">角色</option>
+                    <option value="棋牌">棋牌</option>
+                    <option value="联网">联网</option>
+                    <option value="WAP">WAP</option>
+                </select>
+             </span>
+        </a></div>
+        
+        
+    </div>
+
+		<!--搜索-->
+        <div class="btu_gr pos m_tb_10"><a href="#" onclick="findfir_serach();" id="findfir_serach">
+            <span class="btu_gr_l"></span>
+            <span class="btu_gr_r"></span>
+            <img src="images/icon_search.png" width="22" height="22" class="m_t" />
+            搜 索
+        </a></div>
+</div>
+</body>
+</html>
+

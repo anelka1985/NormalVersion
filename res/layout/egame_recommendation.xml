@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/m_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_background1"
+    android:isScrollContainer="false" >
+
+    <RelativeLayout
+        android:id="@+id/m_lative_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top" >
+
+        <TextView
+            android:id="@+id/m_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" >
+        </TextView>
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/egame_tjgpy" >
+        </TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_lative_top"
+        android:background="@drawable/egame_top_line" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/m_recom_content"
+        android:layout_width="fill_parent"
+        android:layout_height="120dip"
+        android:layout_below="@id/topline"
+        android:layout_margin="10dp"
+        android:background="@drawable/egame_gray_bg"
+        android:gravity="top"
+        android:hint="@string/egame_qsrtjdnr"
+        android:maxLength="500"
+        android:minLines="8"
+        android:paddingBottom="7dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="7dp"
+        android:paddingRight="7dp"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
+        android:textColor="#000000"
+        android:textSize="16dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_recom_content"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/m_recom"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/egame_btn_feedback_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/egame_mstj"
+            android:textColor="#C39D4D"
+            android:textSize="13dp" >
+        </TextView>
+    </RelativeLayout>
+
+</RelativeLayout>

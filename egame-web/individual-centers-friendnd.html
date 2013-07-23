@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--个人中心--我的好友--删除消息</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js/callAndroid.js"></script>  
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/common_html.js"></script>
+<!--页面本身的JS-->
+<script type="text/javascript" src="js/individual-centers-friend.js"></script> 
+</head>
+
+
+<body >
+	
+	<!--title-->
+    <div class="title_pk">
+    	<ul>
+        	<li class="title_pk_select"><a href="" id="friendMessage"><span class="head_mask_pknarrow"></span>好友消息<span class="color_5" id="friend_msg"></span></a></li>
+            <li class="title_pk_nor"><a href="" id="systemMessage">系统消息<span class="color_5" id="sys_msg"></span></a></li>
+        </ul>
+    </div>
+
+
+    <div id="bodyContent">
+	<!--显示管理-->
+    <div class="header" id="manager">
+    	<input id="select_all" type="checkbox" class="float_l fri_deinput1" name="" onchange="quanxuan()"/>
+    	<h3 id="quanxuan" class="color_4 float_l">全选<span class="color_1">0</span></h3>
+    	<div class="but_man btu_green_com pos "><span class="btu_man_com2 btu_green_com2 btu_man_left"></span><span id="quxiao" class="btu_mood_right"></span><a onclick="showCount()">取 消</a></div>
+    </div>
+    <!--删除-->
+    <div id="del" class="btu_g pos"><a onclick="delMessage()">
+    	<span class="btu_g_l"></span>
+        <span class="btu_g_r"></span>
+        删 除
+    </a></div>
+    <!--显示数据-->
+    <div class="header" id="count">
+    	<h3 id="msg_count_h3" class="color_4 float_l">共有<span id="msg_count" class="color_1">0</span>位好友</h3>
+    	<div class="but_man btu_green_com pos " id="manage"><span class="btu_man_com2 btu_green_com2 btu_man_left"></span><span class="btu_mood_right"></span><a onclick="showManager()">管 理</a></div>
+    </div>
+     
+    <!--详情-->
+    <div class="weibo beento">
+    	<div class="line_1"></div>
+
+        <form id="form1" method="post" action="">
+       
+        </form>
+        
+    </div>
+</div>
+</body>
+</html>
+

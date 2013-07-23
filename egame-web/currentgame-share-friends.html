@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>爱游戏--更多玩家</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/w_480.css" rel="stylesheet" type="text/css" />
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script type="text/javascript" src="js/callAndroid.js"></script> 
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/common_html.js"></script> 
+<script type="text/javascript" src="js/currentgame-share-friends.js"></script> 
+</head>
+
+
+<body>
+	
+	<!--title-->
+    <div class="title_pk head_lis">
+    	<!--我的好友-->
+    	<ul>
+        	<li class="title_pk_nor"><a id="inviteGood" href="#">我的好友</a></li>
+            <li class="title_pk_select"><span class="head_mask_pknarrow"></span><a id="invitefriend" href="#">通讯录好友</a></li>
+        </ul>
+        
+    </div>
+
+
+	<div class="header" id="contactcount">
+    	<h3 class="color_4 float_l">共有<span id="callcount" class="color_1">0</span>位联系人</h3>
+    	<div class="but_man " id="quanxuan" onclick="quanxuan()">
+        <form id="form1" method="post" action="">
+        	<div class="blohi P_tb_10">
+                <label for="selectall" class="blohi">
+                	<div class="icon_checkbox1 float_r" id="quanxuanCheckBox"><input type="checkbox" name="no1" id="no1"  class="hide" /></div>
+                 	<div class="float_r m_r_10 color_4">全选</div> 
+                </label>
+             </div>
+        </form></div>
+        
+    </div>
+     
+    <!--详情-->
+    <div class="weibo beento">
+        <div id="phonebook" >
+      
+        </div>
+        <div id="yaoqingdiv">
+				<p class="texalce color_2 ">
+					发送邀请会收取短信费0.1元/条（运营商收取）
+				</p>
+				<!--发送邀请-->
+				<div class="btu_gr pos m_tb_10">
+					<a style="margin-top: 0px" href="#" onclick="sendInvSms();"> <span class="btu_gr_l"></span> <span class="btu_gr_r"></span> 发送邀请 </a>
+				</div>
+			</div>
+			<br />
+        
+
+</body>
+</html>
+

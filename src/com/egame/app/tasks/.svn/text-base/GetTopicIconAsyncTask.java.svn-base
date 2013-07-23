@@ -1,0 +1,76 @@
+package com.egame.app.tasks;
+
+import java.util.Iterator;
+import java.util.List;
+
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.egame.app.adapters.GameTopicListAdapter;
+import com.egame.beans.TopicBean;
+import com.egame.beans.TopicPageBean;
+import com.egame.utils.common.HttpConnect;
+
+public class GetTopicIconAsyncTask extends AsyncTask<String, Integer, String>{
+	
+	List<TopicPageBean> list;
+
+	GameTopicListAdapter adapter;
+	
+	boolean isAlive = true;
+	
+	/**
+	 * 下载List中的图片到IconBean中,并且通过adapter刷新ui
+	 */
+	public GetTopicIconAsyncTask(List<TopicPageBean> list,GameTopicListAdapter adapter){
+		this.list = list;
+		this.adapter = adapter;
+	}
+	
+	/**
+	 * 下载list中的图片到iconbean中,但是不刷新ui
+	 */
+	public GetTopicIconAsyncTask(List<TopicPageBean> list){
+		this.list = list;
+	}
+	
+	
+	@Override
+	protected String doInBackground(String... arg0) {
+		Iterator<TopicPageBean> it = list.iterator();
+		while (it.hasNext() && isAlive) {
+			try {
+				TopicPageBean bean = (TopicPageBean) it.next();
+				for(TopicBean topic : bean.getTopicList()){
+					if(!isAlive){
+						return null;
+					}
+					if (topic.getIcon() == null) {
+						BitmapDrawable drawable = HttpConnect.getHttpDrawable(topic.getIconurl());
+						topic.setIcon(drawable);
+						Log.d("icon","pic get:" + topic.getIconurl());
+						publishProgress(0);
+					}else{
+						Log.d("icon","pic exist!");
+					}
+				}
+			} catch (Exception e) {
+				Log.d("icon","no pic!");
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+		super.onProgressUpdate(values);
+		if(adapter != null){
+			adapter.notifyDataSetChanged();
+		}
+	}
+	
+	public void stop(){
+		isAlive = false;
+	}
+}

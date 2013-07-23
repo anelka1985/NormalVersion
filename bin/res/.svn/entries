@@ -1,0 +1,42 @@
+10
+
+dir
+100553
+http://192.168.50.218/repos/ttigame/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/bin/res
+http://192.168.50.218/repos/ttigame
+delete
+
+
+2012-08-10T11:10:30.078875Z
+89339
+wangchao
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d03527e3-696f-4d70-a353-8f4f07667edd
+
+drawable-hdpi
+dir
+
+
+
+delete
+
+drawable-ldpi
+dir
+
+
+
+delete
+

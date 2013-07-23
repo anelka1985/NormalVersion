@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#DFDFDF" >
+
+    <!-- 标题布局 -->
+
+    <RelativeLayout
+        android:id="@+id/m_lative_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top" >
+
+        <TextView
+            android:id="@+id/m_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" >
+        </TextView>
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="游戏详情" >
+        </TextView>
+    </RelativeLayout>
+
+    <!-- 下载布局 -->
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/egame_anniubackground" 
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/downloadnow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/egame_btn_downloadnow_selector"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/egame_xiazaiicon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/egame_downloadNow"
+                android:textColor="@color/egame_text_green"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 详情中间布局 -->
+
+    <RelativeLayout
+        android:id="@+id/egame_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/bottom"
+        android:layout_below="@id/m_lative_top">
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#EBEBEB"
+            android:cacheColorHint="#00000000"
+            android:divider="@null" >
+
+            <LinearLayout
+              	android:id="@+id/inner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <include layout="@layout/egame_game_detial_head" />
+
+                <include layout="@layout/egame_game_desc" />
+
+<!--                 <include layout="@layout/egame_game_comment" /> -->
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top_line" />
+    </RelativeLayout>
+
+</RelativeLayout>

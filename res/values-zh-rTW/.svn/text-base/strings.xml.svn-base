@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="egame_app_name">愛遊戲</string>
+    <!-- 系統設置 -->
+    <string name="egame_systemSetting">系統設置</string>
+    <string name="egame_notice">推送通知</string>
+    <string name="egame_newGame1">遊戲通知</string>
+    <string name="egame_newGame2">(新遊戲、新活動、客服回復、通知)</string>
+    <string name="egame_community1">互動消息</string>
+    <string name="egame_community2">(好友消息、好友請求、打招呼)</string>
+    <string name="egame_allow">允許</string>
+    <string name="egame_disallow">不允許</string>
+    <string name="egame_modify">確認修改</string>
+    <string name="egame_modifySuccess">修改成功</string>
+    <!-- 隱私設置 -->
+    <string name="egame_hideSetting">隱私設置</string>
+    <string name="egame_hideAndPw">隱私與密碼</string>
+    <string name="egame_myHomepage">誰能看我的首頁</string>
+    <string name="egame_sendMesageToMe">誰能給我發消息</string>
+    <string name="egame_personalInformation">個人資訊</string>
+    <string name="egame_myAge">是否顯示我的年齡</string>
+    <string name="egame_mySite">是否顯示我的所在地</string>
+    <string name="egame_show">顯示</string>
+    <string name="egame_notShow">隱藏</string>
+    <string name="egame_save">保存設置</string>
+    <string name="egame_anyOne">任何人</string>
+    <string name="egame_onlyFriend">好友</string>
+    <string name="egame_modifyPassWord">修改密碼</string>
+    <string name="egame_originalPassword">原密碼：</string>
+    <string name="egame_newPassword">新密碼：</string>
+    <string name="egame_confirmPassword">確認密碼：</string>
+    <string name="egame_passwowdDisaccord">對不起，您的新密碼兩次輸入不一致！</string>
+    <string name="egame_saveSuccess">保存設置成功！</string>
+    <string name="egame_saveFaild">修改提交錯誤，請重試！</string>
+    <string name="egame_modifyPasswordSuccess">新密碼設置成功，請記牢哦！</string>
+    <string name="egame_modifyPasswordFaild">對不起，新密碼設置失敗，請重試！</string>
+    <string name="egame_passwordRule">對不起，請設置6–25位元數位與字母組成的密碼！</string>
+    <string name="egame_originalPasswordFlag">對不起，原密碼不能為空！</string>
+    <string name="egame_waitModifyPasswd">修改密碼提交中，請稍等…</string>
+    <string name="egame_waitModifyHide">隱私設置提交中，請稍等…</string>
+
+    <!-- 搜索 -->
+    <string name="egame_searchTitle">搜索結果</string>
+    <string name="egame_searchResult">找到%s項符合的遊戲</string>
+    <string name="egame_searchResultEmptyTip">親，沒有搜索到您想要的結果</string>
+    <string name="egame_searchWait">正在搜索遊戲，請稍候</string>
+    <string name="egame_searchNoKeyTip">請輸入您要搜索的內容</string>
+    <string name="egame_searchLowKeyTip">親，沒有您要的結果，請擴大您的搜索範圍試試</string>
+    <!-- 產品清單 -->
+    <string name="egame_productList">產品清單</string>
+    <string name="egame_moreProduct">歡迎查看愛遊戲更多產品</string>
+    <string name="seeProduct">進去看看</string>
+    <!-- 遊戲排行 -->
+    <string name="egame_rank_week">周排行</string>
+    <string name="egame_rank_month">月排行</string>
+    <string name="egame_rank_total">總排行</string>
+    <string name="egame_rank_title">遊戲排行</string>
+    <!-- 遊戲管理 -->
+    <string name="egame_DownloadMission_xzwcdjjxaz">下載完成,點擊進行安裝</string>
+    <string name="egame_DownloadMission_xzzdjqx">下載中,點擊取消</string>
+    <string name="egame_DownloadMission_yczzdjcs">異常終止,點擊重試</string>
+    <string name="egame_manager_ckxq">查看詳情</string>
+    <string name="egame_manager_sj">升級</string>
+    <string name="egame_manager_ycgl">隱藏管理</string>
+    <string name="egame_manager_zsmyksjdyx">暫時沒有可升級的遊戲</string>
+    <string name="egame_manager_nodownload">您沒有正在下載的任務</string>
+    <string name="egame_manager_qbsj">全部升級%s</string>
+    <string name="egame_manager_setup">安裝</string>
+    <string name="egame_manager_installed">已安裝</string>
+    <string name="egame_manager_continue">繼續</string>
+    <string name="egame_manager_pause">下載暫停，請繼續…</string>
+    <string name="egame_manager_tautology">重試</string>
+    <string name="egame_manager_download_error">下載出錯，請重試……</string>
+    <string name="egame_manager_downloading">		下載中,
+		<xliff:g>%1$s</xliff:g></string>
+    <string name="egame_manager_updating">		升級中,
+		<xliff:g>%1$s</xliff:g></string>
+    <string name="egame_manager_installed_args">		已安裝
+<xliff:g>%1$s</xliff:g></string>
+    <string name="egame_manager_updateable_args">		可升級
+<xliff:g>%1$s</xliff:g></string>
+    <string name="egame_manager_downloadmission_args">		下載任務
+<xliff:g>%1$s</xliff:g></string>
+    <string name="egame_manager_add_download">已添加至下載佇列,請到管理頁面查看</string>
+
+    <!-- 遊戲詳情 -->
+    <string name="egame_zifei">資費:</string>
+    <string name="egame_gameDetail">遊戲詳情</string>
+    <string name="egame_score">評價：</string>
+    <string name="egame_provider">提供商：</string>
+    <string name="egame_gameSize">遊戲大小：</string>
+    <string name="egame_updatetime">更新時間：</string>
+    <string name="egame_deployeetime">上線時間：</string>
+    <string name="egame_gameType">遊戲類型：</string>
+    <string name="egame_gameTag">遊戲標籤：</string>
+    <string name="egame_gameDesc">遊戲介紹：</string>
+    <string name="egame_gamepl">遊戲評論</string>
+    <string name="egame_gamejs">遊戲介紹</string>
+    <string name="egame_share">分享</string>
+    <string name="egame_update">更新</string>
+    <string name="egame_download">下載</string>
+    <string name="egame_start">開始</string>
+    <string name="egame_collect">收藏</string>
+    <string name="egame_discollect">取消收藏</string>
+    <string name="egame_downloadNow">立即下載</string>
+    <string name="egame_moreLike">大家還喜歡</string>
+    <string name="egame_moreuser">還有誰在玩</string>
+    <string name="egame_comment">發表評論</string>
+    <string name="egame_commenter">評論人：</string>
+    <string name="egame_game_count">		(
+<xliff:g>%1$s</xliff:g>		)
+</string>
+    <string name="egame_click_run_later">請稍候再點擊運行</string>
+    <string name="egame_match_exception">網絡異常，暫時還沒有獲得該遊戲是否匹配您的機型的資訊。</string>
+    <string name="egame_game_size_error">獲取遊戲大小資料異常，無法正常啟動下載任務。</string>
+    <string name="egame_not_match">該款遊戲可能不適合您的手機,請選擇其他遊戲下載。</string>
+    <string name="egame_package_not_order">您好,還沒有訂購遊戲包,請先訂購遊戲包再運行或下載此遊戲</string>
+    <string name="egame_collect_success">收藏成功</string>
+    <string name="egame_discollect_success">取消收藏成功</string>
+    <string name="egame_collect_fail">收藏失敗</string>
+    <string name="egame_discollect_fail">取消收藏成功</string>
+    <!-- 遊戲評論 -->
+    <string name="egame_gameComment">發表評論：</string>
+    <string name="egame_comment_success">評論成功</string>
+    <string name="egame_comment_fail">評論失敗</string>
+    <string name="egame_gameCommentHuadong">滑動進行星級評價：</string>
+    <string name="egame_star1">差</string>
+    <string name="egame_star2">太一般了</string>
+    <string name="egame_star3">一般</string>
+    <string name="egame_star4">很給力</string>
+    <string name="egame_star5">非常好</string>
+    <string name="egame_request_wrong">網絡異常，請稍候重試！</string>
+    <string name="egame_input_prompt">請編輯相應的評論內容！</string>
+    <string name="egame_data_wrong">初始化資料獲取失敗，請重試！</string>
+    <string name="egame_data_success">資料提交成功</string>
+    <string name="egame_fcmy">非常滿意</string>
+    <string name="egame_my">滿意</string>
+    <string name="egame_yb">一般</string>
+    <string name="egame_bmy">不滿意</string>
+    <!-- 使用回饋 -->
+    <string name="egame_reply">使用回饋</string>
+    <string name="egame_wdfk">我的回饋</string>
+    <string name="egame_yjfk">意見回饋</string>
+    <string name="egame_your_relpy">您留下的每個字都將被用來改善我們的服務(可輸入180字)</string>
+    <string name="egame_your_contact">聯繫方式：</string>
+    <string name="egame_your_tel">請輸入聯繫方式</string>
+    <string name="egame_submission">提交回饋</string>
+    <string name="egame_replyQuestion">我要回饋問題</string>
+    <string name="egame_replystate">狀態</string>
+    <string name="egame_replyContent">回饋內容</string>
+    <string name="egame_replyWait">提交回饋中…</string>
+    <string name="egame_getReplyList">獲取回饋列表中…</string>
+    <string name="egame_loadData">數據載入中…</string>
+    <string name="egame_satisfaction">評價提交中…</string>
+    <string name="egame_kfpj">客服評價</string>
+    <string name="egame_ytj">已提交</string>
+    <string name="egame_yhf">已回復</string>
+    <!-- 更多 -->
+    <string name="egame_syfk">使用回饋</string>
+    <string name="egame_rjsj">軟體升級</string>
+    <string name="egame_cplb">產品清單</string>
+    <string name="egame_bzzx">幫助中心</string>
+    <string name="egame_tjgpy">推薦給朋友</string>
+    <string name="egame_gy">關於</string>
+    <string name="egame_ggyh">更改用戶</string>
+    <string name="egame_tc">註銷</string>
+    <!-- 軟體升級 -->
+    <string name="egame_updateSoftware">軟體升級</string>
+    <string name="egame_aboutSoftware">關於本軟體</string>
+    <string name="egame_updateWait">獲取升級資訊中…</string>
+    <string name="egame_version">本軟體已是最新版本</string>
+    <!-- 系統功能表提示文字 -->
+    <string name="egame_menu_feedback">使用回饋</string>
+    <string name="egame_menu_setting">系統設置</string>
+    <string name="egame_menu_about">關於</string>
+    <string name="egame_menu_exit">退出</string>
+    <string name="egame_menu_reload">刷新頁面</string>
+    <string name="egame_menu_search_friend">找朋友</string>
+    <string name="egame_menu_my_friend">我的好友</string>
+    <string name="egame_menu_confrim_exit">您確定要退出愛遊戲大廳嗎？</string>
+    <string name="egame_menu_yes">是</string>
+    <string name="egame_menu_no">否</string>
+    <string name="egame_menu_tip">提示</string>
+    <string name="egame_menu_qsh">請稍候</string>
+    <string name="egame_menu_qd">確定</string>
+    <string name="egame_menu_qx">取消</string>
+    <string name="egame_menu_back">返回</string>
+    <string name="egame_menu_sjdqz">數據讀取中…</string>
+    <string name="egame_menu_sjtjz">資料提交中…</string>
+    <string name="egame_update_icon">上傳圖片中,請稍候…</string>
+    <string name="egame_update_icon_error">上傳圖片失敗</string>
+    <string name="egame_update_icon_ok">上傳圖片成功</string>
+    <!-- 異常提示 -->
+    <string name="egame_net_error">網絡繁忙，請稍後再試</string>
+    <string name="egame_data_error">讀取異常,請點擊重試</string>
+    <string name="egame_error_reload">重新載入</string>
+    <string name="str_ctwapalertdialog_body">請使用中國電信CTWAP方式連接。</string>
+    <string name="egame_net_error_tip">網絡連接異常,請檢查網絡並重新登錄.</string>
+    <string name="egame_login_error">網絡連接異常,請檢查網絡並重新登錄.</string>
+    <string name="egame_get_pic_error">獲取圖片資料失敗,請檢查SD卡</string>
+    <string name="egame_camera_pic_error">拍攝照片失敗,請重新拍攝</string>
+	<string name="egame_readingValidateCode">系統正在為您自動讀取驗證碼，若失敗您可以手動填入</string>
+    <!-- 特色專題 -->
+    <string name="egame_topic_title">特色專題</string>
+    <string name="egame_topic_content_test"> 奧迪R8中國限量版在2011廣州車展全球首發，售價為262.8萬元。一汽-大眾奧迪攜全新產品奧迪A7
+		Sportback、奧迪R8中國限量版、奧迪e-tron概念車登陸第九屆中國(廣州)國際汽車展覽會，包含三款重量級新車在內的奧迪AQR三大系列、11大車系、20款車型共同構成了奧迪品牌的最新產品組合，成為廣州車展上最強勢的高檔汽車品牌陣容，再次展示了奧迪品牌強大的產品實力和“進取、尊貴、動感”的核心價值。
+
+		一汽-大眾汽車有限公司董事、總經理安鐵成先生表示：“今年，一汽-大眾奧迪強大的產品組合實現了從A0級到D級車市場的全面覆蓋，滿足從公商務用車到個性化用車的高檔車各個細分市場的需求，樹立了‘產品年’和‘紀錄年’兩個新的里程碑。今年，一汽-大眾奧迪連續7個月突破單月銷量紀錄，年銷量將超過30萬輛，為實現‘3年100萬輛’的目標打下堅實的基礎。未來，我們仍然不會停下腳步，依靠強大的產品組合和不斷加大的投入，保持中國高檔車市場毫無爭議的引領者地位，並在南方市場創造新的輝煌。”</string>
+    <!-- 流量提示 -->
+    <string name="egame_alert_content">尊敬的用戶,愛遊戲用戶端需手機接入互聯網,所產生的流量費用將根據您的套餐標準收取,詳細資費請諮詢
+		10000,您是否同意?</string>
+    <string name="egame_alert_tishi">友情提醒</string>
+    <string name="egame_alert_butishi">以後不再提示</string>
+    <string name="egame_share_content">hi，我在＂愛遊戲＂下載了超多熱門遊戲！一起來玩吧 http://game.189.cn/dl/</string>
+    <!-- 和邦定微博相關的定義 -->
+    <!-- 新浪微博 -->
+    <string name="egame_sina_bind_prompt">請輸入完整的新浪微博帳號和密碼，再請求綁定. . .</string>
+    <string name="egame_account_pass_wrong">您的新浪微博帳號或密碼有誤，請重新輸入。</string>
+    <string name="egame_the_content_repeat">內容重複啦，新浪微博不允許重複的內容發佈。</string>
+    <string name="egame_sina_bind_success">已成功登錄新浪微博。</string>
+    <string name="egame_sina_bind_failure">綁定失敗，請重新嘗試。</string>
+    <string name="egame_sina_network_wrong">網絡連接失敗，請確認網絡通暢並重試。</string>
+    <!-- 新浪 END -->
+    <!-- 人人網 -->
+    <string name="egame_renren_sdk_title_upload_label">分享到人人網</string>
+    <string name="egame_post_status_cancel">發送被取消</string>
+    <string name="egame_post_status_success">發送成功</string>
+    <string name="egame_post_status_sending">分享發送中，請稍後…</string>
+    <string name="egame_post_status_failure">發送失敗</string>
+    <!-- 騰訊 -->
+    <string name="egame_tencent_title">分享到騰訊微博</string>
+    <!-- End -->
+    <string name="egame_game_tuijian">推薦</string>
+    <string name="egame_game_xinpin">新品</string>
+    <string name="egame_game_fenlei">分類</string>
+    <string name="egame_game_zhuanti">專題</string>
+    <string name="egame_game_youxibao">網遊</string>
+    <string name="egame_game_sortyouxibao">遊戲包</string>
+    <string name="egame_addDownload_hint">正在下載遊戲…</string>
+    <string name="egame_addUpdate_hint">正在升級遊戲…</string>
+
+    <!-- 按鈕文字 -->
+    <string name="egame_novice_task">開始新手任務</string>
+    <string name="egame_user_rigester">新用戶註冊</string>
+    <string name="egame_novice_name">Simplor，歡迎來到愛遊戲社區</string>
+    <string name="egame_novice_task_one">第1步，完善資料</string>
+    <string name="egame_novice_task_two">第2步，找朋友</string>
+    <string name="egame_novice">新手任務</string>
+    <string name="egame_novices">愛好</string>
+    <string name="egame_find_friend"> 找朋友</string>
+    <string name="egame_commit"> 提交</string>
+    <string name="egame_comfrom_pictures">從相冊上傳</string>
+    <string name="egame_photos_text">拍照</string>
+    <string name="egame_nick_name">昵稱：</string>
+    <string name="egame_birthday">生日：</string>
+    <string name="egame_city">城市：</string>
+    <string name="egame_taste">愛好：</string>
+    <string name="egame_nick_name_prompt">特別一點，勝人一籌哦</string>
+    <string name="egame_game_type">一起玩</string>
+    <string name="egame_novice_next_stage">下一步</string>
+    <string name="egame_novice_icon_text">最後一步，上傳頭像</string>
+    <string name="egame_novice_icon_prompt">自信的人最有魅力，自信源於生活小事的積累，每天突破一點吧！</string>
+    <string name="egame_finish_text">完成</string>
+    <string name="egame_novice_finish_text">恭喜您順利完成了新手任務</string>
+    <string name="egame_novice_char">您一次性得到100經驗</string>
+    <string name="egame_novice_chars">您可以得到</string>
+    <string name="egame_novice_chars1">首次在愛遊戲大廳下載遊戲還可以獲得</string>
+    <string name="egame_novice_chars2">50</string>
+    <string name="egame_novice_chars3">經驗哦</string>
+    <string name="egame_go_client">去社區溜達溜達吧</string>
+    <string name="egame_addfriend_text">加好友</string>
+    <string name="egame_grend_prompt">請選擇你喜歡的遊戲類型：</string>
+    <string name="egame_grend_prompt1">你想和誰一起玩遊戲？</string>
+    <string name="egame_grend_prompt2">TA和我一樣，也喜歡</string>
+    <!-- 新用戶註冊 -->
+    <string name="egame_user_register">新用戶註冊</string>
+    <string name="egame_register_prompt">輕鬆註冊帳號與帥哥美女一起遊戲人生吧~</string>
+    <string name="egame_register_phone_prompt">手機號只用來登錄，被完全保密，請放心使用</string>
+    <string name="egame_register_verificate_btnword">免費發送驗證碼</string>
+    <string name="egame_register_verificate_prompt">請輸入您收到的驗證碼</string>
+    <string name="egame_getValidateCode">免費獲取驗證碼</string>
+    <string name="egame_register_phone_num">手機號：</string>
+    <string name="egame_text_man">男生</string>
+    <string name="egame_text_made">女生</string>
+    <string name="egame_show_text">顯示</string>
+    <string name="egame_hide_text">隱藏</string>
+    <string name="egame_welcom_register">歡迎您（123******）來到社區</string>
+    <string name="egame_pass_prompt">註冊成功後密碼將發送到您手機上，為了您帳號安全請及時修改</string>
+    <string name="egame_select_gender">Hi，親，動動您的手指，選個性別唄</string>
+    <string name="egame_sure_text">確定</string>
+    <string name="egame_upload_icon_fail">請選擇有效的頭像，請稍候重試</string>
+
+    <!-- web -->
+    <string name="egame_addFriend_success">添加好友成功</string>
+    <string name="egame_addFriend_faild">添加好友失敗</string>
+    <string name="egame_sel_gender">請選擇您的性別</string>
+
+    <!-- 新使用者註冊協定層 -->
+    <string name="egame_welcome_community">歡迎來到社區，這裡您不僅可以找到志同道合的遊戲好友，還可以看到更多的遊戲資訊～</string>
+    <string name="egame_go_community">趕緊來和愛遊戲的朋友們一起遊戲人生吧～</string>
+    <string name="egame_accept_agreement">同意註冊協議</string>
+    <string name="egame_accept_button">快速註冊</string>
+    <string name="egame_login_now">直接登錄</string>
+    <string name="egame_sure">確定</string>
+    <string name="egame_cancel">取消</string>
+    <string name="egame_prompt_show">系統幫您自動發送一條短信，方便註冊成為會員，享受更多遊戲服務，立即發送麼？</string>
+    <string name="egame_phone_wrong">對不起，您輸入的不是有效的手機號碼，請重新輸入！</string>
+    <string name="egame_progress_dialog">請稍候.......</string>
+
+    <!-- 登錄 -->
+    <string name="egame_account">帳號：</string>
+    <string name="egame_password">密碼：</string>
+    <string name="egame_show_pass">顯示密碼</string>
+    <string name="egame_new_register">新用戶註冊</string>
+    <string name="egame_find_password">找回密碼</string>
+    <string name="egame_findpass_prompt">您可通過驗證的手機號以及郵箱找回密碼</string>
+    <string name="egame_json_error">json解析異常</string>
+
+    <!-- 更改用戶 -->
+    <string name="egame_dialog_title">系統提示</string>
+    <string name="egame_dialog_prompt">想去哪逛逛，“社區“還是“使用回饋“？</string>
+    <string name="egame_dialog_community">社區</string>
+    <string name="egame_dialog_reply">使用回饋</string>
+    <string name="egame_contacts_prompt">您還沒有添加連絡人噢，趕快添加吧!</string>
+    <!-- 找回密碼 -->
+    <string name="egame_find_pass_prompt">請輸入手機號或者郵箱</string>
+    <string name="egame_find_pass_phone_prompt">請輸入有效的手機號碼</string>
+    <string name="egame_find_pass_email_prompt">請輸入有效的郵箱</string>
+
+    <!-- 新手任務 -->
+    <string name="egame_novice_nick1">請輸入昵稱</string>
+    <string name="egame_novice_nick2">請輸入2～8個漢字</string>
+    <string name="egame_birthday_error">請選擇生日</string>
+    <string name="egame_birthday_error1">您好您設置的生日無效，在1950年到2006年之間的才被接受</string>
+    <string name="egame_novice_cancel_prompt">這是新手才有的特權，確定要放棄麼?</string>
+
+</resources>

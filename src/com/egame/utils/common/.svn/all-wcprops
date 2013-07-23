@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/ttigame/!svn/ver/100551/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common
+END
+Md5PwdEncoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/Md5PwdEncoder.java
+END
+BroswerUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/BroswerUtil.java
+END
+SourceUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/SourceUtils.java
+END
+JSONParse.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/JSONParse.java
+END
+MD5.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/MD5.java
+END
+CommonUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/CommonUtil.java
+END
+HttpConnect.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/HttpConnect.java
+END
+L.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/ttigame/!svn/ver/100551/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/L.java
+END
+PreferenceUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/PreferenceUtil.java
+END
+LoginDataStoreUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/utils/common/LoginDataStoreUtil.java
+END

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/egame_contacts_items"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/m_contacts_name"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="5"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/m_contacts_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="3.8"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        
+        android:layout_marginRight="10dp"
+        android:layout_weight="7" >
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/m_contacts_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/egame_select_contactsoff" />
+    </RelativeLayout>
+
+</LinearLayout>

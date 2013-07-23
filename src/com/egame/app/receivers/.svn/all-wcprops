@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers
+END
+CollectedGamesReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/repos/ttigame/!svn/ver/106704/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/CollectedGamesReceiver.java
+END
+GetMsgContextReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/GetMsgContextReceiver.java
+END
+EgameWebReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/EgameWebReceiver.java
+END
+GameDetailReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/GameDetailReceiver.java
+END
+SearchKeyReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/SearchKeyReceiver.java
+END
+OnBootReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/OnBootReceiver.java
+END
+ListNotifyReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/ListNotifyReceiver.java
+END
+EgameHomeReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/app/receivers/EgameHomeReceiver.java
+END

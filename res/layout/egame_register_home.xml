@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg" >
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- 标题背景层 -->
+
+        <TextView
+            android:id="@+id/m_lative_top"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top" >
+        </TextView>
+
+        <!-- 返回按钮 -->
+
+        <TextView
+            android:id="@+id/m_register_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_back" />
+
+        <TextView
+            style="@style/egame_helpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/egame_user_register" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/topline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:background="@drawable/egame_top_line" >
+    </TextView>
+    <!-- 填写基本信息布局 -->
+
+    <TextView
+        android:id="@+id/m_novice_prompt"
+        style="@style/egame_noviceCoffee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ellipsize="marquee"
+        android:gravity="top|center_horizontal"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:text="@string/egame_register_prompt"
+        android:textSize="14dp" >
+    </TextView>
+
+    <!-- 性别选择 -->
+
+    <RelativeLayout
+        android:id="@+id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" >
+
+        <ImageView
+            android:id="@+id/m_icon_made"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/egame_people_woman_off" />
+
+        <ImageView
+            android:id="@+id/m_icon_man"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/m_icon_made"
+            android:background="@drawable/egame_people_man_off" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp" >
+
+        <ImageView
+            android:id="@+id/m_point_made"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_radiobutton_unselect" />
+
+        <TextView
+            android:id="@+id/m_text_made"
+            style="@style/egame_noviceGrayDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/m_point_made"
+            android:paddingLeft="2dp"
+            android:text="@string/egame_text_made" />
+
+        <ImageView
+            android:id="@+id/m_point_men"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@id/m_text_made"
+            android:background="@drawable/egame_radiobutton_unselect" />
+
+        <TextView
+            android:id="@+id/m_text_men"
+            style="@style/egame_noviceGrayDepth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/m_point_men"
+            android:text="@string/egame_text_man" />
+    </RelativeLayout>
+    <!-- 手机号输入界面 -->
+
+    <RelativeLayout
+        android:id="@+id/layout4"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/layout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/egame_shurukuang" >
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/egame_register_phone_num"
+            android:textColor="#383838"
+            android:textSize="14dp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/m_phone_num"
+            android:layout_width="fill_parent"
+            android:textColor="#383838"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/text"
+            android:background="@null"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="14dp" >
+        </EditText>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/m_text_prompt"
+        style="@style/egame_noviceRED"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/egame_register_phone_prompt" />
+    <!-- 免费发送验证码布局 -->
+
+    <Button
+        android:id="@+id/m_send_verificate"
+        style="@style/egame_noviceGREEN"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_below="@id/m_text_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_btn_green_circularity_selector"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/egame_register_verificate_btnword"
+        android:textSize="15dp" >
+    </Button>
+    <!-- 验证码输入布局 -->
+
+    <EditText
+        android:id="@+id/m_input_verificate"
+        style="@style/egame_noviceGray"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/m_send_verificate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/egame_shurukuang"
+        android:hint="请输入验证码"
+        android:inputType="number"
+        android:singleLine="true"
+        android:textSize="14dp" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/m_verificate_prompt"
+        style="@style/egame_noviceRED"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_input_verificate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+    <!-- 完成注册 -->
+
+    <Button
+        android:id="@+id/m_finish_register"
+        style="@style/egame_noviceGREEN"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_below="@id/m_verificate_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_btn_green_circularity_selector"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="完成注册"
+        android:textSize="15dp" >
+    </Button>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="客服热线："
+            android:textColor="#6B6B6B" />
+
+        <TextView
+            android:id="@+id/hotLine"
+            style="@style/egame_aboutSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="4008-289-289"
+            android:textColor="#6568fa" />
+    </LinearLayout>
+
+</RelativeLayout>

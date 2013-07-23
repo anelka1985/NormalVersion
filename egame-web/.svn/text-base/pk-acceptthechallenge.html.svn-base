@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--PK--接受挑战</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script src="js/jquery-1.7.1.js" type="text/javascript"></script>
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<script src="js/common_html.js" type="text/javascript"></script>
+<script src="js/wqz-globalObject.js" language="javascript" type="text/javascript"></script>
+<script src="js/pk-acceptthechallenge.js" language="javascript" type="text/javascript"></script>
+</head>
+
+
+<body>
+	
+
+	<!--您的得分-->
+	<div class="weibo bg_color1 p_30">
+    	
+        <P class="text_align_cen color_2 font_20 font_lin30">您将挑战 <span id="pkUserNameId" class="color_3 font_30"><!-- pk urser name --></span></P>
+        <div class="vs m_auto">
+        	
+            
+            <!--详情-->
+    <div class="weibo m_1_10">
+        
+        <table class="dunit2 m_t_30">
+        
+        	<tr>
+            	<td class="dunit1_inner3 dunit1_inner4">
+                    <div class="pos m_76_auto"><span class="head_mask_76c"></span><img id="myIconId" style="width:76px; height:76px;" src="" alt=""/></div>
+	                 </td>
+                <td class="dunit1_inner3">
+                    <div class="pos m_76_auto"><span class="head_mask_76c"></span><img id="userIconId" style="width:76px; height:76px;"  src="" alt=""/></div>
+                 </td>
+            </tr>
+
+        </table>
+         </div> 
+            
+        </div>
+        
+        
+    </div>   
+     
+     
+     <div class="pri_setting">
+    	<span class="probdnu_absolute probdnu_top_left"></span><span class="probdnu_absolute probdnu_top_right"></span><span class="probdnu_absolute probdnu_bottom_left"></span><span class="probdnu_absolute probdnu_bottom_right"></span>   
+
+     
+     	<P class="text_align_cen color_2 font_18 P_t_20">挑战成功即可获得 <span id="pkBonusId" class="color_3"><!-- bonus pkbi --></span> PK币，失败将失去等额PK币。 </P>
+     	
+     
+     
+    <!--开始挑战-->
+     <div class="btu_gr pos"><a id="startChallId">
+        <span class="btu_grd_l"></span>
+        <span class="btu_grd_r"></span>
+        开始挑战
+    </a></div>
+    <div class="P_t_20"></div>
+</div>
+</body>
+</html>
+

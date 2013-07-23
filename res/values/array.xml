@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="egame_search_type">
+        <item>游戏</item>
+        <item>标签</item>
+        <item>提供商</item>
+    </string-array>
+    <string-array name="egame_sex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="egame_search_hint">
+        <item>请输入要搜索的游戏</item>
+        <item>请输入感兴趣的标签</item>
+        <item>请输入提供商名称</item>
+    </string-array>
+    <string-array name="egame_get_pic">
+        <item>照相机</item>
+        <item>图片库</item>
+    </string-array>
+    <string-array name="egame_share">
+        <item>通讯录</item>
+        <item>人人网</item>
+        <item>腾讯微博</item>
+        <item>新浪微博</item>
+        <item>更多</item>
+        <item>社区好友</item>
+    </string-array>
+    <string-array name="egame_pingjia">
+        <item>非常满意</item>
+        <item>满意</item>
+        <item>一般</item>
+        <item>不满意</item>
+    </string-array>
+    <string-array name="egame_face">
+        <item>[微笑]</item>
+        <item>[大笑]</item>
+        <item>[害羞]</item>
+        <item>[开心]</item>
+        <item>[哇喔]</item>
+        <item>[惊讶]</item>
+        <item>[花心思]</item>
+        <item>[幸运]</item>
+        <item>[媚眼]</item>
+        <item>[喜欢]</item>
+        <item>[酷]</item>
+        <item>[汗]</item>
+        <item>[恐慌]</item>
+        <item>[发火]</item>
+        <item>[坏笑]</item>
+        <item>[难过]</item>
+        <item>[委屈]</item>
+        <item>[大哭]</item>
+        <item>[哼哼]</item>
+        <item>[不理你]</item>
+        <item>[折磨]</item>
+    </string-array>
+    <string-array name="egame_findpass_way">
+        <item>手机号</item>
+        <item>邮箱</item>
+    </string-array>
+	
+</resources>

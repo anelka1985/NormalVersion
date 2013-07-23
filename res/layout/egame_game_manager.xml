@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg"
+    android:orientation="vertical" >
+
+    <!-- title bar on the top -->
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/egame_top_title" />
+
+    <!-- a LinearLayout contains 3 buttons and a mask on them -->
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- contains 3 buttons -->
+        <!-- named tab1 to tab3 from left to right -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tab1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:text="已安装"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:text="可升级"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/egame_btn_game_tab_selector"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="3dip"
+                android:singleLine="true"
+                android:text="下载任务"
+                android:textColor="@drawable/egame_tv_game_tab_font_color_selector"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+            <!--  
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tab1tag"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#ce0000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab2tag"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="right"
+                android:paddingRight="6dip"
+                android:singleLine="true"
+                android:text="(0)"
+                android:textColor="#ce0000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tab3tag"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="right"
+                android:paddingRight="6dip"
+                android:singleLine="true"
+                android:text="(0)"
+                android:textColor="#ce0000"
+                android:textSize="14sp" />
+        </LinearLayout>
+        -->
+
+        <!-- the mask -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top_line" />
+    </FrameLayout>
+
+    <!-- the main layout to set each layout -->
+
+</LinearLayout>

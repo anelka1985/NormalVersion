@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/m_head_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="3"
+        android:background="@drawable/egame_direct_left" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/m_novice_prompt"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" 
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center_horizontal"
+            android:singleLine="true"
+            android:text="@string/egame_novice_task_two"
+            android:textColor="#72855E"
+            android:textSize="15dp" />
+        <TextView
+            android:layout_gravity="center_horizontal" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            style="@style/egame_noviceGrayDepth1"
+            android:text="添加几位我们给您推荐的朋友吧"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="3"
+        android:background="@drawable/egame_direct_right" >
+    </TextView>
+
+</LinearLayout>

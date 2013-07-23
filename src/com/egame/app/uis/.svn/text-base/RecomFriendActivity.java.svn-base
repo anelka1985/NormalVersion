@@ -1,0 +1,140 @@
+/**
+ * 
+ */
+package com.egame.app.uis;
+
+import java.lang.ref.SoftReference;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.egame.R;
+import com.egame.utils.common.CommonUtil;
+import com.egame.utils.common.PreferenceUtil;
+import com.egame.utils.ui.MyTextWatcher;
+import com.egame.utils.ui.ToastUtil;
+import com.egame.weibos.MyOAuth;
+import com.egame.weibos.ShareWindows;
+import com.eshore.network.stat.NetStat;
+
+/**
+ * 描述:推荐给朋友界面
+ * 
+ * @author LiuHan
+ * @version 1.0 create date 2011-12-29
+ */
+public class RecomFriendActivity extends Activity implements OnClickListener {
+
+	/** 推荐信息编辑UI控件 */
+	private EditText mRecomContent;
+	/** 触发“推荐”事件的UI控件 */
+	private TextView mRecom;
+	/** 触发“返回”事件的UI控件 */
+	private TextView mBack;
+	/** 用户的IMSI号 **/
+	private String mIMSI = null;
+	/** 软键盘 **/
+	private InputMethodManager imM;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.egame_recommendation);
+		// 取得UI控件的引用
+		initControlView();
+	}
+
+	/**
+	 * 功能:取得UI控件的引用
+	 */
+	private void initControlView() {
+		// 返回
+		mBack = (TextView) this.findViewById(R.id.m_back);
+		mBack.setOnClickListener(this);
+		// 推荐的内容
+		mRecomContent = (EditText) this.findViewById(R.id.m_recom_content);
+		mRecomContent.setText(getString(R.string.egame_share_content)
+				+ getIMSI());
+		mRecomContent.addTextChangedListener(new MyTextWatcher(this, 140,
+				mRecomContent));
+		mRecomContent.requestFocus();
+		// 推荐
+		mRecom = (TextView) this.findViewById(R.id.m_recom);
+		mRecom.setOnClickListener(this);
+		// init imM
+		imM = (InputMethodManager) this.getSystemService("input_method");
+	}
+
+	/**
+	 * 相关UI控件的单击事件处理函数
+	 * 
+	 * @param v
+	 */
+	@Override
+	public void onClick(View v) {
+		if (v == mBack) {
+			//add 2013-01-18 返回时键盘没有消失
+			if (imM.isActive()) {
+				imM.hideSoftInputFromWindow(
+						getCurrentFocus().getWindowToken(), 0);
+			}
+			//add end
+			RecomFriendActivity.this.finish();
+		} else if (v == mRecom) {
+			if ("".equals(mRecomContent.getText().toString())) {
+				ToastUtil.show(RecomFriendActivity.this, "请输入您推荐的内容!");
+			} else {
+				PreferenceUtil.storeType(RecomFriendActivity.this, "client");
+				// 显示分享方式对話框
+				(new ShareWindows(RecomFriendActivity.this// 上下文
+						, mRecomContent.getText().toString()// 分享的内容
+						, null, CommonUtil.getUserId(RecomFriendActivity.this)// 游戏实体类对象
+																				// 这里进行客户端软件的分享
+																				// 该值设为null
+				)).show();
+			}
+
+		}
+	}
+
+	/**
+	 * 获取用户IMSI
+	 * 
+	 * @return
+	 */
+	public String getIMSI() {
+		TelephonyManager tm = (TelephonyManager) this
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		mIMSI = tm.getSubscriberId();
+		return mIMSI;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		NetStat.onResumePage();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NetStat.onPausePage("RecomFriendActivity");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (null != MyOAuth.instance) {
+			MyOAuth.instance.unRegister();
+		}
+	}
+
+}

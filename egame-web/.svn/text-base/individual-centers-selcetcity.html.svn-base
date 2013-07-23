@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" />
+<title>爱游戏--个人中心--我的好友</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script type="text/javascript" src="js/callAndroid.js"></script> 
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/page_common.js"></script> 
+<script type="text/javascript" src="js/common_html.js"></script> 
+<!--页面本身的JS-->
+<script type="text/javascript" src="js/individual-centers-selcetcity.js"></script> 
+</head>
+
+
+<body>
+
+	<br>  
+	<br>    
+    <!--详情-->
+    <div class="weibo beento" >
+
+      
+        <div class="list pos P_lr_10"><a href="#" class="P_tb_10 blohi">
+            <span class="float_l font_20 m_t_4" >城市：</span>
+            <span>
+            	<div class="float_l blohi">
+            	<select id="province" class="fri_sel font_w" name="" onchange="provincechange();" >
+                </select> -  
+                </div>
+                <div class="float_l blohi"> -
+            	<select id="city" class="fri_sel font_w" name="">
+                </select>
+                </div>
+             </span>
+        </a></div>
+        
+
+        
+       
+        <div class="line_1" ></div>   
+    </div>
+
+
+	<div class="btu_gr pos m_tb_10" id="school_sub" onclick="modify()"><a href="#">
+		<span class="btu_gr_l"></span>
+		<span class="btu_gr_r"></span>
+		<img src="images/icon_correct.png" width="22" height="22" class="m_t">
+		提 交
+		</a></div>
+
+</body>
+</html>
+

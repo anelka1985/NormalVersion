@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" /> 
+<title>爱游戏--个人中心--我的好友</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<!--通用的JS-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script> 
+<script src="js/callAndroid.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/common.js"></script> 
+<script src="js/common_html.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/page_common.js"></script>
+<!--页面本身的JS-->
+<script type="text/javascript" src="js/hisfriend.js"></script> 
+</head>
+
+
+<body>
+	<!--共有52个游戏-->
+	<div id="myfriend">
+    <div class="header"  id="friendHeader">
+    	<h3 class="color_4 float_l">共有<span class="color_1" id="friendCount">0</span>位好友</h3>
+    	<!--<div class="but_man btu_green_com pos "><a href=""><span class="btu_man_com2 btu_green_com2 btu_man_left"></span><span class="btu_mood_right">管理</span></a></div>-->
+    </div>
+     
+    <!--详情-->
+    <div class="weibo beento"  id="friendBody">
+    	 <div id="friendList">
+       </div>
+        
+        <div class="m_auto p_b_20 blohi" id="button">  
+             <div class="btu_page btu_green_s pos" id ="lastPage">
+                <a href="" id="lastPageIndex"><span class="btu_man_com2 btu_green_s_com btu_green_s_left" id="lastPageLeft"></span><span class="btu_green_s_right" id="lastPageRight"></span>末页</a>
+            </div>
+            
+            <div class="btu_page btu_green_s pos" id ="pageDown">
+                <a href="" id="pageDownIndex"><span class="btu_man_com2 btu_green_s_com btu_green_s_left" id="pageDownLeft"></span><span class="btu_green_s_right" id="pageDownRight"></span>下一页</a>
+            </div>
+            
+            <div class="btu_page btu_gra_s pos btu_page_com" id="pageUp">
+                <a href="" id="pageUpIndex"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left" id="pageUpLeft"></span><span class="btu_gra_s_right"  id="pageUpRight"></span>上一页</a>
+            </div>
+            
+            <div class="btu_page btu_gra_s pos btu_page_com" id="pageHome">
+                <a href="" id="pageHomeIndex"><span class="btu_man_com2 btu_gra_s_com btu_gra_s_left" id="pageHomeLeft"></span><span class="btu_gra_s_right" id="pageHomeRight"></span>首 页</a>
+            </div>
+        </div>
+        
+    </div>
+
+ </div>
+
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/egame_listbg"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="6dip"
+        android:background="@drawable/egame_defaultgamepic"
+        android:scaleType="fitXY"
+        android:src="@drawable/egame_touxiangzhezhao" />
+
+    <TextView
+        android:id="@+id/productName"
+        style="@style/egame_Text16Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/productImage"
+        />
+
+    <Button
+        android:id="@+id/see"
+        style="@style/egame_greenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/egame_btn_green_selector"
+        android:text="@string/seeProduct" />
+
+</RelativeLayout>

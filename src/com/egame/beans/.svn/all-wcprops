@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/ttigame/!svn/ver/90874/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans
+END
+ReplyMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ReplyMessage.java
+END
+TopicPageBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/TopicPageBean.java
+END
+ProductListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ProductListBean.java
+END
+GameInPackageBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GameInPackageBean.java
+END
+ReplyMessageByContentID.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ReplyMessageByContentID.java
+END
+PackageDetailBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/PackageDetailBean.java
+END
+ContactsBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ContactsBean.java
+END
+TopicBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/TopicBean.java
+END
+QueryByContentIdResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/QueryByContentIdResult.java
+END
+AdPageBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/AdPageBean.java
+END
+Additional.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/Additional.java
+END
+Obj.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/Obj.java
+END
+HelpListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/HelpListBean.java
+END
+AdBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/AdBean.java
+END
+ProvinceBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ProvinceBean.java
+END
+AdTouchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/AdTouchBean.java
+END
+GameTopListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GameTopListBean.java
+END
+TopicListBeanCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/TopicListBeanCache.java
+END
+ReplyMessageByPhone.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ReplyMessageByPhone.java
+END
+ListBeanCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ListBeanCache.java
+END
+TopicDetailBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/TopicDetailBean.java
+END
+CommentBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/CommentBean.java
+END
+DownloadListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/106704/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/DownloadListBean.java
+END
+PackageInfoHead.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/PackageInfoHead.java
+END
+GameListBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GameListBean.java
+END
+SortListBeanCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/SortListBeanCache.java
+END
+HideBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/HideBean.java
+END
+UserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/UserBean.java
+END
+UpdateSofeWareBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/UpdateSofeWareBean.java
+END
+ResultBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ResultBean.java
+END
+PackageBeanCache.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/PackageBeanCache.java
+END
+GameSortBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GameSortBean.java
+END
+NoviceBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/NoviceBean.java
+END
+Content.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/Content.java
+END
+GamePackageBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GamePackageBean.java
+END
+ShareFriendBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/ShareFriendBean.java
+END
+GameInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/GameInfo.java
+END
+UserReqResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/UserReqResult.java
+END
+PushMsg.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/PushMsg.java
+END
+SatisfactionResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/SatisfactionResult.java
+END
+MoreUserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/MoreUserBean.java
+END
+HobbyBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/HobbyBean.java
+END
+QueryByPhoneResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/QueryByPhoneResult.java
+END
+MoreLikeBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/MoreLikeBean.java
+END
+LoginUserBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/LoginUserBean.java
+END
+CityBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/CityBean.java
+END
+FindFriendBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/ttigame/!svn/ver/86231/newversion/EGameCodeManager/egame-client/android/fourversion/Egame4Web_YuZhi/src/com/egame/beans/FindFriendBean.java
+END

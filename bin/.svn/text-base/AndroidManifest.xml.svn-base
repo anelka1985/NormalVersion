@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.egame"
+    android:versionCode="521"
+    android:versionName="5.2.1_0817" >
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />  
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" /> 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".app.EgameApplication"
+        android:enabled="true"
+        android:icon="@drawable/icon"
+        android:label="@string/egame_app_name" >
+        <activity
+            android:name=".app.FlashScreenActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenLayout" 
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.uis.WelcomeActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.EgameHomeActivity"
+            android:configChanges="keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameSortActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.GamesDetailActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.SearchActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".app.uis.ManagerActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.MoreActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+
+        <!-- 游戏栏目ActivityGroup -->
+        <activity
+            android:name=".app.uis.GameHomeActivityGroup"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <!-- 管理ActivityGroup -->
+        <activity
+            android:name=".app.uis.ManagerActivityGroup"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameDownloadEdActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameDownloadUpdateActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameUpdateAbleActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.GameDownloadMissionActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <!-- 弹出对话框activity -->
+        <activity
+            android:name=".app.uis.AlertActivity"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <!-- 游戏推荐列表页面 -->
+        <activity
+            android:name=".app.uis.GameRecommendActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏专题列表页面 -->
+        <activity
+            android:name=".app.uis.GameTopicActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏专题详情页面 -->
+        <activity
+            android:name=".app.uis.GameTopicDetailActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏排行页面 -->
+        <activity
+            android:name=".app.uis.GameRankActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏分类详情列表页面 -->
+        <activity
+            android:name=".app.uis.GameSortDetailActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏包列表页面 -->
+        <activity
+            android:name=".app.uis.GamePackageActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 游戏包详情页面 -->
+        <activity
+            android:name=".app.uis.GamePackageDetailActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.EnlargeImageActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@style/egame_Transparent" />
+        <!-- 游戏评论页面 -->
+        <activity
+            android:name=".app.uis.GameCommentActivity"
+            android:configChanges="locale|orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.HelpCenterActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.AboutActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 使用反馈 -->
+        <activity
+            android:name=".app.uis.MyReplyActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.RecomFriendActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.RecomPlatFormActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 系统设置 -->
+        <activity
+            android:name=".app.uis.SystemSettingActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 隐私设置 -->
+        <activity
+            android:name=".app.uis.HideSettingActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.RecommContactsActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 产品列表 -->
+        <activity
+            android:name=".app.uis.ProductLitActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 软件升级 -->
+        <activity
+            android:name=".app.uis.UpdateSoftWareActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".app.uis.TestDownloadCursorAdapterActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- 腾讯 -->
+        <activity
+            android:name=".app.uis.TencentShareActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/egame_sinaDialog" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="callback"
+                    android:scheme="x-oauthflow" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.uis.EgameWebActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".app.uis.InputPopupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/egame_translucent" >
+        </activity>
+        <activity
+            android:name=".app.uis.GamePackageSortActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.ImageViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <!-- 新手任务 -->
+        <activity
+            android:name=".app.uis.NoviceAssignmentUIActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.NovicePrimaryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.BaseInfoRegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.FinishRegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.NoviceFindFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.NoviceUpPhotoActivity"
+            android:screenOrientation="portrait"
+             android:configChanges="orientation|keyboardHidden|keyboard|screenLayout" 
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.NoviceFinishActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".app.uis.NoviceGrendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+         <activity
+            android:name=".app.uis.GameOnlineActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        
+        <activity
+            android:name=".app.uis.UserLoginActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".app.uis.FindPassWordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <!--  
+        <receiver android:name=".app.receivers.OnBootReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.egame.app.receivers.PUSH_MSG" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        -->
+        
+        <receiver android:name="com.egame.app.receivers.GetMsgContextReceiver" >
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+　　     </receiver>
+
+        <!-- 接收安装/卸载广播 -->
+        <receiver android:name="com.egame.app.receivers.CollectedGamesReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+                <!-- 注意！！ 这句必须要加，否则接收不到BroadCast -->
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".app.services.BackRunService" />
+
+        <!-- 下载服务 -->
+        <service
+            android:name=".app.services.DownloadService"
+            android:process="com.egame.downloadService" >
+        </service>
+         <!-- 更新服务 -->
+        <service
+            android:name=".app.services.UpdateService"
+            android:process="com.egame.UpdateService" >
+        </service>
+    </application>
+
+</manifest>

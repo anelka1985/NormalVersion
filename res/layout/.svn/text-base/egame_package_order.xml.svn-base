@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/egame_readingValidateCode" 
+        android:textSize="18sp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/validateCode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:hint="@string/egame_register_verificate_prompt"/>
+
+</LinearLayout>

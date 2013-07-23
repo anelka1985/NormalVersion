@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-rotate xmlns:android="http://schemas.android.com/apk/res/android" >
+     <item android:drawable="@drawable/egame_search_type_btn_off" android:state_window_focused="false"/>
+    <item android:drawable="@drawable/egame_search_type_btn_on" android:state_focused="false" android:state_pressed="true"/>
+
+</animated-rotate>

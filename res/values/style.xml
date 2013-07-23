@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="egame_listItemTextStyle">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_Text16Style">
+		<item name="android:textSize">16sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_Text18Style">
+		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_shurukuangTextStyle">
+		<item name="android:textSize">13sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_grayTextStyle">
+		<item name="android:textSize">13sp</item>
+		<item name="android:textColor">#757575</item>
+	</style>
+
+	<style name="egame_grayText14Style">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#757575</item>
+	</style>
+
+	<style name="egame_black9Style">
+		<item name="android:textSize">10sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_topTitle">
+		<item name="android:textSize">19sp</item>
+		<item name="android:textColor">#ffffff</item>
+	</style>
+
+	<style name="egame_moreProduct">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#AC6A00</item>
+	</style>
+
+	<style name="egame_myReply">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#0068b7</item>
+	</style>
+
+	<style name="egame_myReplyDetail">
+		<item name="android:textSize">13sp</item>
+		<item name="android:textColor">#323232</item>
+	</style>
+
+	<style name="egame_kefuAnswer">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#ac6a00</item>
+	</style>
+
+	<style name="egame_replyDate">
+		<item name="android:textSize">12sp</item>
+		<item name="android:textColor">#505050</item>
+	</style>
+
+	<style name="egame_appraise">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#323232</item>
+	</style>
+
+	<style name="egame_searchResult">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#bb8a3d</item>
+	</style>
+
+	<style name="egame_searchResultEmpty">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#c4403e</item>
+	</style>
+
+	<style name="egame_gameDesc">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#646464</item>
+	</style>
+
+	<style name="egame_gameCost">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#1e1e1e</item>
+	</style>
+
+	<style name="egame_helpCenterList">
+		<item name="android:textSize">16dp</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+
+	<style name="egame_helpTitle">
+		<item name="android:textSize">20dp</item>
+		<item name="android:textColor">#FFFFFF</item>
+	</style>
+
+	<style name="egame_helpIndex">
+		<item name="android:textSize">12dp</item>
+		<item name="android:textColor">#B2751E</item>
+	</style>
+
+	<style name="egame_helpTab">
+		<item name="android:textSize">15dp</item>
+		<item name="android:textColor">#FFFFFF</item>
+	</style>
+
+	<style name="egame_aboutSize">
+		<item name="android:textSize">12dp</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+
+	<style name="egame_greenText">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">#279701</item>
+	</style>
+
+	<style name="egame_roomRatingBar" parent="@android:style/Widget.RatingBar">
+		<item name="android:progressDrawable">@drawable/egame_ratingbar</item>
+		<item name="android:minHeight">18dp</item>
+		<item name="android:maxHeight">18dp</item>
+		<item name="android:minWidth">18dp</item>
+		<item name="android:maxWidth">18dp</item>
+	</style>
+	<!-- 半透明 -->
+	<style name="egame_Transparent">
+		<item name="android:windowBackground">@color/egame_transparent_background</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+	</style>
+
+	<style name="egame_PopupAnimation" mce_bogus="1" parent="android:Animation">
+		<item name="android:windowEnterAnimation">@anim/popup_enter</item>
+		<item name="android:windowExitAnimation">@anim/popup_exit</item>
+	</style>
+
+	<style name="egame_Popup_fade" mce_bogus="1" parent="android:Animation">
+		<item name="android:windowEnterAnimation">@anim/fade_in</item>
+		<item name="android:windowExitAnimation">@anim/fade_out</item>
+	</style>
+	<!-- 用于微薄发消息的dialog -->
+	<style name="egame_sinaDialog" parent="@android:style/Theme.Dialog">
+		<item name="android:windowNoTitle">true</item>
+	</style>
+
+	<!-- ActivityGroup去阴影 -->
+	<style name="egame_Theme.ActivityGroupNoShadow" parent="android:style/Theme.NoTitleBar">
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+
+	<style name="egame_AlertDialogType" parent="@android:style/Theme.Dialog">
+		<item name="android:textSize">18sp</item>
+	</style>
+
+	<style name="egame_translucent" parent="@android:style/Theme.Dialog">
+		<item name="android:windowBackground">@color/egame_transparent_background</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+	</style>
+
+	<style name="egame_noviceTitle">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#FFFFFF</item>
+	</style>
+
+	<style name="egame_noviceTaskTitle">
+		<item name="android:textSize">18dp</item>
+		<item name="android:textColor">#000000</item>
+	</style>
+
+	<style name="egame_noviceRegister">
+		<item name="android:textSize">15dp</item>
+		<item name="android:textColor">#B47C21</item>
+	</style>
+
+	<style name="egame_noviceGray">
+		<item name="android:textSize">18dp</item>
+		<item name="android:textColor">#A3A3A3</item>
+	</style>
+
+	<style name="egame_noviceGrayDepth">
+		<item name="android:textSize">18dp</item>
+		<item name="android:textColor">#6B6B6B</item>
+	</style>
+
+	<style name="egame_noviceGrayDepth1">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#6B6B6B</item>
+	</style>
+
+	<style name="egame_noviceGrayDepth14">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#6B6B6B</item>
+	</style>
+
+	<style name="egame_noviceRED">
+		<item name="android:textSize">12dp</item>
+		<item name="android:textColor">#F66968</item>
+	</style>
+
+	<style name="egame_noviceGREEN">
+		<item name="android:textSize">18dp</item>
+		<item name="android:textColor">#49A61F</item>
+	</style>
+
+	<style name="egame_noviceCoffee">
+		<item name="android:textSize">18dp</item>
+		<item name="android:textColor">#AF6E09</item>
+	</style>
+
+	<style name="egame_dialog" parent="@android:style/Theme.Dialog">
+		<item name="android:windowNoTitle">true</item>
+	</style>
+	<!-- 登录 -->
+	<style name="egame_userLogin">
+		<item name="android:textSize">16dp</item>
+		s
+		<item name="android:textColor">#646464</item>
+		s
+	</style>
+	<style name="egame_showpass">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#757575</item>
+	</style>
+
+	<style name="egame_loginOther">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#2b9900</item>
+	</style>
+	<style name="egame_login">
+		<item name="android:textSize">14dp</item>
+		<item name="android:textColor">#ac6a00</item>
+	</style>
+	<style name="egame_expDialog" parent="@android:Theme.Dialog">
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:backgroundDimEnabled">true</item>
+		<item name="android:backgroundDimAmount">0.6</item>
+
+	</style>
+
+</resources>

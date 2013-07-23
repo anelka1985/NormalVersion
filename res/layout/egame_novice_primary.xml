@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/egame_bg" >
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp" >
+
+        <!-- 标题背景层 -->
+
+        <TextView
+            android:id="@+id/m_lative_top"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_top" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/topline"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/m_lative_top"
+            android:background="@drawable/egame_top_line" >
+        </TextView>
+        <!-- 返回按钮 -->
+
+        <TextView
+            android:id="@+id/m_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/egame_back" />
+        <!-- 标题文字层 -->
+
+        <TextView
+            android:id="@+id/m_novice_name"
+            style="@style/egame_noviceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:text="@string/egame_novice_name" />
+
+        <TextView
+            style="@style/egame_noviceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/m_novice_name"
+            android:layout_centerHorizontal="true"
+            android:text="@string/egame_novice" />
+    </RelativeLayout>
+    <!-- 基本信息填写界面 -->
+    <!-- 完善资料布局 -->
+
+    <LinearLayout
+        android:id="@+id/m_novice_task1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_weight="2.5"
+            android:background="@drawable/egame_direct_left" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/m_novice_prompt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:gravity="top|center_horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@string/egame_novice_task_one"
+            android:textColor="#72855E"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_weight="2.5"
+            android:background="@drawable/egame_direct_right" >
+        </TextView>
+    </LinearLayout>
+    <!-- 昵称 -->
+
+    <RelativeLayout
+        android:id="@+id/m_novice_task2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_task1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_contacts_items" >
+
+        <TextView
+            android:id="@+id/nick_table"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="@string/egame_nick_name"
+            android:textColor="#282828"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/m_nick_name"
+            style="@style/egame_noviceGrayDepth1"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/nick_table"
+            android:background="@drawable/egame_shurukuang"
+            android:paddingLeft="5dp"
+            android:text="点击编辑昵称" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/m_nick_name"
+            android:layout_toRightOf="@id/nick_table"
+            android:paddingBottom="5dp"
+            android:text="@string/egame_nick_name_prompt"
+            android:textColor="#A9ABAA"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <!-- 生日 -->
+
+    <RelativeLayout
+        android:id="@+id/m_novice_task3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_task2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_contacts_items"
+        android:focusable="true"
+        android:paddingBottom="5dp" >
+
+        <TextView
+            android:id="@+id/nick_table1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="@string/egame_birthday"
+            android:textColor="#282828"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/m_novice_birthday"
+            style="@style/egame_noviceGrayDepth1"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/nick_table1"
+            android:background="@drawable/egame_shurukuang"
+            android:paddingLeft="5dp"
+            android:text="点击选择生日" />
+
+        <!-- 显示和隐藏控制布局 -->
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/m_novice_birthday"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/m_birthday_show"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:background="@drawable/egame_lvse"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="显示"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/m_birthday_hide"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:background="@drawable/egame_huiseright"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="隐藏"
+                android:textColor="#A9ABAA" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 城市 -->
+
+    <RelativeLayout
+        android:id="@+id/m_novice_task4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_task3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_contacts_items"
+        android:paddingBottom="5dp" >
+
+        <TextView
+            android:id="@+id/m_city"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="@string/egame_city"
+            android:textColor="#282828"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/m_novice_province"
+            style="@style/egame_noviceGrayDepth1"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/m_city"
+            android:background="@drawable/egame_shurukuang"
+            android:text="点击选择城市" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/m_city"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/m_address_show"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:background="@drawable/egame_lvse"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="显示"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/m_address_hide"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:background="@drawable/egame_huiseright"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="隐藏"
+                android:textColor="#A9ABAA" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 爱好 -->
+
+    <RelativeLayout
+        android:id="@+id/m_novice_task5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_task4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_contacts_items"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/m_text1"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="@string/egame_taste"
+            android:textColor="#282828"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/m_taste_gender"
+            style="@style/egame_noviceGrayDepth1"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/m_text1"
+            android:background="@drawable/egame_shurukuang"
+            android:text="点击选择您喜欢的游戏类型" />
+    </RelativeLayout>
+    <!-- 找朋友 -->
+
+    <RelativeLayout
+        android:id="@+id/m_novice_findfriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m_novice_task5"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/egame_btn_green_circularity_selector" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp" 
+            android:text="@string/egame_novice_next_stage"
+            android:textColor="#5FB03E"
+            android:textSize="17dp" >
+        </TextView>
+    </RelativeLayout>
+
+</RelativeLayout>

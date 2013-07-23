@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="egame_transparent">#00000000</color>
+    <color name="egame_harf_black_transparent">#b0000000</color>
+    <color name="egame_white">#ffffffff</color>
+    <!-- 文字颜色,接近于灰色 -->
+    <color name="egame_text_gray">#8c8b8b</color>
+    <!-- 文字颜色,接近黑色 -->
+    <color name="egame_text_black">#1e1e1e</color>
+    <!-- 文字颜色,接近橙色,专题详情标题用 -->
+    <color name="egame_text_orange">#ac6a00</color>
+    <color name="egame_black_my">#646464</color>
+    <!-- 文字颜色,接近绿色, -->
+    <color name="egame_text_green">#2b9900</color>
+    <!-- 文字颜色,接近土黄色 -->
+    <color name="egame_text_dark_yellow">#ac6a00</color>
+    <!-- 文字颜色,游戏详情中标签未选中 -->
+    <color name="egame_text_unselected">#ffc8c8c8</color>
+    <!-- 人人网有关的颜色声明 -begin -->
+    <color name="egame_transparent_background">#50000000</color>
+    <color name="egame_renren_sdk_edittext_border">#cedef6</color>
+    <color name="egame_renren_sdk_edittext_bg">#ffffff</color>
+    <color name="egame_renren_sdk_title_text">#ffffff</color>
+    <color name="egame_renren_sdk_status_username_text">#000000</color>
+    <color name="egame_renren_sdk_title_border">#000000</color>
+    <color name="egame_renren_sdk_title_bg">#3366ff</color>
+    <!-- End -->
+    <color name="egame_register_color">#49A61F</color>
+    
+    <color name="egame_next_color">#5FB03E</color>
+    <color name="egame_rexian">#127ee2</color>
+</resources>

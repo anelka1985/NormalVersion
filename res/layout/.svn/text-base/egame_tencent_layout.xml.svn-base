@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="32dip"
+        android:orientation="horizontal"
+        android:padding="1dip" >
+
+        <ImageView
+            android:id="@+id/egame_tencent"
+            android:layout_width="32dip"
+            android:layout_height="32dip"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/egame_weiboicons" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="32dip"
+            android:layout_toRightOf="@id/egame_tencent"
+            android:background="@drawable/egame_tencent_title_right"
+            android:gravity="center_vertical"
+            android:text="@string/egame_tencent_title"
+            android:textColor="#FFFFFF"
+            android:textSize="14dip" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/myword"
+        android:layout_width="260dip"
+        android:layout_height="100dip"
+        android:layout_margin="10dp"
+        android:background="@drawable/egame_inputtext_bg"
+        android:gravity="left|top"
+        android:paddingLeft="5dip"
+        android:textSize="13dip" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="#E4ECF1"
+        android:paddingRight="10dip" >
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/egame_renren_sdk_default_button_unselected"
+            android:text="取消"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/publish_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/cancel_button"
+            android:background="@drawable/egame_renren_sdk_default_button_unselected"
+            android:text="确定"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+</LinearLayout>

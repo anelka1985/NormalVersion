@@ -1,0 +1,144 @@
+package com.egame.app.receivers;
+
+import java.io.File;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.database.Cursor;
+import android.util.Log;
+
+import com.egame.app.services.DBService;
+import com.egame.config.Const;
+import com.egame.utils.common.CommonUtil;
+import com.egame.utils.common.L;
+import com.egame.utils.common.PreferenceUtil;
+import com.eshore.network.stat.NetStat;
+
+public class CollectedGamesReceiver extends BroadcastReceiver {
+	private final String TAG = "BroadcastReceiver";
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		try {
+			// 设备上新安装了一个应用程序包后自动启动新安装应用程序。
+			DBService dbService;
+			dbService = new DBService(context);
+			dbService.open();
+			// 如果之前的状态不是已安装
+			if (intent.getAction()
+					.equals("android.intent.action.PACKAGE_ADDED")) {
+				String packageName = intent.getDataString().substring(8);
+				L.d(TAG, "安装了:" + packageName);
+				NetStat.onEvent(PreferenceUtil.KET_QAS_INSTALL, "程序安装",
+						packageName);
+				Cursor cursor = dbService.getGameByPackageName(packageName);
+				if (cursor != null && cursor.getCount() > 0) {
+					cursor.moveToFirst();
+					dbService.updateData(cursor.getString(cursor
+							.getColumnIndex(DBService.KEY_SERVICEID)),
+							DBService.KEY_STATE, DBService.DOWNSTATE_INSTALLED);
+					dbService.updateData(cursor.getString(cursor
+							.getColumnIndex(DBService.KEY_SERVICEID)),
+							DBService.KEY_INSTALL, DBService.INSTALL_INSTALL);
+					try {
+						// 因为后台下发的版本数据现在是写死的所以暂不实现升级
+						dbService
+								.updateData(
+										cursor.getString(cursor
+												.getColumnIndex(DBService.KEY_SERVICEID)),
+										DBService.KEY_LOACL_VERSION,
+										""
+												+ CommonUtil.getVersionCode(
+														context, packageName));
+						// dbService.updateData(cursor.getString(cursor.getColumnIndex(DBService.KEY_SERVICEID)),
+						// DBService.KEY_LOACL_VERSION, "" + 1);
+						// dbService.updateData(cursor.getString(cursor.getColumnIndex(DBService.KEY_SERVICEID)),
+						// DBService.KEY_VERSION, "" + 100);
+						new File(
+								Const.DIRECTORY
+										+ "/"
+										+ cursor.getString(cursor
+												.getColumnIndex(DBService.KEY_SERVICEID))
+										+ ".apk").delete();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					SharedPreferences share = context.getSharedPreferences(
+							"romdown", 0);
+					String romPackageName = share.getString("packagename", "");
+					L.d("romPackage:" + romPackageName);
+					// 已安装的包名,和之前下载到rom保存的包名相同
+					if (romPackageName.equals(packageName)) {
+						String gameId = share.getString("gameId", "");
+						String cpid = share.getString("cpid", "");
+						String cpcode = share.getString("cpcode", "");
+						String servicecode = share.getString("servicecode", "");
+						String gamename = share.getString("gamename", "");
+						String channelcode = share.getString("channelcode", "");
+						String classname = share.getString("classname", "");
+						String iconurl = share.getString("iconurl", "");
+						String filesize = share.getString("filesize", "");
+						// 插入数据
+						dbService.insert(gameId, cpid, cpcode, servicecode,
+								gamename, channelcode, iconurl, classname, "");
+						// 更新包名
+						dbService.updateData(gameId, DBService.KEY_PACKAGENAME,
+								packageName);
+						// 更新游戏大小
+						dbService.updateData(gameId, DBService.KEY_TOTALSIZE,
+								filesize);
+						// 更新本地版本
+						try {
+							dbService.updateData(
+									gameId,
+									DBService.KEY_LOACL_VERSION,
+									""
+											+ CommonUtil.getVersionCode(
+													context, packageName));
+						} catch (NameNotFoundException e) {
+							e.printStackTrace();
+						}
+						// 更新下载状态
+						dbService.updateData(gameId, DBService.KEY_STATE,
+								DBService.DOWNSTATE_INSTALLED);
+						// 更新安装状态
+						dbService.updateData(gameId, DBService.KEY_INSTALL,
+								DBService.INSTALL_INSTALL);
+					}
+				}
+				CommonUtil.sendChangeBroadCast(context);
+				if (cursor != null) {
+					cursor.close();
+				}
+			} else if (intent.getAction().equals(
+					"android.intent.action.PACKAGE_REMOVED")) {
+				String packageName = intent.getDataString().substring(8);
+				L.d(TAG, "卸载了:" + packageName);
+
+				NetStat.onEvent(PreferenceUtil.KET_QAS_INSTALL, "程序卸载",
+						packageName);
+				Cursor cursor = dbService.getGameByPackageName(packageName);
+				if (cursor != null) {
+					if (cursor.getCount() > 0) {
+						cursor.moveToFirst();
+						// dbService.delGameByServiceId(cursor.getInt(cursor.getColumnIndex(DBService.KEY_SERVICEID)));
+						dbService.updateData(cursor.getString(cursor
+								.getColumnIndex(DBService.KEY_SERVICEID)),
+								DBService.KEY_INSTALL,
+								DBService.INSTALL_UNINSTALL);
+						CommonUtil.sendChangeBroadCast(context);
+					}
+					cursor.close();
+				}
+			}
+			dbService.close();
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+		}
+	}
+}

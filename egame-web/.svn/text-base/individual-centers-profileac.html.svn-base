@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">
+<meta content="telephone=no" name="format-detection" />
+<title>爱游戏--个人中心--我的账户</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+
+<!--
+
+if(screen.width<300) {
+
+    document.write('<link href="css/w_240.css" rel="stylesheet" type="text/css" />');
+
+}
+
+else {
+
+    document.write('<link href="css/w_480.css" rel="stylesheet" type="text/css" />');
+
+}
+
+//-->
+
+</script>
+<script src="js/yaopp.js"></script>
+</head>
+<body>
+	
+	<!--title-->
+    <div class="title_pk">
+    	<!--充值记录-->
+    	<ul>
+        	<li class="title_pk_select"><a href=""><span class="head_mask_pknarrow"></span>充值记录</a></li>
+            <li class="title_pk_nor"><a href="">消费记录</a></li>
+        </ul>
+        
+    </div>
+
+
+	<!--全选消息-->
+    <div class="header bg_color1 line_b">
+    	<h3 class="color_4 float_l">当前余额：<span id="idouCount" name="idouCount" class="color_5">20000</span> <a href="">爱豆</a></h3>
+    	<div class="but_man but_recharge btu_g_com pos">
+        	<a href=""><span class="btu_man_com2 btu_green_com2 btu_g_money"></span><span class="btu_g_right"></span><span class="m_l_20">账户充值</span></a>
+        </div>
+    </div>
+    
+    <!--删除-->
+    <div class="pro_sort">
+    	<select class="pro_accsele" name="" id="sortType">
+            <option value="1">排序：本周</option>
+            <option value="2">排序：本月</option>
+            <option value="3">排序：本季度</option>
+        </select>
+    </div>
+     
+    <!--详情-->
+    <div class="beento m_1_10">
+		<P id="recordCount" class="color_2">共有 25 条充值记录</P>
+        
+        <div id="chargeRecord" >
+        <table class="dunit1 m_tb_10">
+        	<tr class="dunit1_out1">
+            	<td class="dunit1_inner1 table_line">充值方式</td>
+                <td class="dunit1_inner1 table_line">金额</td>
+                <td class="dunit1_inner2">时间</td>
+            </tr>
+            <tr class="dunit1_out2">
+            	<td class="dunit1_inner3">工商银行</td>
+                <td class="dunit1_inner3">200爱豆</td>
+                <td class="dunit1_inner3">2011-04-12 12:30:55</td>
+            </tr>
+            <tr class="dunit1_out2">
+            	<td class="dunit1_inner3">工商银行</td>
+                <td class="dunit1_inner3">200爱豆</td>
+                <td class="dunit1_inner3">2011-04-12 12:30:55</td>
+            </tr>
+        </table>
+        </div>
+        <P id="countPerPage" class="text_align_right color_4">每页显示20条记录</P>
+         
+         <div class="m_auto">  
+            <div class="but_man btu_green_sd pos">
+                <a href=""><span class="btu_man_com2 btu_green_sd_com btu_green_sd_left"></span><span class="btu_green_sd_right"></span><span id="nowPage" class="color_8">1</span><span id="pageCount" class="color_7">/20</span></a>
+            </div>
+            
+            <div id="nextPage" class="but_man btu_green_s pos">
+                <a href=""><span id="nextPageLeft" class="btu_man_com2 btu_green_s_com btu_green_s_left"></span><span id="nextPageRight" class="btu_green_s_right"></span>下一页</a>
+            </div>
+            
+            <div id="backPage" class="but_man btu_gra_s pos btu_page_com">
+                <a href=""><span id="backPageLeft" class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span id="backPageRight" class="btu_gra_s_right"></span>上一页</a>
+            </div>
+            
+            <div id="topPage" class="but_man btu_gra_s pos btu_page_com">
+                <a href=""><span id="topPageLeft" class="btu_man_com2 btu_gra_s_com btu_gra_s_left"></span><span id="topPageRight" class="btu_gra_s_right"></span>首 页</a>
+            </div>
+        </div>
+        
+            
+        
+        
+    </div>
+
+
+
+</body>
+</html>
+
